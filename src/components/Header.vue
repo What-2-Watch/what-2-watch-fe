@@ -1,7 +1,7 @@
 <template>
     <header>
         <h1 class='app-title'>Watch to What</h1>
-        <img class='prof-img' src='https://icons-for-free.com/iconfiles/png/512/avatar+human+man+profile+icon-1320085876716628234.png' />
+        
     </header>
 </template>
 
@@ -15,7 +15,7 @@ export default {
 <style scoped>
 
     header {
-        height: 150px; 
+        height: 75px; 
         background-color: whitesmoke; 
         display: flex;
         flex-direction: row;
