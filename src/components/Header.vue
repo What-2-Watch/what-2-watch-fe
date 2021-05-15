@@ -1,7 +1,8 @@
 <template>
     <header>
         <h1 class='app-title'>Watch to What</h1>
-        
+        <router-link to="/search">Search</router-link>
+        <router-link to="/profile">Profile</router-link>
     </header>
 </template>
 

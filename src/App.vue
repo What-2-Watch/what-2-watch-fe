@@ -1,8 +1,7 @@
 <template>
   <body id="app">
     <Header>
-      <router-link to="/search">Search</router-link>
-      <router-link to="/profile">Profile</router-link> |
+ |
     </Header>
     <router-view/>
   </body>
