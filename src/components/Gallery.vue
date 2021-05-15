@@ -1,6 +1,6 @@
 <template>
-    <main>
-
+    <main class='grid-display'>
+        <!-- all movies go here -->
     </main>
 </template>
 
@@ -16,17 +16,8 @@ export default {
 
 <style scoped>
 
-    header {
-        height: 150px; 
-        background-color: whitesmoke; 
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    
-    .prof-img {
-        height: 50px;
-        margin: 20px; 
+    main {
+        /* grid display for all films */
     }
 
 </style>
