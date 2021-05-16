@@ -2,7 +2,7 @@
     <header>
         <div class="header-content">
             <h1 class='app-title'>Flick Finder</h1>
-            <aside class="nav-links">
+            <aside class="nav-links" v-if="loggedIn">
                 <router-link to="/search">Search</router-link>
                 <router-link to="/profile">Profile</router-link>
             </aside>
@@ -13,7 +13,10 @@
 <script>
 
 export default {
-    name: 'Header'
+    name: 'Header',
+    props: {
+        loggedIn: Boolean
+     },
 }
 </script>
 

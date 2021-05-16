@@ -1,6 +1,6 @@
 <template>
   <body id="app">
-    <Header>
+    <Header :loggedIn="loggedIn"/>
     <Login v-if="!loggedIn" />
     <main v-else>
       <router-view />
