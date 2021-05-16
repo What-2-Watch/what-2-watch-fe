@@ -7,9 +7,6 @@
   list-style: none;
 }
 
-html {
-  font-size: 62.5%;
-}
 
 body {
   box-sizing: border-box;
@@ -24,8 +21,6 @@ button {
 
 a, a:link, a:visited, a:focus {
   width: 100%;
-  margin: 0 auto;
-  // color:white;
   text-decoration:none;
   text-align: center;
   cursor: cell;
