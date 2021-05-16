@@ -25,7 +25,7 @@
         placeholder="EMAIL"/>
       <label for="email"></label> 
       <input 
-        type="text"
+        type="password"
         name="password"
         placeholder="PASSWORD"/>
       <label for="password"></label>
@@ -138,6 +138,8 @@ export default ({
 
       select {
         margin: 20px;
+        padding: 5px;
+        
       }
     }
     p {
