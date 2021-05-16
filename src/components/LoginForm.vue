@@ -8,12 +8,14 @@
         type="text" 
         name="email"
         placeholder="EMAIL"
-        v-on:change="inputEmail"/>
+        v-on:change="inputEmail"
+        required/>
       <label for="email"></label>
       <input 
-        type="text"
+        type="password"
         name="password"
-        placeholder="PASSWORD"/>
+        placeholder="PASSWORD"
+        required/>
         <label for="password"></label>
         <button class="login-btn" type="submit">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
@@ -22,36 +24,43 @@
       <input
         type="text"
         name="email"
-        placeholder="EMAIL"/>
+        placeholder="EMAIL" 
+        required/>
       <label for="email"></label> 
       <input 
         type="password"
         name="password"
-        placeholder="PASSWORD"/>
+        placeholder="PASSWORD"
+        required>
       <label for="password"></label>
       <input 
-        type="text"
+        type="password"
         name="confirmPassword"
-        placeholder="RETYPE PASSWORD"/>
+        placeholder="RETYPE PASSWORD"
+        required/>
       <label for="confirmPassword"></label>
       <input 
         type="text"
         name="firstName"
-        placeholder="FIRST NAME"/>
+        placeholder="FIRST NAME"
+        required/>
       <label for="firstName"></label>
       <input 
         type="text"
         name="lastName"
-        placeholder="LAST NAME"/>
+        placeholder="LAST NAME"
+        required/>
       <label for="lastName"></label>
       <aside class="dropDown">
-        <select v-model="selectedLanguage">
+        <select v-model="selectedLanguage"
+        required>
           <option disabled value="">Default language</option>
           <option>English</option>
           <option>Spanish</option>
           <option>German</option>
         </select>
-        <select v-model="selectedRegion">
+        <select v-model="selectedRegion"
+        required>
           <option disabled value="">Default region</option>
           <option>United States</option>
           <option>Pits of Hell</option>
