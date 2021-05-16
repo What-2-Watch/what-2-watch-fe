@@ -10,7 +10,12 @@
 .hidden {
 display: none;}
 
+html, #app {
+  height: 100%; 
+}
+
 body {
+  height: 100%; 
   box-sizing: border-box;
   background-size: cover;
 }
