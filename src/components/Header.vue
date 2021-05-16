@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header-content">
-            <h1 class='app-title'>Watch to What</h1>
+            <h1 class='app-title'>Flick Finder</h1>
             <aside class="nav-links">
                 <router-link to="/search">Search</router-link>
                 <router-link to="/profile">Profile</router-link>
@@ -18,14 +18,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+@import '../index'; 
     header {
         height: 75px; 
         background-color: whitesmoke; 
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
-        // padding: 0 10px 0 10px;
+        padding: 0 10px 0 10px;
+        width: 100%;
+        top: 0;
     }
     h1 {
         // align-self: center;
