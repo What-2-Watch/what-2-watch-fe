@@ -18,7 +18,7 @@
         <button class="login-btn" type="submit">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
     </form>
-    <form v-else>
+    <form v-else class="login-form">
       <input
         type="text"
         name="email"
@@ -44,22 +44,22 @@
         name="lastName"
         placeholder="LAST NAME"/>
       <label for="lastName"></label>
-
-      <select v-model="selectedLanguage">
-        <option disabled value="">Default language</option>
-        <option>English</option>
-        <option>Spanish</option>
-        <option>German</option>
-      </select>
-      <select v-model="selectedRegion">
-        <option disabled value="">Default region</option>
-        <option>United States</option>
-        <option>Pits of Hell</option>
-        <option>France</option>
-      </select>
-        
+      <aside class="dropDown">
+        <select v-model="selectedLanguage">
+          <option disabled value="">Default language</option>
+          <option>English</option>
+          <option>Spanish</option>
+          <option>German</option>
+        </select>
+        <select v-model="selectedRegion">
+          <option disabled value="">Default region</option>
+          <option>United States</option>
+          <option>Pits of Hell</option>
+          <option>France</option>
+        </select>
+      </aside>
       <label for="language"></label>
-      <button>CREATE ACCOUNT</button>
+      <button class="create-acct-btn">CREATE ACCOUNT</button>
     </form>
    </section>
 </template>
@@ -110,10 +110,10 @@ export default ({
     background-position: 50% 70%;
   }
 
-  .login-form {
+  .login-form  {
     @include centerColumn; 
     margin: 0 auto;
-    height: 250px;
+    height: 330px;
     width: 35%;
     border: solid black; 
     border-radius: 10px;
@@ -131,15 +131,35 @@ export default ({
       outline: none; 
       font-size: 1.05em;
       padding: 2px;
+      border-radius: 2px;
+    }
+    .dropDown {
+      display: flex;
+
+      select {
+        margin: 20px;
+      }
+    }
+    p {
+      cursor: pointer
     }
   }
 
   .login-btn {
     height: 30px; 
-    width: 20%;
+    width: 30%;
     margin: 30px; 
     background-color: $gray; 
     font-weight: bold;
+  }
+
+  .create-acct-btn {
+    height: 30px; 
+    width: 40%;
+    margin: 10px; 
+    background-color: $gray; 
+    font-weight: bold;
+    padding: 5px;
   }
 
 </style>
