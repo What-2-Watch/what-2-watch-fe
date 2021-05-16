@@ -44,7 +44,7 @@ export default {
         justify-content: space-between;
         height: unset;
         a {
-            color: whitesmoke;
+            color: $gray;
             font-family: 'Bebas Neue', cursive;
             letter-spacing: 2px;
             font-size: 15px;
