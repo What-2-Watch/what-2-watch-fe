@@ -18,7 +18,7 @@
       type="text"
       name="email"
       placeholder="EMAIL"/>
-    <label for="email"></label>
+    <label for="email"></label> 
     <input 
       type="text"
       name="password"
@@ -44,10 +44,15 @@
       name="region"
       placeholder="DEFAULT REGION"/>
     <label for="region"></label>
-    <input 
-      type="text"
-      name="language"
-      placeholder="LANGUAGE"/>
+    <select v-model="selected">
+      <option disabled value="">Default language</option>
+      <option>English</option>
+      <option>Spanish</option>
+      <option>German</option>
+    </select>
+
+
+      
     <label for="language"></label>
     <button>CREATE ACCOUNT</button>
   </form>
@@ -57,6 +62,14 @@
 <script>
 
 export default ({
-  name: 'Login'
+  name: 'Login',
+  components: {
+
+  },
+  data() {
+    return {
+      selected: ''
+    }
+  }
 })
 </script>
