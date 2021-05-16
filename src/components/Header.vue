@@ -35,7 +35,7 @@ export default {
         border-bottom: solid $gray 6px;
     }
     h1 {
-        margin-top: 22.2px;
+        margin-top: 15px;
     }
     .nav-links {
         align-self: flex-end;

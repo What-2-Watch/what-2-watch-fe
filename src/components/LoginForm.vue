@@ -15,8 +15,8 @@
         name="password"
         placeholder="PASSWORD"/>
         <label for="password"></label>
+        <button class="login-btn" type="submit">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
-        <button type="submit">LOGIN</button>
     </form>
     <form v-else>
       <input
@@ -57,8 +57,6 @@
         <option>Pits of Hell</option>
         <option>France</option>
       </select>
-
-
         
       <label for="language"></label>
       <button>CREATE ACCOUNT</button>
@@ -115,18 +113,33 @@ export default ({
   .login-form {
     @include centerColumn; 
     margin: 0 auto;
-    height: 200px;
-    width: 30%;
+    height: 250px;
+    width: 35%;
     border: solid black; 
     border-radius: 10px;
     color: $gray;
     box-shadow: 0 0 .75em #808080;
-    backdrop-filter: blur(5px);
-    background-color: rgba(217, 217, 217, 0.76)00;
-    filter: brightness(300%);
+    backdrop-filter: blur(4px);
+    background-color: rgba(217, 217, 217, 0)00;
+    filter: brightness(200%);
     input {
       color: $gray;
       background-color: $black;
+      width: 50%;
+      height: 25px;
+      margin: 5px; 
+      outline: none; 
+      font-size: 1.05em;
+      padding: 2px;
     }
   }
+
+  .login-btn {
+    height: 30px; 
+    width: 20%;
+    margin: 30px; 
+    background-color: $gray; 
+    font-weight: bold;
+  }
+
 </style>
