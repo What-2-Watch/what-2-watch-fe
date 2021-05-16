@@ -77,9 +77,7 @@ export default ({
   },
   methods: {
     showNewUser() {
-      if (!this.newUser) {
         this.newUser = true;
-      }
     }
   }
 })

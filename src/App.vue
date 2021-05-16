@@ -1,19 +1,28 @@
 <template>
   <body id="app">
     <Header>
- |
-    </Header>
-    <router-view/>
+    <Login v-if="!loggedIn" />
+    <main v-else>
+      <router-view />
+      <Home/>
+    </main>
   </body>
 </template>
 
 <script>
-import Header from './components/Header'
+import Header from './components/Header'; 
+import Login from './views/Login'; 
 
 export default {
   name: 'App',
   components: {
-    Header
+    Header,
+    Login
+  },
+  data() {
+    return{
+      loggedIn: false
+    }
   }
 }
 </script>
