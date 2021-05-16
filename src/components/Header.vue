@@ -1,8 +1,12 @@
 <template>
     <header>
-        <h1 class='app-title'>Watch to What</h1>
-        <router-link to="/search">Search</router-link>
-        <router-link to="/profile">Profile</router-link>
+        <div class="header-content">
+            <h1 class='app-title'>Watch to What</h1>
+            <aside class="nav-links">
+                <router-link to="/search">Search</router-link>
+                <router-link to="/profile">Profile</router-link>
+            </aside>
+        </div>
     </header>
 </template>
 
@@ -13,19 +17,35 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
     header {
         height: 75px; 
         background-color: whitesmoke; 
         display: flex;
-        flex-direction: row;
+        flex-direction: column-reverse;
         justify-content: space-between;
+        // padding: 0 10px 0 10px;
+    }
+    h1 {
+        // align-self: center;
+        // height: 75px;
+        // align-self: flex-end;
+        // height:60%;
+        // font-size: 30px;
+    }
+    .nav-links {
+        align-self: flex-end;
+        width: 140px;
+        display: flex;
+        justify-content: space-between;
+        height: unset;
     }
     
-    .prof-img {
+    .header-content {
         height: 50px;
-        margin: 20px; 
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
     }
-
 </style>
