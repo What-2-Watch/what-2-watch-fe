@@ -32,9 +32,9 @@ export default {
         width: 100%;
         top: 0;
         vertical-align:bottom;
+        border-bottom: solid $gray 6px;
     }
     h1 {
-        color: whitesmoke;
         margin-top: 22.2px;
     }
     .nav-links {

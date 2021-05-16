@@ -104,9 +104,9 @@ export default ({
   }
 
   .form-view {
-    @include centerColumn; 
     background-image: url('../assets/red_seats.jpg');
     height: 90%;
+    padding-top: 90px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 70%;
@@ -114,11 +114,19 @@ export default ({
 
   .login-form {
     @include centerColumn; 
-    height: 300px;
-    width: 60%;
+    margin: 0 auto;
+    height: 200px;
+    width: 30%;
     border: solid black; 
     border-radius: 10px;
+    color: $gray;
     box-shadow: 0 0 .75em #808080;
     backdrop-filter: blur(5px);
+    background-color: rgba(217, 217, 217, 0.76)00;
+    filter: brightness(300%);
+    input {
+      color: $gray;
+      background-color: $black;
+    }
   }
 </style>
