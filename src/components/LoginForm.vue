@@ -1,17 +1,20 @@
 <template>
-  <form v-if="!newUser">
+  <form v-if="!newUser"
+  @submit="existingLogin"
+  >
     <input
-      type="text"
+      type="text" 
       name="email"
-      placeholder="EMAIL"/>
+      placeholder="EMAIL"
+      v-on:change="inputEmail"/>
     <label for="email"></label>
     <input 
       type="text"
       name="password"
       placeholder="PASSWORD"/>
       <label for="password"></label>
-      <button v-on:click="showNewUser">Don't have an account? Create one here!</button>
-      <button>LOGIN</button>
+      <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
+      <button type="submit">LOGIN</button>
   </form>
   <form v-else>
     <input
@@ -75,10 +78,18 @@ export default ({
       newUser: false
     }
   },
+  emits: [
+    'existingLogin'
+  ],
   methods: {
     showNewUser() {
         this.newUser = true;
+    },
+    existingLogin(obj) {
+      console.log(obj)
+      this.$emit('existingLogin', obj)
     }
+
   }
 })
 </script>

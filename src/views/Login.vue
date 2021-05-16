@@ -1,5 +1,5 @@
 <template>
-    <LoginForm />
+    <LoginForm v-on:existingLogin="userLogin($event)" v-bind:updateLogin="updateLogin" />
 </template>
 
 
@@ -11,11 +11,25 @@ export default ({
   components: {
     LoginForm
   },
+  props: {
+    updateLogin: {type: Function}
+  },
+  emits: [
+    'userLogin:obj'
+  ],
   data() {
     return {
       selectedLanguage: '',
       selectedRegion: ''
     }
+  },
+  methods: {
+    userLogin(obj) {
+      console.log(obj)
+      this.$emit('userLogin', obj)
+    }
+
   }
+
 })
 </script>
