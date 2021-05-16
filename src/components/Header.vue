@@ -18,23 +18,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../index'; 
+@import '../index.scss'; 
     header {
         height: 75px; 
-        background-color: whitesmoke; 
+        background-color: black; 
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
         padding: 0 10px 0 10px;
         width: 100%;
         top: 0;
+        vertical-align:bottom;
     }
     h1 {
-        // align-self: center;
-        // height: 75px;
-        // align-self: flex-end;
-        // height:60%;
-        // font-size: 30px;
+        color: whitesmoke;
+        margin-top: 22.2px;
     }
     .nav-links {
         align-self: flex-end;
@@ -42,6 +40,12 @@ export default {
         display: flex;
         justify-content: space-between;
         height: unset;
+        a {
+            color: whitesmoke;
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 2px;
+            font-size: 15px;
+        }
     }
     
     .header-content {
