@@ -1,5 +1,3 @@
-//submit new user
-//confirm login
 const checkResponse = (response) => {
   if(response.ok) {
   return response.json()
@@ -22,3 +20,8 @@ export const confirmLogin = (user) => {
     return fetch(`URL`)
         .then(response => checkResponse(response))
 } 
+
+export const getServices = () => {
+    return fetch (`URL`)
+        .then(response => checkResponse(response))
+}

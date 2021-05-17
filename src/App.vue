@@ -12,6 +12,7 @@
 <script>
 import Header from './components/Header'; 
 import Login from './views/Login'; 
+// import { submitNewUser, confirmLogin } from './utilities'; 
 
 export default {
   name: 'App',
