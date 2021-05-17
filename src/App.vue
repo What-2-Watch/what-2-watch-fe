@@ -1,7 +1,7 @@
 <template>
   <body id="app">
     <Header :loggedIn="loggedIn"/>
-    <Login v-if="!loggedIn" v-on:newUser="createNewUser(userData)" v-on:userLogin="updateLogin($event)"/>
+    <Login v-if="!loggedIn" v-on:newUser="createNewUser(userData)" v-on:userLogin="updateLogin()"/>
     <main v-else>
       <router-view />
       <Home/>
@@ -21,7 +21,8 @@ export default {
   },
   data() {
     return{
-      loggedIn: false
+      loggedIn: false,
+      currentUser: {}
     }
   },
   methods: {
