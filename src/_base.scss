@@ -7,8 +7,15 @@
   list-style: none;
 }
 
+.hidden {
+display: none;}
+
+html, #app {
+  height: 100%; 
+}
 
 body {
+  height: 100%; 
   box-sizing: border-box;
   background-size: cover;
 }
@@ -24,4 +31,8 @@ a, a:link, a:visited, a:focus {
   text-decoration:none;
   text-align: center;
   cursor: cell;
+}
+
+input {
+  border: none; 
 }

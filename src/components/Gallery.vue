@@ -6,7 +6,7 @@
 
 <script>
 
-export default {
+export default { {}
     name: 'Gallery', 
     props: {
         // we will eventually have some

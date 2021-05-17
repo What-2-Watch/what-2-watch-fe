@@ -2,7 +2,7 @@
     <header>
         <div class="header-content">
             <h1 class='app-title'>Flick Finder</h1>
-            <aside class="nav-links">
+            <aside class="nav-links" v-if="loggedIn">
                 <router-link to="/search">Search</router-link>
                 <router-link to="/profile">Profile</router-link>
             </aside>
@@ -13,7 +13,10 @@
 <script>
 
 export default {
-    name: 'Header'
+    name: 'Header',
+    props: {
+        loggedIn: Boolean
+     },
 }
 </script>
 
@@ -29,10 +32,10 @@ export default {
         width: 100%;
         top: 0;
         vertical-align:bottom;
+        border-bottom: solid $gray 6px;
     }
     h1 {
-        color: whitesmoke;
-        margin-top: 22.2px;
+        margin-top: 15px;
     }
     .nav-links {
         align-self: flex-end;
@@ -41,7 +44,7 @@ export default {
         justify-content: space-between;
         height: unset;
         a {
-            color: whitesmoke;
+            color: $gray;
             font-family: 'Bebas Neue', cursive;
             letter-spacing: 2px;
             font-size: 15px;
