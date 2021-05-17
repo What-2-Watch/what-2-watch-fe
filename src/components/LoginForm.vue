@@ -62,17 +62,17 @@
         v-model="selectedLanguage"
         required>
           <option disabled value="">Default language</option>
-          <option>English</option>
-          <option>Spanish</option>
-          <option>German</option>
+          <option>Eng</option>
+          <option>Esp</option>
+          <option>Ger</option>
         </select>
         <select 
         v-model="selectedRegion"
         required>
           <option disabled value="">Default region</option>
-          <option>United States</option>
-          <option>Pits of Hell</option>
-          <option>France</option>
+          <option>US</option>
+          <option>Pits</option>
+          <option>FR</option>
         </select>
       </aside>
       <label for="language"></label>
@@ -128,8 +128,8 @@ export default ({
         'password': this.password,
         'confirmPassword': this.confirmPassword,
         'services': this.services,
-        'firstName': this.firstName,
-        'lastName': this.lastName,
+        'first_name': this.firstName,
+        'last_name': this.lastName,
       }
       console.log(newUser)
       this.$emit('createUser', newUser)
@@ -181,7 +181,6 @@ export default ({
       select {
         margin: 20px;
         padding: 5px;
-        
       }
     }
     p {

@@ -1,7 +1,7 @@
 <template>
   <body id="app">
     <Header :loggedIn="loggedIn"/>
-    <Login v-if="!loggedIn" v-on:newUser="createNewUser(userData)" v-on:userLogin="updateLogin()"/>
+    <Login v-if="!loggedIn" v-on:newUser="createNewUser($event)" v-on:userLogin="updateLogin()"/>
     <main v-else>
       <router-view />
       <Home/>
@@ -32,9 +32,10 @@ export default {
     },
     createNewUser(userData) {
       console.log(userData)
+      console.log(JSON.stringify(userData))
       submitNewUser(userData)
+      .then(data => console.log(data));
       this.updateLogin()
-      //send the userData to the BE via an API call
     },
   },
 }
