@@ -1,5 +1,5 @@
 <template>
-    <LoginForm v-on:existingLogin="userLogin($event)" v-bind:updateLogin="updateLogin" />
+    <LoginForm v-on:createUser="newUser(userData)" v-on:existingLogin="userLogin(user)" v-bind:updateLogin="updateLogin" />
 </template>
 
 
@@ -15,7 +15,8 @@ export default ({
     updateLogin: {type: Function}
   },
   emits: [
-    'userLogin:obj'
+    'userLogin:user',
+    'newUser:userData'
   ],
   data() {
     return {
@@ -24,9 +25,11 @@ export default ({
     }
   },
   methods: {
-    userLogin(obj) {
-      console.log(obj)
-      this.$emit('userLogin', obj)
+    userLogin(user) {
+      this.$emit('userLogin', user)
+    },
+    newUser(userData) {
+      this.$emit('newUser', userData)
     }
 
   }

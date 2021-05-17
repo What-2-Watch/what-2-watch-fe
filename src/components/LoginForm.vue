@@ -8,15 +8,17 @@
         type="text" 
         name="email"
         placeholder="EMAIL"
-        required/>
+        required
+        v-model="email"/>
       <label for="email"></label>
       <input 
         type="password"
         name="password"
         placeholder="PASSWORD"
-        required/>
+        required
+        v-model="password"/>
         <label for="password"></label>
-        <button class="login-btn" type="submit">LOGIN</button>
+        <button class="login-btn" type="submit" v-on:click="existingLogin">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
     </form>
     <form v-else class="login-form">
@@ -24,18 +26,21 @@
         type="text"
         name="email"
         placeholder="EMAIL" 
+        v-model="email"
         required/>
       <label for="email"></label> 
       <input 
         type="password"
         name="password"
         placeholder="PASSWORD"
+        v-model="password"
         required>
       <label for="password"></label>
       <input 
         type="password"
         name="confirmPassword"
         placeholder="RETYPE PASSWORD"
+        v-model="confirmPassword"
         required/>
       <label for="confirmPassword"></label>
       <input 
@@ -43,7 +48,7 @@
         name="firstName"
         placeholder="FIRST NAME"
         required
-        v-model="lastName"/>
+        v-model="firstName"/>
       <label for="firstName"></label>
       <input 
         type="text"
@@ -71,7 +76,7 @@
         </select>
       </aside>
       <label for="language"></label>
-      <button class="create-acct-btn">CREATE ACCOUNT</button>
+      <button v-on:click="createUser" class="create-acct-btn">CREATE ACCOUNT</button>
     </form>
    </section>
 </template>
@@ -86,44 +91,45 @@ export default ({
   },
   data() {
     return {
+      newUser: false,
       selectedLanguage: '',
       selectedRegion: '',
-      newUser: false,
       email: '',
       password: '',
       confirmPassword: '',
-      services: '',
+      services: [],
       firstName: '',
       lastName: ''
     }
   },
   emits: [
-    'existingLogin'
+    'existingLogin:user', 
+    'createUser:userData'
   ],
   methods: {
     showNewUser() {
         this.newUser = true;
     },
-    existingLogin() {
+    existingLogin(e) {
+      e.preventDefault();
       const user = {
-      email: this.email,
-      password: this.password,
+        email: this.email,
+        password: this.password,
       }
-
       this.$emit('existingLogin', user)
     },
 
-    createUser() {
+    createUser(e) {
+      e.preventDefault()
       const newUser = {
-      'language': this.selectedLanguage,
-      'region': this.selectedRegion,
-      'email': this.email,
-      'password': this.password,
-      // this.confirmPassword,
-      'services': this.services,
-      'firstName': this.firstName,
-      'lastName': this.lastName,
-      //does BE need the confirm password data?
+        'language': this.selectedLanguage,
+        'region': this.selectedRegion,
+        'email': this.email,
+        'password': this.password,
+        'confirmPassword': this.confirmPassword,
+        'services': this.services,
+        'firstName': this.firstName,
+        'lastName': this.lastName,
       }
       console.log(newUser)
       this.$emit('createUser', newUser)
