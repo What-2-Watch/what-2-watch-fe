@@ -8,14 +8,12 @@
         type="text" 
         name="email"
         placeholder="EMAIL"
-        v-on:change="inputEmail"
         required/>
       <label for="email"></label>
       <input 
         type="password"
         name="password"
         placeholder="PASSWORD"
-        v-on:change="inputPassword"
         required/>
         <label for="password"></label>
         <button class="login-btn" type="submit">LOGIN</button>
@@ -26,41 +24,37 @@
         type="text"
         name="email"
         placeholder="EMAIL" 
-        v-on:change="inputEmail"
         required/>
       <label for="email"></label> 
       <input 
         type="password"
         name="password"
         placeholder="PASSWORD"
-        v-on:change="inputPassword"
         required>
       <label for="password"></label>
       <input 
         type="password"
         name="confirmPassword"
         placeholder="RETYPE PASSWORD"
-        v-on:change="confirmPassword"
         required/>
       <label for="confirmPassword"></label>
       <input 
         type="text"
         name="firstName"
         placeholder="FIRST NAME"
-        v-on:change="inputName"
-        required/>
+        required
+        v-model="lastName"/>
       <label for="firstName"></label>
       <input 
         type="text"
         name="lastName"
         placeholder="LAST NAME"
-        v-on:change="inputName"
-        required/>
+        required
+        v-model="lastName"/>
       <label for="lastName"></label>
       <aside class="dropDown">
         <select 
         v-model="selectedLanguage"
-        v-on:change="inputLanguage"
         required>
           <option disabled value="">Default language</option>
           <option>English</option>
@@ -69,7 +63,6 @@
         </select>
         <select 
         v-model="selectedRegion"
-        v-on:change="inputRegion"
         required>
           <option disabled value="">Default region</option>
           <option>United States</option>
@@ -111,13 +104,31 @@ export default ({
     showNewUser() {
         this.newUser = true;
     },
-    existingLogin(obj) {
-      console.log(obj)
-      this.$emit('existingLogin', obj)
-    }
+    existingLogin() {
+      const user = {
+      email: this.email,
+      password: this.password,
+      }
 
-  }
-})
+      this.$emit('existingLogin', user)
+    },
+
+    createUser() {
+      const newUser = {
+      'language': this.selectedLanguage,
+      'region': this.selectedRegion,
+      'email': this.email,
+      'password': this.password,
+      // this.confirmPassword,
+      'services': this.services,
+      'firstName': this.firstName,
+      'lastName': this.lastName,
+      //does BE need the confirm password data?
+      }
+      console.log(newUser)
+      this.$emit('createUser', newUser)
+    }
+}})
 </script>
 
 <style scoped lang='scss'>
