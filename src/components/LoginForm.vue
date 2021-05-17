@@ -15,6 +15,7 @@
         type="password"
         name="password"
         placeholder="PASSWORD"
+        v-on:change="inputPassword"
         required/>
         <label for="password"></label>
         <button class="login-btn" type="submit">LOGIN</button>
@@ -25,41 +26,50 @@
         type="text"
         name="email"
         placeholder="EMAIL" 
+        v-on:change="inputEmail"
         required/>
       <label for="email"></label> 
       <input 
         type="password"
         name="password"
         placeholder="PASSWORD"
+        v-on:change="inputPassword"
         required>
       <label for="password"></label>
       <input 
         type="password"
         name="confirmPassword"
         placeholder="RETYPE PASSWORD"
+        v-on:change="confirmPassword"
         required/>
       <label for="confirmPassword"></label>
       <input 
         type="text"
         name="firstName"
         placeholder="FIRST NAME"
+        v-on:change="inputName"
         required/>
       <label for="firstName"></label>
       <input 
         type="text"
         name="lastName"
         placeholder="LAST NAME"
+        v-on:change="inputName"
         required/>
       <label for="lastName"></label>
       <aside class="dropDown">
-        <select v-model="selectedLanguage"
+        <select 
+        v-model="selectedLanguage"
+        v-on:change="inputLanguage"
         required>
           <option disabled value="">Default language</option>
           <option>English</option>
           <option>Spanish</option>
           <option>German</option>
         </select>
-        <select v-model="selectedRegion"
+        <select 
+        v-model="selectedRegion"
+        v-on:change="inputRegion"
         required>
           <option disabled value="">Default region</option>
           <option>United States</option>
@@ -85,7 +95,13 @@ export default ({
     return {
       selectedLanguage: '',
       selectedRegion: '',
-      newUser: false
+      newUser: false,
+      email: '',
+      password: '',
+      confirmPassword: '',
+      services: '',
+      firstName: '',
+      lastName: ''
     }
   },
   emits: [
