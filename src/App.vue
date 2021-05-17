@@ -1,7 +1,7 @@
 <template>
   <body id="app">
     <Header :loggedIn="loggedIn"/>
-    <Login v-if="!loggedIn" v-on:userLogin="updateLogin($event)"/>
+    <Login v-if="!loggedIn" v-on:newUser="createNewUser(userData)" v-on:userLogin="updateLogin()"/>
     <main v-else>
       <router-view />
       <Home/>
@@ -12,6 +12,7 @@
 <script>
 import Header from './components/Header'; 
 import Login from './views/Login'; 
+// import { submitNewUser, confirmLogin } from './utilities'; 
 
 export default {
   name: 'App',
@@ -21,24 +22,25 @@ export default {
   },
   data() {
     return{
-      loggedIn: false
+      loggedIn: false,
+      currentUser: {}
     }
   },
   methods: {
-    updateLogin(event) {
-      event.preventDefault();
+    updateLogin() {
       !this.loggedIn ? this.loggedIn = true : this.loggedIn = false 
-      console.log(event)
-    }
+    },
+    createNewUser(userData) {
+      console.log(userData)
+      this.updateLogin()
+      //send the userData to the BE via an API call
+    },
   },
-  emits: [
-    "existingLogin:obj"
-  ]
 }
 </script>
 
 <style lang="scss">
-@import './index.scss'; 
+@import './index.scss';
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
