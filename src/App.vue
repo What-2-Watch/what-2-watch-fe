@@ -12,7 +12,7 @@
 <script>
 import Header from './components/Header'; 
 import Login from './views/Login'; 
-// import { submitNewUser, confirmLogin } from './utilities'; 
+import { submitNewUser } from './utilities'; 
 
 export default {
   name: 'App',
@@ -32,6 +32,7 @@ export default {
     },
     createNewUser(userData) {
       console.log(userData)
+      submitNewUser(userData)
       this.updateLogin()
       //send the userData to the BE via an API call
     },

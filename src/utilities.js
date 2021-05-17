@@ -6,7 +6,7 @@ const checkResponse = (response) => {
 }}
 
 export const submitNewUser = (userData) => {
-    return fetch(`URL`, {
+    return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -16,8 +16,8 @@ export const submitNewUser = (userData) => {
     .then(response => checkResponse(response))
 }
 
-export const confirmLogin = (user) => {
-    return fetch(`URL`)
+export const confirmLogin = () => {
+    return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/`)
         .then(response => checkResponse(response))
 } 
 
