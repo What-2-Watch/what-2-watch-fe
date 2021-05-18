@@ -3,7 +3,7 @@
         <h2 class='gallery-title'>
         <article class='list-container'>
             <li :key="movie.id" v-for="movie in movieList">
-             <MovieCard>
+             <MovieCard :movie="movie">
             </li> 
         </article>
     </section>
