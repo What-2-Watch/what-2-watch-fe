@@ -10,13 +10,21 @@
 </template>
 
 <script>
+import MovieCard from './components/MovieCard'
 
 export default { 
     name: 'Gallery', 
     props: {
         listTitle: {type: String},
-        movieList: {type: Array}
     }, 
+    components: {
+        MovieCard
+    },
+    data() {
+        return {
+            movieList: [{id: 0, src: "https://www.indiewire.com/wp-content/uploads/2019/12/us-1.jpg?w=758"}, {id: 1, src:"https://www.indiewire.com/wp-content/uploads/2019/12/us-1.jpg?w=758"}, {id: 2, src: "https://www.indiewire.com/wp-content/uploads/2019/12/us-1.jpg?w=758"}]
+        }
+    }
 }
 </script>
 
