@@ -1,6 +1,6 @@
 <template>
-    <router-link to="/movieDetailTest">
-     <img src="https://www.indiewire.com/wp-content/uploads/2019/12/us-1.jpg?w=758"/>
+    <router-link to="/movieDetailTest" class="poster-container">
+     <img :src="movie.src" alt=""/>
     </router-link>
 </template>
 
@@ -14,6 +14,13 @@
     }
 </script>
 
-<style >
+<style lang="scss">
+
+    .poster-container {
+        
+        img {
+            
+        }
+    }
 
 </style>
