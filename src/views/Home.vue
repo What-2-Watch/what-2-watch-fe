@@ -1,16 +1,24 @@
 <template>
   <section class="home-view">
-    Home
+    <Gallery />
   </section>
 </template>
 
 <script>
-// @ is an alias to /src
+import Gallery from '../components/Gallery';
 
 export default {
   name: 'Home',
   components: {
-    
+    Gallery
   }
 }
 </script>
+
+<style scoped lang="scss">
+@import '../index.scss';
+  .home-view {
+    background-color: $darkestRed;
+  }
+
+</style>
