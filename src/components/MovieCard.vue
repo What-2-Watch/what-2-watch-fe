@@ -19,7 +19,8 @@
     .poster-container {
         
         img {
-            
+          height: 200px;  
+          margin: 20px; 
         }
     }
 
