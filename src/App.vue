@@ -34,7 +34,7 @@ export default {
       console.log(userData)
       console.log(JSON.stringify(userData))
       submitNewUser(userData)
-      .then(data => console.log(data));
+      .then(data => this.currentUser = data)
       this.updateLogin()
     },
   },
