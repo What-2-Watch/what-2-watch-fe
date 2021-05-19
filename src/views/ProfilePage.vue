@@ -1,6 +1,6 @@
 <template>
   <section class="profile-view">
-    <Profile />
+    <Profile :user="user"/>
   </section>
 </template>
 
@@ -14,3 +14,8 @@ export default ({
  }
 })
 </script>
+
+<style scoped  lang="scss">
+  @import '../index.scss';
+
+</style>
