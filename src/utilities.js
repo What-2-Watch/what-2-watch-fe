@@ -24,7 +24,7 @@ export const confirmLogin = () => {
 export const getGenres = (language) => {
   return fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=d485a0da5573c3e7d61614d66ae23824&language=${language}`)
     .then(response => checkResponse(response))
-    .then(genres => genres.response)
+    .then(genres => genres.genres)
     .catch()
 }
 
