@@ -1,16 +1,20 @@
 <template>
     <section class='gallery-display'>
         <h2 class='gallery-title'>{{ listTitle || 'Recommendations' }}</h2>
+
         <article class='list-container'>
             <li :key="movie.id" v-for="movie in movieList">
+            <!-- <Slide> -->
              <MovieCard :list="listTitle" :movie="movie"/>
-            </li> 
+            <!-- </Slide> -->
+            </li>
         </article>
     </section>
 </template>
 
 <script>
 import MovieCard from '../components/MovieCard';
+// import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
 export default { 
     name: 'Gallery', 
@@ -19,7 +23,9 @@ export default {
         
     }, 
     components: {
-        MovieCard
+        MovieCard,
+        // Carousel,
+        // Slide,
     },
     data() {
         return {
@@ -47,33 +53,48 @@ export default {
 <style scoped lang='scss'>
 @import '../index.scss';
 
+
     .gallery-display {
         display: flex;
         flex-direction: column;
         text-align: left;
+        padding: 30px 20px;
     }
 
     .gallery-title {
         color: $gray;
+        margin: 10px;
+        border-bottom: 1px solid $gray; 
     }
 
     .list-container {
         display: flex;
-        background-color: $gray;
+        background-color: $black;
         overflow-x: scroll;
         overflow-y: hidden;
+        padding-bottom: 50px;
     }
     .list-container::-webkit-scrollbar {
-        background-color: transparent;
+        background-color: $darkestRed;
         border-radius: 10px;
         height: 55px;
+        // width: 50vw;
+        cursor: pointer;
+        position: absolute
     }
 
     .list-container::-webkit-scrollbar-thumb {
-        background-image: url('../assets/image.png');
+        background-image: url('../assets/vertical-flip.png');
         border-radius: 10px;
+        height: 10px;
+        width: 10px;
         background-size: contain;
         background-repeat: no-repeat;
+        scroll-behavior: smooth;
+    }
+
+    .list-container::-webkit-scrollbar-track {
+        // width: 200%;
     }
 
 </style>
