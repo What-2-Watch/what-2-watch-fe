@@ -32,8 +32,7 @@ export default {
         "language": "en-US",
         "region": "US",
         "watchlist": [],
-        "thumbsUp": [],
-        "thumbsDown": [],
+        "thumbs": [],
         "recommendations": [],
         "subscriptions": []
         },
