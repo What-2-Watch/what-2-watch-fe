@@ -22,8 +22,15 @@ export default {
   },
   data() {
     return{
-      loggedIn: false,
-      currentUser: {}
+      loggedIn: true,
+      currentUser: {        
+        "id": 1,
+        "email": "hope.gochnour@gmail.com",
+        "first_name": "",
+        "last_name": "",
+        "language": "0",
+        "region": "0"
+        }
     }
   },
   methods: {

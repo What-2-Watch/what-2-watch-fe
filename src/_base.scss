@@ -12,17 +12,19 @@ display: none;}
 
 html, #app {
   height: 100%; 
+  background-color: $black;
 }
 
 body {
   height: 100%; 
   box-sizing: border-box;
   background-size: cover;
+  
 }
 
 button {
   border: none;
-  background: white;
+  background-color: transparent;
   cursor: cell;
 }
 
