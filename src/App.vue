@@ -13,7 +13,7 @@
 import Header from './components/Header'; 
 import Login from './views/Login'; 
 import { submitNewUser } from './utilities'; 
-
+import router from './router/index'
 export default {
   name: 'App',
   components: {
@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return{
-      loggedIn: true,
+      loggedIn: false,
       currentUser: {        
         "id": 1,
         "email": "hope.gochnour@gmail.com",
@@ -35,7 +35,8 @@ export default {
   },
   methods: {
     updateLogin() {
-      !this.loggedIn ? this.loggedIn = true : this.loggedIn = false 
+      !this.loggedIn ? this.loggedIn = true : this.loggedIn = false
+      this.loggedIn && router.push('home') 
     },
     createNewUser(userData) {
       console.log(userData)
