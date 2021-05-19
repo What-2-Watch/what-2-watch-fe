@@ -9,6 +9,7 @@
     "start": "vue-cli-service serve"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@headlessui/vue": "^1.2.0",
     "core-js": "^3.6.5",
     "swiper": "^6.6.2",

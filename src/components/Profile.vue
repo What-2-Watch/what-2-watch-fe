@@ -1,23 +1,39 @@
 <template>
     <section class="profile-container">
         <div class="welcome-container">
-            <h1>Welcome {{ `Nick Cage`|| currentUser.first_name }}</h1>
+            <h1>Welcome, {{ `Nick Cage`|| currentUser.first_name }}</h1>
             <h2 class="email">Email: {{ 'nick.cage@gmail.com' || currentUser.email }}</h2>
         </div>
         <div class="lang-reg-container">
             <h2>Language: {{ 'English' || currentUser.language }} | </h2>
             <h2>| Region: {{ 'United States' || currentUser.region }}</h2>
         </div>
-        <h3>Services: {{ 'a long list of services' || currentUser.subscriptions }}</h3>
+        <h2>Your Services:</h2>
+        <div :key="service.id" v-for="service in subscriptionList" class="">
+            <Service :provider="service" />
+        </div>
         <button class="edit-btn">Edit Profile</button>
     </section>
 </template>
 
 <script>
+import Service from './Service'; 
+
 export default {
     name: 'Profile',
     props: {
         currentUser: {type: Object}
+    }, 
+    components: {
+        Service
+    }, 
+    data() {
+        return {
+            subscriptionList: [
+                {id: 0, sub: "NutFlex"}, 
+                {id: 1, sub: "FlexNuts"}
+            ]
+        }
     }
 }
 </script>
@@ -35,8 +51,7 @@ export default {
     }
 
     .lang-reg-container {
-        display: flex;
-        justify-content: center;
+        @include flex-row; 
     }
 
     .welcome-container {
@@ -50,9 +65,13 @@ export default {
     }
 
     .edit-btn {
-        background-color: $gray; 
+        background-color: transparent;
+        border-bottom: 1px solid $gray; 
+        color: $gray; 
         width: 100px;
-        height: 20px; 
-        border-radius: 3px;
+        height: 25px; 
+        position: absolute;
+        bottom: 50px; 
+        left: 90px; 
     }
 </style>
