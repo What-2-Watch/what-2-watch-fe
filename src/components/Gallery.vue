@@ -34,7 +34,6 @@ export default {
     name: 'Gallery', 
     props: {
         listTitle: {type: String},
-        
     }, 
     components: {
         MovieCard,

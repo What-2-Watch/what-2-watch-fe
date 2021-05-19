@@ -18,3 +18,8 @@
   transition: transform 300ms;
   transition: all 0.2s ease-in-out;
 }
+
+@mixin flex-row {
+  display: flex;
+  justify-content: center;
+}
