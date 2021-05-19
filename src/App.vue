@@ -30,7 +30,9 @@ export default {
         "last_name": "",
         "language": "0",
         "region": "0"
-        }
+        },
+      genres: [],
+      services: []
     }
   },
   methods: {

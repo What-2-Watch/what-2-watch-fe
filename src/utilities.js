@@ -22,6 +22,21 @@ export const confirmLogin = () => {
 } 
 
 export const getServices = () => {
-    return fetch (`URL`)
+  return fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=d485a0da5573c3e7d61614d66ae23824&language=en-US&watch_region=US`)
         .then(response => checkResponse(response))
 }
+
+/*getUserOptions
+  onpage load (because it is needed to create a new user)
+  fetch provides, genres, regions and languages
+  use promise all 
+  filter each promise to only save the data we need
+  hold this stuff in app data
+*/
+
+//get genres
+//get languages
+/*get regions 
+services 
+https://api.themoviedb.org/3/watch/providers/regions?api_key=d485a0da5573c3e7d61614d66ae23824&language=en-US
+*/
