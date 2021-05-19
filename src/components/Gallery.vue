@@ -2,19 +2,33 @@
     <section class='gallery-display'>
         <h2 class='gallery-title'>{{ listTitle || 'Recommendations' }}</h2>
 
-        <article class='list-container'>
-            <li :key="movie.id" v-for="movie in movieList">
-            <!-- <Slide> -->
+         
+            <swiper
+            :slides-per-view="5"
+            :space-between="50"
+            :pagination="{ clickable: true }"
+            :scrollbar="{ draggable: true }"
+            navigation
+            >
+
+            <swiper-slide :key="movie.id" v-for="movie in movieList">
              <MovieCard :list="listTitle" :movie="movie"/>
-            <!-- </Slide> -->
-            </li>
-        </article>
+            </swiper-slide>
+            </swiper>
     </section>
 </template>
 
 <script>
 import MovieCard from '../components/MovieCard';
-// import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+
+import { Swiper, SwiperSlide } from 'swiper/vue';
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export default { 
     name: 'Gallery', 
@@ -24,8 +38,8 @@ export default {
     }, 
     components: {
         MovieCard,
-        // Carousel,
-        // Slide,
+        Swiper,
+        SwiperSlide,
     },
     data() {
         return {
@@ -66,35 +80,8 @@ export default {
         margin: 10px;
         border-bottom: 1px solid $gray; 
     }
-
-    .list-container {
-        display: flex;
-        background-color: $black;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        padding-bottom: 50px;
-    }
-    .list-container::-webkit-scrollbar {
-        background-color: $darkestRed;
-        border-radius: 10px;
-        height: 55px;
-        // width: 50vw;
-        cursor: pointer;
-        position: absolute
-    }
-
-    .list-container::-webkit-scrollbar-thumb {
-        background-image: url('../assets/vertical-flip.png');
-        border-radius: 10px;
-        height: 10px;
-        width: 10px;
-        background-size: contain;
-        background-repeat: no-repeat;
-        scroll-behavior: smooth;
-    }
-
-    .list-container::-webkit-scrollbar-track {
-        // width: 200%;
+    .swiper-container {
+        padding: 20px;
     }
 
 </style>
