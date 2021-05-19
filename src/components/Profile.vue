@@ -8,13 +8,43 @@
             <h2>Language: {{ 'English' || currentUser.language }} | </h2>
             <h2>| Region: {{ 'United States' || currentUser.region }}</h2>
         </div>
-        <h2>Your Services:</h2>
+        <h2>YOUR SERVICES:</h2>
         <article class="subscriptions-container"> 
             <div :key="service.id" v-for="service in subscriptionList">
                 <Service :provider="service" />
             </div>
+<div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                        <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                        <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                        <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                        <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                        <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                                    <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                                    <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                                    <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+                                    <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
         </article>
-        <button class="edit-btn">Edit Profile</button>
+        <button class="edit-btn">EDIT PROFILE</button>
     </section>
 </template>
 
@@ -73,13 +103,15 @@ export default {
         color: $gray; 
         width: 100px;
         height: 25px; 
-        position: absolute;
-        bottom: 50px; 
-        left: 90px; 
+        margin: 40px; 
+        float: left;  
     }
 
     .subscriptions-container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        height: 175px;
+        margin-top: 20px; 
+        overflow: auto; 
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <section class="sevice-container">
-        <h2>{{ provider.sub }}</h2>
+    <section class="service-container">
+        <button class="service-btn">{{ provider.sub }}</button>
     </section>
 </template>
 
@@ -19,6 +19,16 @@ export default {
     
     .service-container {
         @include flex-row; 
+        border: solid 1px $mediumRed; 
+        box-shadow: 0 0 .5em $mediumRed;
+        height: 40px; 
+        margin: 5px; 
+    }
+
+    .service-btn {
+        color: $gray; 
+        font-size: 1.5em; 
+        font-weight: bold; 
     }
 
 </style>
