@@ -13,36 +13,6 @@
             <div :key="service.id" v-for="service in subscriptionList">
                 <Service :provider="service" />
             </div>
-<div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                        <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                        <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                        <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                        <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                        <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                                    <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                                    <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                                    <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
-                                    <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
         </article>
         <button class="edit-btn">EDIT PROFILE</button>
     </section>
@@ -114,4 +84,15 @@ export default {
         margin-top: 20px; 
         overflow: auto; 
     }
+
+    .subscriptions-container::-webkit-scrollbar {
+        background-color: transparent;
+        width: 4px;
+    }
+
+    .subscriptions-container::-webkit-scrollbar-thumb {
+       background-color: $gray;
+       border-radius: 10px;
+    }
+
 </style>
