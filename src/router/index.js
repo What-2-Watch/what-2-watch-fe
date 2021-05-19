@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Profile from '../views/Profile.vue'
+import ProfilePage from '../views/ProfilePage.vue'
 import Search from '../views/Search.vue'
 const routes = [
   {
@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile
+    component: ProfilePage
   },
   {
     path: '/search',
