@@ -9,9 +9,11 @@
             <h2>| Region: {{ 'United States' || currentUser.region }}</h2>
         </div>
         <h2>Your Services:</h2>
-        <div :key="service.id" v-for="service in subscriptionList" class="">
-            <Service :provider="service" />
-        </div>
+        <article class="subscriptions-container"> 
+            <div :key="service.id" v-for="service in subscriptionList">
+                <Service :provider="service" />
+            </div>
+        </article>
         <button class="edit-btn">Edit Profile</button>
     </section>
 </template>
@@ -52,6 +54,7 @@ export default {
 
     .lang-reg-container {
         @include flex-row; 
+        margin-bottom: 20px; 
     }
 
     .welcome-container {
@@ -73,5 +76,10 @@ export default {
         position: absolute;
         bottom: 50px; 
         left: 90px; 
+    }
+
+    .subscriptions-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 </style>
