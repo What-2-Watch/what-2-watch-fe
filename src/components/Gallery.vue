@@ -6,9 +6,8 @@
             <swiper
             :slides-per-view="5"
             :space-between="50"
-            :pagination="{ clickable: true }"
             :scrollbar="{ draggable: true }"
-            navigation
+            
             >
 
             <swiper-slide :key="movie.id" v-for="movie in movieList">
