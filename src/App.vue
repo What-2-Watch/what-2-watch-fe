@@ -22,17 +22,25 @@ export default {
   },
   data() {
     return{
+      error:"",
       loggedIn: true,
       currentUser: {        
         "id": 1,
         "email": "hope.gochnour@gmail.com",
         "first_name": "",
         "last_name": "",
-        "language": "0",
-        "region": "0"
+        "language": "en-US",
+        "region": "US",
+        "watchlist": [],
+        "thumbsUp": [],
+        "thumbsDown": [],
+        "recommendations": [],
+        "subscriptions": []
         },
-      genres: [],
-      services: []
+      allGenres: [],
+      allServices: [],
+      allLanguages: [],
+      allRegions: []
     }
   },
   methods: {
