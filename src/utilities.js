@@ -42,6 +42,29 @@ export const getServices = (region, language) => {
         .catch()
 }
 
+
+export const movieSearch = (query) => {
+  return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d485a0da5573c3e7d61614d66ae23824${query}`)
+    .then(response => checkResponse(response))
+    .then(response => cleanMovieSearchData(response.results))
+}
+
+export const cleanMovieSearchData = (array) => {
+  return array.map(movieData => {
+    return {
+      'id':movieData.id, 
+      'genres':movieData.genre_ids,
+      'backdrop': movieData.backdrop_path,
+      'title': movieData.title,
+      'overview': movieData.overview,
+      'poster': movieData.poster_path, 
+      'release_date': movieData.release_date, 
+      'user_rating': movieData.vote_average
+    }
+  })
+}
+
+
 export const cleanServiceData = (array) => {
   return array.map(service => {
     return {
@@ -61,13 +84,7 @@ export const cleanRegionData = (array) => {
   })
 }
 
-export const cleanGenres = (array) => {
-  return array.map(genres => {
-    return {
 
-    }
-  })
-}
 
 
 //get genres
