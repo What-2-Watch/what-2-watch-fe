@@ -52,6 +52,7 @@ export default {
           this.allRegions = responses[1],
           this.allServices = responses[2]
         })
+        //should we put a catch here to update the error data? Might be easier that getting from the calls in utilities
       }
   },
   methods: {
