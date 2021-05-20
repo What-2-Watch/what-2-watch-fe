@@ -48,10 +48,8 @@
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: repeat(1, 1fr);
-      // grid-template-area: bottom;
       transition: all 0.2s ease-in-out;
       z-index: 0;
-      margin-bottom: 25px;
 
         img {
           height: 250px;  
@@ -59,16 +57,10 @@
           border-radius: 2px;
           border: solid .1px #d9d9d956; 
           box-shadow: 0 0 .75em #808080;
-          // grid-area: ;
         }
 
         &:hover {
-          @include transition;
           border: solid 3px $darkestRed;
-        }
-
-        &:hover .poster {
-          transform: scale(1.01);
         }
     }
     .card-info {
@@ -77,8 +69,6 @@
       opacity: 0;
       height: 100%;
       width: 100%;
-      position: absolute;
-      padding: 8px;
 
       h3 {
         font-size: 24px;

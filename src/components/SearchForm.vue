@@ -1,0 +1,84 @@
+<template>
+  <form class="search-form">
+    <input type="text" placeholder="Search" v-model="searchInput">
+    <article class="secondary-inputs">
+    <select name="genres" v-model="genreInput">
+      <option>Genres:</option>
+      <option>Comedy</option>
+      <option>Horror</option>
+    </select>
+    <select name="languages" v-model="languageInput">
+      <option>En</option>
+      <option>Esp</option>
+    </select>
+    <select name="regions" v-model="regionInput">
+      <option>US</option>
+      <option>CA</option>
+      <option>Belarus</option>
+    </select>
+    </article>
+    <button type="submit" v-on:click="searchMovies">Submit Search</button>
+  </form>
+</template>
+
+<script>
+
+export default {
+  name: 'SearchForm',
+  data() {
+    return {
+      searchInput: '',
+      genreInput: 'Genres:',
+      languageInput: 'En',
+      regionInput: 'US',
+    }
+  },
+  methods: {
+    searchMovies(e) {
+      e.preventDefault()
+      const searchInputs = {
+        genre: this.genreInput,
+        lang: this.languageInput,
+        region: this.regionInput,
+        search: this.searchInput
+      }
+      this.$emit('submitSearch', searchInputs)
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+  @import '../index.scss';
+
+  .search-form {
+    margin: 35px;
+    border: 3px solid black;
+    box-shadow: 0 0 .75em $lightRed;
+
+    padding: 50px;
+    border-radius: 10px;
+    input {
+      background-color: transparent;
+      border-bottom: 1px solid $lightRed;
+      width: 60%;
+      font-size: 2em;
+      color: $gray
+    }
+    button, select {
+      color: $gray;
+      border: 1px solid $lightRed;
+      padding: 5px;
+      background-color: transparent;
+      border-radius: 5px;
+      font-size: 1.5em;
+      margin: 15px;
+    }
+  }
+
+  .secondary-inputs {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+</style>
