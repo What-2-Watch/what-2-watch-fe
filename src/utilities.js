@@ -44,7 +44,7 @@ export const getServices = (region, language) => {
 
 
 export const movieSearch = (query) => {
-  return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d485a0da5573c3e7d61614d66ae23824${query}`)
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=d485a0da5573c3e7d61614d66ae23824${query}`)
     .then(response => checkResponse(response))
     .then(response => cleanMovieSearchData(response.results))
 }
@@ -64,6 +64,11 @@ export const cleanMovieSearchData = (array) => {
   })
 }
 
+export const filterResultsByGenre = (searchResults, genreID) => {
+  return searchResults.filter(movie => {
+    movie.genre_ids.includes(genreID)
+  })
+}
 
 export const cleanServiceData = (array) => {
   return array.map(service => {
