@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/movieDetailTest" class="movie-card">
+    <router-link to="/movie/399566" class="movie-card">
      <img :src="movie.src" alt="" class="poster"/>
         <aside class="movie-card-details">
             <h3>{{ movie.title }}</h3>
