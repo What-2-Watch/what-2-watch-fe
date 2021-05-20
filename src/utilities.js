@@ -59,7 +59,7 @@ export const movieSearch = (query) => {
 const cleanMovieDetails = (movieData) => {
   return {
     'id': movieData.id,
-    'genres': movieData.genre_ids,
+    'genres': movieData.genres,
     'backdrop': movieData.backdrop_path,
     'title': movieData.title,
     'overview': movieData.overview,
