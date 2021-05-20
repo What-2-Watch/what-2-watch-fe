@@ -23,6 +23,11 @@ const routes = [
     path: '/',
     name: 'Login',
     component: App,
+  },
+  {
+    path: '/movie/:id',
+    name: 'Movie Details',
+    component: MovieDetailsPage
   }
 
 ]
