@@ -135,7 +135,7 @@ export const movieSearch = (query) => {
     .catch()
 }
 
-const cleanMovieDetails(movieData) => {
+const cleanMovieDetails = (movieData) => {
   return {
     'id': movieData.id,
     'genres': movieData.genre_ids,
