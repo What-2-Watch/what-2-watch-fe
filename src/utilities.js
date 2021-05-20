@@ -42,11 +42,33 @@ export const getServices = (region, language) => {
         .catch()
 }
 
+export const getMovieDetails = (id, language) => {
+  return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=d485a0da5573c3e7d61614d66ae23824&language=${language}`)
+  .then(response => checkResponse(response))
+  .then(movieData => cleanMovieDetails(movieData))
+  .catch()
+}
 
 export const movieSearch = (query) => {
   return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=d485a0da5573c3e7d61614d66ae23824${query}`)
     .then(response => checkResponse(response))
     .then(response => cleanMovieSearchData(response.results))
+    .catch()
+}
+
+export const cleanMovieDetails(movieData) => {
+  return {
+    'id': movieData.id,
+    'genres': movieData.genre_ids,
+    'backdrop': movieData.backdrop_path,
+    'title': movieData.title,
+    'overview': movieData.overview,
+    'poster': movieData.poster_path,
+    'release_date': movieData.release_date,
+    'user_rating': movieData.vote_average,
+    'run_time':movieData.runtime,
+    'tagline':movieData.tagline
+  }
 }
 
 export const cleanMovieSearchData = (array) => {
@@ -56,7 +78,6 @@ export const cleanMovieSearchData = (array) => {
       'genres':movieData.genre_ids,
       'backdrop': movieData.backdrop_path,
       'title': movieData.title,
-      'overview': movieData.overview,
       'poster': movieData.poster_path, 
       'release_date': movieData.release_date, 
       'user_rating': movieData.vote_average
@@ -68,9 +89,9 @@ export const cleanMovieSearchData = (array) => {
 export const cleanServiceData = (array) => {
   return array.map(service => {
     return {
-      logo_path: service.logo_path,
-      name: service.provider_name,
-      id: service.provider_id
+      'logo_path': service.logo_path,
+      'name': service.provider_name,
+      'id': service.provider_id
     }
   })
 }
@@ -78,21 +99,8 @@ export const cleanServiceData = (array) => {
 export const cleanRegionData = (array) => {
   return array.map(region => {
     return {
-      en_name: region.english_name,
-      id: region.iso_3166_1
+      'en_name': region.english_name,
+      'id': region.iso_3166_1
     }
   })
 }
-
-
-
-
-//get genres
-//get languages
-/*get regions 
-services 
-https://api.themoviedb.org/3/watch/providers/regions?api_key=d485a0da5573c3e7d61614d66ae23824&language=en-US
-*/
-
-
-//
