@@ -57,7 +57,7 @@ export const cleanMovieSearchData = (array) => {
       'backdrop': movieData.backdrop_path,
       'title': movieData.title,
       'overview': movieData.overview,
-      'poster': movieData.poster_path, 
+      'poster': `https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.poster_path}`,
       'release_date': movieData.release_date, 
       'user_rating': movieData.vote_average
     }
