@@ -135,7 +135,7 @@ export const movieSearch = (query) => {
     .catch()
 }
 
-export const cleanMovieDetails(movieData) => {
+const cleanMovieDetails(movieData) => {
   return {
     'id': movieData.id,
     'genres': movieData.genre_ids,
@@ -177,7 +177,7 @@ export const filterResultsByGenre = (searchResults, genreID) => {
   })
 }
 
-export const cleanServiceData = (array) => {
+const cleanServiceData = (array) => {
   return array.map(service => {
     return {
       'logo_path': service.logo_path,
@@ -187,7 +187,7 @@ export const cleanServiceData = (array) => {
   })
 }
 
-export const cleanRegionData = (array) => {
+const cleanRegionData = (array) => {
   return array.map(region => {
     return {
       'en_name': region.english_name,
