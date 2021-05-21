@@ -1,19 +1,21 @@
 <template>
-    <router-link to="/movieDetailTest" class="movie-card">
+  <article class="movie-card">
+    <router-link to="/movieDetailTest" >
      <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster"/>
      <p v-else class="poster-error">Poster not available</p>
+    </router-link>
         <aside class="movie-card-details">
             <h3>{{ movie.title }}</h3>
             <div class="button-container">
               <div class="thumbs">
-                <button name="upVote" v-on:click="emitActivity">👍</button>
-                <button name="downVote" v-on:click="emitActivity">👎</button>
+                <button name="upVote" v-on:click="emitThumbs">👍</button>
+                <button name="downVote" v-on:click="emitThumbs">👎</button>
               </div>
-              <button name="add" v-on:click="emitActivity" v-if="list !== 'My Watchlist'">Add to Watchlist</button>
-              <button v-else name="remove" v-on:click="emitActivity">Remove from Watchlist</button>
+              <button name="add" v-on:click="emitWatchlist" v-if="list !== 'My Watchlist'">Add to Watchlist</button>
+              <button v-else name="remove" v-on:click="emitWatchlist">Remove from Watchlist</button>
             </div>
         </aside>
-    </router-link>
+    </article>
 </template>
 
 
@@ -31,8 +33,12 @@
             'remove:movie.id'
         ],
         methods: {
-          emitActivity(e) {
-            this.$emit(e.target.name, this.movie.id)
+          emitThumbs(e) {
+            this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
+          },
+          emitWatchlist(e) {
+            console.log(this.movie)
+            this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
           }
         }
     }
@@ -75,25 +81,28 @@
       box-shadow: 0 0 .75em #808080;
     }
 
-    .card-info {
+    .movie-card-details {
       display:flex;
-      flex-direction: column-reverse;
-      opacity: 0;
+      flex-direction: column;
       height: 100%;
       width: 100%;
+      text-align:center;
 
       h3 {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 400;
         text-align: left;
         margin-left: 15px;
         margin-bottom: -6;
+        color:$gray;
       }
     }
 
   .thumbs {
-
     justify-content: space-between;
+    button {
+          margin: 5px;
+    }
   }
 
   .button-container{

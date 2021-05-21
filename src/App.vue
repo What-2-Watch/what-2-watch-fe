@@ -3,8 +3,9 @@
     <Header :loggedIn="loggedIn"/>
     <Login v-if="!loggedIn" v-on:newUser="createNewUser($event)" v-on:userLogin="updateLogin()"/>
     <main v-else>
-      <router-view />
-      <Home/>
+      <router-view 
+      :user="currentUser" 
+      :log="loggedIn"/>
     </main>
   </body>
 </template>
@@ -13,14 +14,13 @@
 import { } from 'vue'
 import Header from './components/Header';   
 import Login from './views/Login'; 
-import { submitNewUser, getGenres, getRegions, getServices } from './utilities'; 
-
+import { submitNewUser } from './utilities'; 
 import router from './router/index'
 export default {
   name: 'App',
   components: {
     Header,
-    Login
+    Login,
   },
   data() {
     return{
@@ -38,21 +38,7 @@ export default {
         "recommendations": [],
         "subscriptions": []
         },
-      allGenres: [],
-      allServices: [],
-      allLanguages: [],
-      allRegions: []
     }
-  },
-    mounted() {
-      if(this.loggedIn) {
-        Promise.all([getGenres(this.currentUser.language), getRegions(this.currentUser.language), getServices(this.currentUser.region, this.currentUser.language)])
-        .then(responses => {
-          this.allGenres = responses[0],
-          this.allRegions = responses[1],
-          this.allServices = responses[2]
-        })
-      }
   },
   methods: {
     updateLogin() {

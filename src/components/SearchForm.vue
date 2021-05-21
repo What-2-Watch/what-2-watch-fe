@@ -3,18 +3,18 @@
     <input type="text" placeholder="Search" v-model="searchInput">
     <article class="secondary-inputs">
     <select name="genres" v-model="genreInput">
-      <option>Genres:</option>
-      <option>Comedy</option>
-      <option>Horror</option>
-    </select>
-    <select name="languages" v-model="languageInput">
-      <option>En</option>
-      <option>Esp</option>
+      <option disabled>Genre:</option>
+      <option v-for="genre in genres" 
+      value="genre.id" :key="genre.id">
+       {{genre.name}}    
+      </option>
     </select>
     <select name="regions" v-model="regionInput">
-      <option>US</option>
-      <option>CA</option>
-      <option>Belarus</option>
+      <option disabled>Region:</option>
+      <option v-for="region in regions" 
+      value="region.id" :key="region.id">
+       {{region.en_name}}    
+      </option>
     </select>
     </article>
     <button type="submit" v-on:click="searchMovies">Submit Search</button>
@@ -28,11 +28,16 @@ export default {
   data() {
     return {
       searchInput: '',
-      genreInput: 'Genres:',
-      languageInput: 'En',
-      regionInput: 'US',
+      genreInput: 'Genre:',
+      languageInput: 'en-US',
+      regionInput: 'Region:',
     }
   },
+  props: {
+    genres: Array,
+    languages: Array,
+    regions: Array
+ },
   methods: {
     searchMovies(e) {
       e.preventDefault()
@@ -76,6 +81,9 @@ export default {
       border-radius: 5px;
       font-size: 1.5em;
       margin: 15px;
+    }
+    select {
+      width: 50%;
     }
   }
 
