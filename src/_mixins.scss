@@ -28,3 +28,9 @@
   border: solid .1px #d9d9d956; 
   box-shadow: 0 0 .75em #808080;
 }
+
+@mixin activeBorder {
+  border: solid .1px $gray;
+  background-color:$gray;
+  color:black;
+}
