@@ -37,12 +37,15 @@ export default {
     searchMovies(e) {
       e.preventDefault()
       const searchInputs = {
-        genre: this.genreInput,
-        lang: this.languageInput,
+        lang: 'en-US',
         region: this.regionInput,
         search: this.searchInput
       }
       this.$emit('submitSearch', searchInputs)
+      this.submitGenre()
+    },
+    submitGenre() {
+      this.$emit('changeGenreFilter', this.genreInput)
     }
   }
 }

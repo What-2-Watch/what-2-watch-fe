@@ -1,6 +1,6 @@
 <template>
   <section class="search-grid">
-      <MovieCard :list="title" v-for="movie in movieList" :movie="movie" :key="movie.id"/>
+      <MovieCard :list="title" v-for="result in searchResults" :movie="result" :key="result.id"/>
   </section>
 </template>
 
@@ -8,7 +8,9 @@
 import MovieCard from '../components/MovieCard'
 export default {
   name: 'SearchGrid', 
-  
+  props: {
+    searchResults: [],
+  },
   components: {
       MovieCard,
   },

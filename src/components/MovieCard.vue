@@ -1,6 +1,7 @@
 <template>
     <router-link to="/movieDetailTest" class="movie-card">
-     <img :src="movie.src" alt="" class="poster"/>
+     <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster"/>
+     <p v-else class="poster-error">Poster not available</p>
         <aside class="movie-card-details">
             <h3>{{ movie.title }}</h3>
             <div class="button-container">
@@ -63,6 +64,17 @@
           border: solid 3px $darkestRed;
         }
     }
+
+    .poster-error {
+      height: 250px;  
+      width:100%;
+      margin: 20px;
+      padding: 50px 20px 50px 20x; 
+      font-size: 26px;
+      border: solid .1px #d9d9d956; 
+      box-shadow: 0 0 .75em #808080;
+    }
+
     .card-info {
       display:flex;
       flex-direction: column-reverse;
