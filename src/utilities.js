@@ -7,7 +7,6 @@ const checkResponse = (response) => {
 }}
 
 export const postWatchlist = (watchListObj) => {
-  console.log(watchListObj)
   return fetch('https://what-2-watch-be.herokuapp.com/v1/watchlists/', {
     method: 'POST',
     headers: {
@@ -17,33 +16,33 @@ export const postWatchlist = (watchListObj) => {
   })
 }
 
-export const postThumb = ({api_movie_id, up}) => {
+export const postThumb = async ({api_movie_id, up, title}) => {
   let thumb = {
       'user': 1,
       api_movie_id,
       up,
-      "title": "Sup",
+      title,
       "api_actor_id": null,
       "api_director_id": null,
       "api_genre_id": null,
       "api_similar_id": 123,
   }
   
-  Promise.all([getCredits(api_movie_id), getMovieGenre(api_movie_id)])
+  await Promise.all([getCredits(api_movie_id), getMovieGenre(api_movie_id)])
     .then(responses => {
       thumb.api_director_id = getDirectorID(responses[0])
       thumb.api_actor_id = getActorID(responses[0])
       thumb.api_genre_id = responses[1].id
   }) 
 
-  return fetch(`https://what-2-watch-be.herokuapp.com/v1/thumbs/`, {
-    method: 'POST',
-    body: JSON.stringify(thumb),
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  })
-    .then(response => checkResponse(response))
+
+    return fetch(`https://what-2-watch-be.herokuapp.com/v1/thumbs/`, {
+      method: 'POST',
+      body: JSON.stringify(thumb),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
     .catch()
 }
 
