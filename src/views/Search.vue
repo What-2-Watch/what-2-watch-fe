@@ -7,14 +7,15 @@
     :regions="allRegions"
     
     ></search-form>
-    <search-grid :searchResults="searchResults"></search-grid>
+    <search-grid :searchResults="searchResults"
+    v-on:postThumb="updateThumb"></search-grid>
   </section>
 </template>
 
 <script>
 import SearchForm from '../components/SearchForm'
 import SearchGrid from '../components/SearchGrid'
-import { movieSearch, getGenres, getRegions } from '../utilities'; 
+import { movieSearch, getGenres, getRegions, postThumb } from '../utilities'; 
 
 
 
@@ -50,6 +51,20 @@ export default ({
       movieSearch(fetchStr)
       .then(data => this.searchResults = data)
     },
+    updateThumb({api_movie_id, up}) {
+      const thumb = {
+        'user': this.user.id,
+        api_movie_id,
+        up,
+        "title": "Sup",
+        "api_actor_id": 234,
+        "api_director_id": 345,
+        "api_genre_id": 456,
+        "api_similar_id": 000,    
+      }
+      postThumb(thumb)
+      .then(res => console.log(res))
+    }
     // setActiveGenres(genreId) {
     //   console.log(genreId)
     // v-on:changeGenreFilter="setActiveGenre($event)"

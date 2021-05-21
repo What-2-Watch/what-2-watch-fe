@@ -1,6 +1,11 @@
 <template>
   <section class="search-grid">
-      <MovieCard :list="title" v-for="result in searchResults" :movie="result" :key="result.id"/>
+      <MovieCard 
+      :list="title" v-for="result in searchResults" 
+      :movie="result" 
+      :key="result.id"
+      v-on:upVote="thumbsUp($event)"
+      v-on:downVote="thumbsDown($event)"/>
   </section>
 </template>
 
@@ -19,6 +24,14 @@ export default {
           movieList: []
       }
   },
+  methods: {
+    thumbsUp(id) {
+      this.$emit('postThumb', {api_movie_id: id, up: true})
+    },
+    thumbsDown(id) {
+      this.$emit('postThumb', {api_movie_id: id, up: false})
+    }
+  }
 }
 </script>
 
