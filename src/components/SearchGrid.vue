@@ -5,7 +5,9 @@
       :movie="result" 
       :key="result.id"
       v-on:upVote="thumbsUp($event)"
-      v-on:downVote="thumbsDown($event)"/>
+      v-on:downVote="thumbsDown($event)"
+      v-on:add="addToWatchList($event)"
+      v-on:remove="removeFromWatchlist($event)"/>
   </section>
 </template>
 
@@ -25,11 +27,14 @@ export default {
       }
   },
   methods: {
-    thumbsUp(id) {
-      this.$emit('postThumb', {api_movie_id: id, up: true})
+    thumbsUp({id, title}) {
+      this.$emit('postThumb', {api_movie_id: id, up: true, title: title})
     },
-    thumbsDown(id) {
-      this.$emit('postThumb', {api_movie_id: id, up: false})
+    thumbsDown(id, title) {
+      this.$emit('postThumb', {api_movie_id: id, up: false, title: title})
+    },
+    addToWatchList({id, title}) {
+      this.$emit('postWatchList', {api_movie_id: id, title})
     }
   }
 }
