@@ -1,7 +1,9 @@
 <template>
-    <router-link to="/movieDetailTest" class="movie-card">
+  <article class="movie-card">
+    <router-link to="/movieDetailTest" >
      <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster"/>
      <p v-else class="poster-error">Poster not available</p>
+    </router-link>
         <aside class="movie-card-details">
             <h3>{{ movie.title }}</h3>
             <div class="button-container">
@@ -13,7 +15,7 @@
               <button v-else name="remove" v-on:click="emitActivity">Remove from Watchlist</button>
             </div>
         </aside>
-    </router-link>
+    </article>
 </template>
 
 
@@ -75,25 +77,28 @@
       box-shadow: 0 0 .75em #808080;
     }
 
-    .card-info {
+    .movie-card-details {
       display:flex;
-      flex-direction: column-reverse;
-      opacity: 0;
+      flex-direction: column;
       height: 100%;
       width: 100%;
+      text-align:center;
 
       h3 {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 400;
         text-align: left;
         margin-left: 15px;
         margin-bottom: -6;
+        color:$gray;
       }
     }
 
   .thumbs {
-
     justify-content: space-between;
+    button {
+          margin: 5px;
+    }
   }
 
   .button-container{
