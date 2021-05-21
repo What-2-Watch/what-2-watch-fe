@@ -8,11 +8,11 @@
             <h3>{{ movie.title }}</h3>
             <div class="button-container">
               <div class="thumbs">
-                <button name="upVote" v-on:click="emitActivity">👍</button>
-                <button name="downVote" v-on:click="emitActivity">👎</button>
+                <button name="upVote" v-on:click="emitThumbs">👍</button>
+                <button name="downVote" v-on:click="emitThumbs">👎</button>
               </div>
-              <button name="add" v-on:click="emitActivity" v-if="list !== 'My Watchlist'">Add to Watchlist</button>
-              <button v-else name="remove" v-on:click="emitActivity">Remove from Watchlist</button>
+              <button name="add" v-on:click="emitWatchlist" v-if="list !== 'My Watchlist'">Add to Watchlist</button>
+              <button v-else name="remove" v-on:click="emitWatchlist">Remove from Watchlist</button>
             </div>
         </aside>
     </article>
@@ -33,8 +33,12 @@
             'remove:movie.id'
         ],
         methods: {
-          emitActivity(e) {
-            this.$emit(e.target.name, this.movie.id)
+          emitThumbs(e) {
+            this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
+          },
+          emitWatchlist(e) {
+            console.log(this.movie)
+            this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
           }
         }
     }
