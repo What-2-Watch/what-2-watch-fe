@@ -12,7 +12,6 @@
             <p>{{ movie.release_date }}</p>
             <p>{{ movie.user_rating }}</p>
             <div class="genres-box">
-                Genre list
             </div>
         </div>
         <article class="overview-box">
@@ -30,7 +29,12 @@
 export default {
     name: 'MovieDetails',
     props: {
-        movie: {type: Object}
+        movie: Object
+    }, 
+    data() {
+        return{
+            movieDetails:this.movie
+        }
     }
 }   
 </script>
