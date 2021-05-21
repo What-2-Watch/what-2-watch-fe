@@ -1,6 +1,7 @@
 <template>
     <section>
         <MovieDetails :movie="movie"/>
+    </section>
 </template>
 
 <script>
@@ -18,13 +19,20 @@ export default {
             movie: {}
         }
     },
-    mounted() {
+    created() {
         Promise.all([getMovieDetails(399566)])
-        .then(response => this.movie = response[0])
+        .then(response => {
+            console.log(response)
+            this.movie = response[0]
+            console.log(this.movie)
+            this.$forceUpdate()
+        })
+
     }
 }
 
-/*
-how to find the id of the movie from within the component, can it be passed 
-*/
-</script>great job
+</script>
+
+<style scoped lang="scss">
+
+</style>
