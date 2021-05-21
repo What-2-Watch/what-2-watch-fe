@@ -2,6 +2,7 @@
   <section class="home-view">
     <Gallery />
     <Gallery :listTitle="watchlist_title"/>
+    <h2>{{ user.email }}</h2>
   </section>
 </template>
 
@@ -17,6 +18,9 @@ export default {
     return {
       'watchlist_title':"My Watchlist"
     }
+  },
+  props: {
+    user: {type: Object}
   }
 }
 </script>

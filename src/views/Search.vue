@@ -1,6 +1,11 @@
 <template>
   <section class="search-view">
-    <search-form v-on:submitSearch="getSearchResults($event)"
+    <search-form 
+    v-on:submitSearch="getSearchResults($event)"
+    :genres="allGenres"
+    :languages="allLanguages"
+    :regions="allRegions"
+    
     ></search-form>
     <search-grid :searchResults="searchResults"></search-grid>
   </section>
@@ -9,7 +14,9 @@
 <script>
 import SearchForm from '../components/SearchForm'
 import SearchGrid from '../components/SearchGrid'
-import { movieSearch } from '../utilities'; 
+import { movieSearch, getGenres, getRegions } from '../utilities'; 
+
+
 
 export default ({
   name: 'Search',
@@ -19,8 +26,22 @@ export default ({
   },
   data() {
     return {
-      searchResults: []
+      searchResults: [],
+      allGenres: [],
+      allLanguages: [],
+      allRegions: []
     }
+  },
+  mounted() {
+    Promise.all([getGenres(this.user.language), getRegions(this.user.language)])
+    .then(responses => {
+      this.allGenres = responses[0],
+      this.allRegions = responses[1]
+      console.log(responses);
+    })
+  },
+  props: {
+    user: Object,
   },
   methods: {
     getSearchResults({ region, search, lang }) {
