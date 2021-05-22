@@ -108,7 +108,7 @@ export const getRegions = (language) => {
     .catch()
 }
 
-export const getServices = (region, language) => {
+export const getServices = (region = 'US', language = 'en-US') => {
   return fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=d485a0da5573c3e7d61614d66ae23824&language=${language}&watch_region=${region}`)
         .then(response => checkResponse(response))
         .then(data => cleanServiceData(data.results))
@@ -180,14 +180,21 @@ export const filterResultsByGenre = (searchResults, genreID) => {
 const cleanServiceData = (array) => {
   return array.map(service => {
     return {
-      'logo_path': service.logo_path,
-      'name': service.provider_name,
-      'id': service.provider_id
+      logo: `https://www.themoviedb.org/t/p/original${service.logo_path}`,
+      name: service.provider_name,
+      id: service.provider_id
     }
   })
 }
 
-const cleanRegionData = (array) => {
+export const filterByTopServices = (services) => {
+  const topServicesIds = ['8', '9', '337', '384', '15', '2', '528', '361', '258', '386', '192', '99', '300', '279', '37', '352']
+  const topServices = services.filter(service => topServicesIds.includes(String(service.id)))
+
+  return topServices
+}
+
+export const cleanRegionData = (array) => {
   return array.map(region => {
     return {
       'en_name': region.english_name,
