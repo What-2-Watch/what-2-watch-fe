@@ -177,7 +177,19 @@ export const filterResultsByGenre = (searchResults, genreID) => {
   })
 }
 
-const cleanServiceData = (array) => {
+export const postService = (userData) => {
+  return fetch('https://what-2-watch-be.herokuapp.com/v1/subscriptions/', {
+    method: 'POST',
+    body: JSON.stringify(userData),
+    headers: {
+    'Content-Type': 'application/json'
+    }
+  })
+  .then(response => checkResponse(response))
+  .then(response => console.log(response))
+}
+
+export const cleanServiceData = (array) => {
   return array.map(service => {
     return {
       logo: `https://www.themoviedb.org/t/p/original${service.logo_path}`,
@@ -188,7 +200,7 @@ const cleanServiceData = (array) => {
 }
 
 export const filterByTopServices = (services) => {
-  const topServicesIds = ['8', '9', '337', '384', '15', '2', '528', '361', '258', '386', '192', '99', '300', '279', '37', '352']
+  const topServicesIds = ['8', '9', '337', '384', '15', '2', '143', '361', '258', '386', '192', '99', '300', '279', '37', '3']
   const topServices = services.filter(service => topServicesIds.includes(String(service.id)))
 
   return topServices
