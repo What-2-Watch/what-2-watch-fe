@@ -61,11 +61,9 @@ export default {
 
   .search-form {
     margin: 35px;
-    border: 3px solid black;
-    box-shadow: 0 0 .75em $lightRed;
-
     padding: 50px;
-    border-radius: 10px;
+    @include primaryBorder;
+
     input {
       background-color: transparent;
       border-bottom: 1px solid $lightRed;

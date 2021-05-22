@@ -46,10 +46,9 @@ export default {
     .profile-container {
         color: $gray;
         padding: 50px; 
-        border: solid .1px #d9d9d956; 
-        box-shadow: 0 0 .75em #808080;
-        margin: 50px; 
+        margin: 35px; 
         min-height: 550px;
+        @include primaryBorder;
     }
 
     .lang-reg-container {

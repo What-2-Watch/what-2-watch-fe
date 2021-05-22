@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header-content">
-            <router-link to="/home">
+            <router-link to="/home" exact-active-class="active-title">
             <h1 class='app-title'>Flick Finder</h1>
             </router-link>
             <aside class="nav-links" v-if="loggedIn">
@@ -42,14 +42,15 @@ export default {
     }
     .nav-links {
         align-self: flex-end;
-        width: 140px;
+        width: 160px;
         display: flex;
         justify-content: space-between;
         height: unset;
         a {
             font-family: 'Bebas Neue', cursive;
             letter-spacing: 2px;
-            font-size: 15px;
+            font-size: 17px;
+            border: solid .1px transparent;
         }
     }
     
@@ -58,8 +59,15 @@ export default {
         width: 100%;
         display: flex;
         justify-content: space-between;
+
+        .active-title {
+            background-color: transparent;
+            border: none;
+            color: black;
+        }
     }
     .router-link-active {
-    color: $lightRed
+        @include activeBorder;
+
   }
 </style>
