@@ -77,21 +77,15 @@ export default {
     }
 
     .subscriptions-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        height: 175px;
-        margin-top: 20px; 
-        overflow: auto; 
+       @include serviceContainer
     }
 
     .subscriptions-container::-webkit-scrollbar {
-        background-color: transparent;
-        width: 4px;
+       @include serviceScroll
     }
 
     .subscriptions-container::-webkit-scrollbar-thumb {
-       background-color: $gray;
-       border-radius: 10px;
+      @include serviceScrollThumb
     }
 
 </style>
