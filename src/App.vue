@@ -1,7 +1,11 @@
 <template>
   <body id="app">
     <Header :loggedIn="loggedIn"/>
-    <Login v-if="!loggedIn" v-on:newUser="createNewUser($event)" v-on:userLogin="existingLogin($event)"/>
+    <Login v-if="!loggedIn" 
+    v-on:newUser="createNewUser($event)" 
+    v-on:userLogin="existingLogin($event)"
+    :userId="currentUser" 
+    />
     <main v-else>
       <router-view 
       :userId="currentUser" 
@@ -49,7 +53,7 @@ export default {
     },
     createNewUser(userData) {
       submitNewUser(userData)
-      .then(data => this.currentUser = data)
+      .then(data => this.currentUser = data.id)
     },
   },
 }
