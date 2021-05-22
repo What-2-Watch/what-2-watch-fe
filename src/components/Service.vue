@@ -1,13 +1,13 @@
 <template>
         <img 
-        v-on:click="addProvider"
+        v-on:click="clickProvider"
         :src="provider.logo" 
         class="service-logo" 
         :alt="provider.name + 'logo'"
         id="provider.id"
         name="provider.name"
-        :class="{active: is_active}">
-        <div v-if=active>{{provider.name}}</div>
+        :class="active ? 'is-active' : 'not-active'"
+        />
 </template>
 
 <script>
@@ -23,9 +23,9 @@ export default {
         }
     },
     methods: {
-        addProvider() {
+        clickProvider() {
             console.log(this.provider.name, this.provider.id)
-            this.active = true;
+            this.active = true
             this.$emit('addProvider', {name: this.provider.name, api_provider_id: this.provider.id})
         }
     }
@@ -35,30 +35,18 @@ export default {
 <style scoped  lang="scss">
   @import '../index.scss';
     
-    .service-container {
-        margin: 5px; 
-
-        img {
-            width: 100%;
-        }
-    }
-
     .service-logo {
-        width: 75px;
-        height: 75px; 
+        width: 85px;
+        height: 85px; 
         border-radius: 20%;
-
     }
 
-    .is_active {
-        border: solid 2px $mediumRed;
+    .is-active {
+        border: solid 5px $mediumRed;
     }
 
-
-    .service-btn {
-        color: $gray; 
-        /* font-size: 1.5em;  */
-        font-weight: bold; 
+    .not-active {
+        border: solid 5px transparent;
     }
 
 </style>
