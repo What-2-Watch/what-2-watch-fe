@@ -1,5 +1,9 @@
 <template>
-    <LoginForm v-on:createUser="newUser($event)" v-on:existingLogin="userLogin($event)" v-bind:updateLogin="updateLogin" />
+    <LoginForm 
+    v-on:createUser="newUser($event)" 
+    v-on:existingLogin="userLogin($event)" 
+    v-bind:updateLogin="updateLogin" 
+    />
 </template>
 
 
