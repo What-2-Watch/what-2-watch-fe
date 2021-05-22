@@ -38,7 +38,7 @@
 @mixin serviceContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  height: 175px;
+  height: 355px;
   margin-top: 20px; 
   overflow: auto; 
 }
