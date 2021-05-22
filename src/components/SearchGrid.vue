@@ -44,15 +44,11 @@ export default {
 @import '../index.scss'; 
 
   .search-grid {
+    margin: 0 auto;
+    width: 95%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    padding: 0 20px;
-    .movie-card {
-      transform: scale(.9);
-      .poster {
-        margin: .75em;
-        box-shadow: 0 0 .75em $lightRed;
-      }
-    }
+    column-gap: 16px;
+    row-gap: 16px;
   }
 </style>
