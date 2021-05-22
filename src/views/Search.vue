@@ -16,7 +16,7 @@
 <script>
 import SearchForm from '../components/SearchForm'
 import SearchGrid from '../components/SearchGrid'
-import { movieSearch, getGenres, getRegions, postThumb, postWatchlist } from '../utilities'; 
+import { movieSearch, getGenres, getRegions, postThumb, postWatchlist, getUserById } from '../utilities'; 
 
 
 
@@ -31,10 +31,12 @@ export default ({
       searchResults: [],
       allGenres: [],
       allLanguages: [],
-      allRegions: []
+      allRegions: [],
+      user: {}
     }
   },
-  mounted() {
+  async mounted() {
+    this.user = await getUserById(this.userId)
 
     Promise.all([getGenres(this.user.language), getRegions(this.user.language)])
     .then(responses => {
@@ -44,7 +46,7 @@ export default ({
     })
   },
   props: {
-    user: Object,
+    userId: Number,
   },
   methods: {
     getSearchResults({ region, search, lang }) {

@@ -1,13 +1,14 @@
 <template>
   <section class="home-view">
-    <Gallery />
-    <Gallery :listTitle="watchlist_title"/>
-    <h2>{{ user.email }}</h2>
+    <Gallery 
+    :listTitle="watchlist_title"
+    :list="watchlist"/>
   </section>
 </template>
 
 <script>
 import Gallery from '../components/Gallery';
+import { getUserById, getMovieById, cleanMovieSearchData } from '../utilities'; 
 
 export default {
   name: 'Home',
@@ -16,12 +17,34 @@ export default {
   },
   data() {
     return {
-      'watchlist_title':"My Watchlist"
+      'watchlist_title':"My Watchlist",
+      user: {},
+      watchlist : []
     }
   },
+  mounted() {
+    getUserById(this.userId)
+    .then(data => {
+      this.user = data
+      this.fetchWatchlistMovies()
+      })
+  },
   props: {
-    user: {type: Object}
-  }
+    userId: Number
+  },
+  methods: {
+    fetchWatchlistMovies() {
+      let movieList = this.user.watchlist.map(watchlistObj => {
+        return getMovieById(watchlistObj.api_movie_id)
+      })
+      Promise.all(movieList)
+      .then(responses => {
+        this.watchlist = [...cleanMovieSearchData(responses)]
+        console.log(responses)
+      })
+      
+    }
+}
 }
 </script>
 <style scoped lang="scss">

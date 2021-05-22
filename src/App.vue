@@ -1,10 +1,10 @@
 <template>
   <body id="app">
     <Header :loggedIn="loggedIn"/>
-    <Login v-if="!loggedIn" v-on:newUser="createNewUser($event)" v-on:userLogin="updateLogin()"/>
+    <Login v-if="!loggedIn" v-on:newUser="createNewUser($event)" v-on:userLogin="existingLogin($event)"/>
     <main v-else>
       <router-view 
-      :user="currentUser" 
+      :userId="currentUser" 
       :log="loggedIn"/>
     </main>
   </body>
@@ -14,7 +14,7 @@
 import { } from 'vue'
 import Header from './components/Header';   
 import Login from './views/Login'; 
-import { submitNewUser } from './utilities'; 
+import { submitNewUser, getUsers, confirmLogin } from './utilities'; 
 import router from './router/index'
 export default {
   name: 'App',
@@ -25,29 +25,29 @@ export default {
   data() {
     return{
       error:"",
-      loggedIn: true,
-      currentUser: {        
-        "id": 1,
-        "email": "hope.gochnour@gmail.com",
-        "first_name": "",
-        "last_name": "",
-        "language": "en-US",
-        "region": "US",
-        "watchlist": [],
-        "thumbs": [],
-        "recommendations": [],
-        "subscriptions": []
-        },
+      loggedIn: false,
+      currentUser: null,
+      allUsers: []
     }
   },
+  async mounted() {
+    const allUsers = await getUsers()
+    this.allUsers = allUsers
+  },
+
   methods: {
     updateLogin() {
       !this.loggedIn ? this.loggedIn = true : this.loggedIn = false
       this.loggedIn && router.push('home') 
     },
+    existingLogin(userData) {
+      const user = confirmLogin(userData, this.allUsers)
+      if (user) {
+        this.updateLogin()
+        this.currentUser = user.id
+      }
+    },
     createNewUser(userData) {
-      console.log(userData)
-      console.log(JSON.stringify(userData))
       submitNewUser(userData)
       .then(data => this.currentUser = data)
       this.updateLogin()

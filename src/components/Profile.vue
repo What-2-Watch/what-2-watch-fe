@@ -1,12 +1,12 @@
 <template>
     <section class="profile-container">
         <div class="welcome-container">
-            <h1>Welcome, {{ `Nick Cage`|| currentUser.first_name }}</h1>
-            <h2 class="email">Email: {{ 'nick.cage@gmail.com' || currentUser.email }}</h2>
+            <h1>Welcome, {{ user.first_name }}</h1>
+            <h2 class="email">Email: {{ user.email }}</h2>
         </div>
         <div class="lang-reg-container">
-            <h2>Language: {{ 'English' || currentUser.language }} | </h2>
-            <h2>| Region: {{ 'United States' || currentUser.region }}</h2>
+            <h2>Language: {{ user.language }} | </h2>
+            <h2>| Region: {{ user.region }}</h2>
         </div>
         <h2>YOUR SERVICES:</h2>
         <article class="subscriptions-container"> 
@@ -24,7 +24,7 @@ import Service from './Service';
 export default {
     name: 'Profile',
     props: {
-        currentUser: {type: Object}
+        user: Object
     }, 
     components: {
         Service
