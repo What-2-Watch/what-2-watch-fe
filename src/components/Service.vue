@@ -5,7 +5,9 @@
         class="service-logo" 
         :alt="provider.name + 'logo'"
         id="provider.id"
-        name="provider.name">
+        name="provider.name"
+        :class="{active: is_active}">
+        <div v-if=active>{{provider.name}}</div>
 </template>
 
 <script>
@@ -15,9 +17,15 @@ export default {
     props: {
         provider: {type: Object}
     },
+    data() {
+        return{
+            active: false
+        }
+    },
     methods: {
         addProvider() {
             console.log(this.provider.name, this.provider.id)
+            this.active = true;
             this.$emit('addProvider', {name: this.provider.name, api_provider_id: this.provider.id})
         }
     }
@@ -41,6 +49,11 @@ export default {
         border-radius: 20%;
 
     }
+
+    .is_active {
+        border: solid 2px $mediumRed;
+    }
+
 
     .service-btn {
         color: $gray; 
