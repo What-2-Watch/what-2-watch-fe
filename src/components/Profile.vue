@@ -11,7 +11,9 @@
         <h2>YOUR SERVICES:</h2>
         <article class="subscriptions-container"> 
             <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
+                <Service 
+                :provider="service"
+                 />
             </div>
         </article>
         <button class="edit-btn">EDIT PROFILE</button>
@@ -31,10 +33,7 @@ export default {
     }, 
     data() {
         return {
-            subscriptionList: [
-                {id: 0, sub: "NutFlex"}, 
-                {id: 1, sub: "FlexNuts"}
-            ]
+ 
         }
     }
 }
