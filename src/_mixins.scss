@@ -34,3 +34,21 @@
   background-color:$gray;
   color:black;
 }
+
+@mixin serviceContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 175px;
+  margin-top: 20px; 
+  overflow: auto; 
+}
+
+@mixin serviceScroll {
+  background-color: transparent;
+  width: 4px;
+}
+
+@mixin serviceScrollThumb {
+  background-color: $gray;
+  border-radius: 10px;
+}
