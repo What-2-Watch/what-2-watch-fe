@@ -50,7 +50,6 @@ export default {
     createNewUser(userData) {
       submitNewUser(userData)
       .then(data => this.currentUser = data)
-      this.updateLogin()
     },
   },
 }
