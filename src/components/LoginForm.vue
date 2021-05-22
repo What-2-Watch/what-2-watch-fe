@@ -78,11 +78,16 @@
       <label for="language"></label>
       <button v-on:click="createUser" class="create-acct-btn">CREATE ACCOUNT</button>
     </form>
-    <form class="subscriptions-container" v-else-if="servicePage">
-      <p class="service-message">Select which services you use</p>
+    <form  v-else-if="servicePage">
+      <h3 class="service-message">Select which services you use</h3>
+      <article class="subscriptions-container">
           <section :key="service.id" v-for="service in services">
-            <Service :provider="service" />
+            <Service 
+            :provider="service" 
+            v-on:addProvider="postService($event)"
+            />
           </section>
+      </article>
     </form>
    </section>
 </template>
@@ -150,6 +155,10 @@ export default ({
       }
       this.$emit('createUser', newUser)
       this.servicePage = true;
+    },
+
+    postService(service) {
+      this.$emit('postService', service)
     }
 }})
 </script>
@@ -163,7 +172,7 @@ export default ({
   .form-view {
     background-image: url('../assets/red_seats.jpg');
     height: 90%;
-    padding-top: 90px;
+    padding-top: 50px; 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 70%;
@@ -222,9 +231,14 @@ export default ({
     padding: 5px;
   }
 
+    .service-message {
+      color:$gray;
+      font-size: 24px;
+      margin: 0 0 40px 0;
+    }
     .subscriptions-container {
       margin: 0 auto;
-      width:95%;
+      width:65%;
        @include serviceContainer;
       overflow-x: hidden;
     }
