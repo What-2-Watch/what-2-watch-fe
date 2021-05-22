@@ -6,11 +6,24 @@
 
 <script>
 import Profile from '../components/Profile'; 
+import { getUserById } from '../utilities';
 
 export default ({
  name: 'ProfilePage',
+ data() {
+   return {
+     user: {}
+   }
+ },
  components: {
    Profile
+ },
+ props: {
+   userId: Number
+ },
+mounted() { 
+    getUserById(this.userId)
+    .then(data => this.user = data)
  }
 })
 </script>
