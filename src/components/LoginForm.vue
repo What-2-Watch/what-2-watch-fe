@@ -11,17 +11,17 @@
         required
         v-model="email"/>
       <label for="email"></label>
-      <input 
+      <!-- <input 
         type="password"
         name="password"
         placeholder="PASSWORD"
         required
-        v-model="password"/>
-        <label for="password"></label>
+        v-model="password"/> -->
+        <!-- <label for="password"></label> -->
         <button class="login-btn" type="submit" v-on:click="existingLogin">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
     </form>
-    <form v-else class="login-form">
+    <form v-else-if="!servicePage" class="login-form">
       <input
         type="text"
         name="email"
@@ -78,20 +78,30 @@
       <label for="language"></label>
       <button v-on:click="createUser" class="create-acct-btn">CREATE ACCOUNT</button>
     </form>
+    <form class="subscriptions-container" v-else-if="servicePage">
+      <p class="service-message">Select which services you use</p>
+          <section :key="service.id" v-for="service in services">
+            <Service :provider="service" />
+          </section>
+    </form>
    </section>
 </template>
 
 
 <script>
+  
+import Service from './Service.vue'; 
+import { getServices, filterByTopServices } from '../utilities';
 
 export default ({
   name: 'LoginForm',
   components: {
-
+    Service
   },
   data() {
     return {
       newUser: false,
+      servicePage: false,
       selectedLanguage: '',
       selectedRegion: '',
       email: '',
@@ -101,6 +111,13 @@ export default ({
       firstName: '',
       lastName: ''
     }
+  },
+  async mounted() {
+    await getServices()
+    .then( services => {
+      this.services = filterByTopServices(services)
+      console.log(this.services)
+    })
   },
   emits: [
     'existingLogin:user', 
@@ -131,8 +148,8 @@ export default ({
         'first_name': this.firstName,
         'last_name': this.lastName,
       }
-      console.log(newUser)
       this.$emit('createUser', newUser)
+      this.servicePage = true;
     }
 }})
 </script>
@@ -204,5 +221,20 @@ export default ({
     font-weight: bold;
     padding: 5px;
   }
+
+    .subscriptions-container {
+      margin: 0 auto;
+      width:95%;
+       @include serviceContainer;
+      overflow-x: hidden;
+    }
+
+    .subscriptions-container::-webkit-scrollbar {
+       @include serviceScroll
+    }
+
+    .subscriptions-container::-webkit-scrollbar-thumb {
+      @include serviceScrollThumb
+    }
 
 </style>
