@@ -17,7 +17,7 @@
 
 <script>
 import Gallery from '../components/Gallery';
-import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb } from '../utilities'; 
+import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb, getUserRecs } from '../utilities'; 
 import Modal from '../components/Modal'
 
 export default {
@@ -32,7 +32,8 @@ export default {
       user: {},
       watchlist : [],
       displayed: false,
-      shownMovie: {}
+      shownMovie: {},
+      recommended: [],
     }
   },
   mounted() {
@@ -40,6 +41,7 @@ export default {
     .then(data => {
       this.user = data
       this.fetchWatchlistMovies()
+      this.fetchRecommendations()
       })
   },
   props: {
@@ -77,6 +79,13 @@ export default {
       postWatchlist(obj)
       .then(res => console.log(res))
     },
+    fetchRecommendations() {
+      getUserRecs(this.userId)
+      .then(data => {
+        console.log(data)
+        this.recommended = [...cleanMovieSearchData(data.results)]
+      })
+    }
 }
 }
 </script>

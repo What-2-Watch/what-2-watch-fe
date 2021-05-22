@@ -16,6 +16,11 @@ export const postWatchlist = (watchListObj) => {
   })
 }
 
+export const getUserRecs = (id) => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/movies?user=${id}`)
+  .then(res => checkResponse(res))
+} 
+
 export const postThumb = async ({api_movie_id, up, title}) => {
   let thumb = {
       'user': 1,
