@@ -82,9 +82,16 @@ export const submitNewUser = (userData) => {
     .then(response => checkResponse(response))
 }
 
-export const confirmLogin = () => {
-    return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/`)
-        .then(response => checkResponse(response))
+export const getUserById = (id) => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/${id}`)
+      .then(response => checkResponse(response))
+      .then(data => data)
+
+}
+
+export const confirmLogin = (user, userList) => {
+  const foundUser = userList.find(potentialUser => potentialUser.email === user.email)
+  return foundUser
 } 
 
 export const getGenres = (language) => {
@@ -108,11 +115,23 @@ export const getServices = (region, language) => {
         .catch()
 }
 
+export const getUsers = () => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/`)
+        .then(response => checkResponse(response))
+
+}
+
 
 export const movieSearch = (query) => {
   return fetch(`https://api.themoviedb.org/3/search/movie?api_key=d485a0da5573c3e7d61614d66ae23824${query}`)
     .then(response => checkResponse(response))
     .then(response => cleanMovieSearchData(response.results))
+}
+
+export const getMovieById = (id) => {
+  return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=d485a0da5573c3e7d61614d66ae23824`)
+  .then(response => checkResponse(response))
+
 }
 
 export const cleanMovieSearchData = (array) => {
