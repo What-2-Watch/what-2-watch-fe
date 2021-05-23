@@ -4,11 +4,12 @@
     <Login v-if="!loggedIn" 
     v-on:newUser="createNewUser($event)" 
     v-on:userLogin="existingLogin($event)"
+    v-on:finishCreate="updateLogin()"
     :userId="currentUser" 
     />
     <main v-else>
       <router-view 
-      :userId="currentUser" 
+
       :log="loggedIn"/>
     </main>
   </body>
@@ -35,10 +36,6 @@ export default {
       allUsers: []
     }
   },
-  created() {
-    localStorage.clear()
-    this.setUpSubscriptionStorage()
-  },
   async mounted() {
     const allUsers = await getUsers()
     this.allUsers = allUsers
@@ -52,17 +49,14 @@ export default {
       const user = confirmLogin(userData, this.allUsers)
       if (user) {
         this.updateLogin()
-        this.currentUser = user.id
+        setUserId(user.id)
       }
     },
     createNewUser(userData) {
       submitNewUser(userData)
       .then(data => setUserId(data.id))
-    },
-    setUpSubscriptionStorage() {
-      localStorage.setItem('userSubscriptions',(JSON.stringify([])))
     }
-  },
+  }
 }
 </script>
 
@@ -90,4 +84,4 @@ export default {
 
 
 
-     
+           <!-- :userId="currentUser"  -->
