@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { postService, removeSubscription, getUserId, saveSubscription } from '../utilities.js'
+import { getUserById, postService, removeSubscription, getUserId, } from '../utilities.js'
 
 export default {
     name: 'Service',
@@ -25,31 +25,43 @@ export default {
         }
     },
     mounted() {
-        //pull local storage
-        //check if MY service id is inside of the array
-        //if so, save the subID and change active to true
+        this.checkForSubscription(this.provider.id);
     },
     methods: {
         clickProvider() {
-            console.log(this.provider.name, this.provider.id)
             if (this.active !== true) {
             this.active = true
             this.addSubscription({name: this.provider.name, api_provider_id: this.provider.id})
         } else {
             this.active = false
             removeSubscription(this.subId)
-            //find in local storage using id, remove it
          }
         },
         addSubscription(service) {
             service.user = getUserId()
             postService(service)
             .then(response => {
-                // console.log(response)
                 this.subId = response.id
-                saveSubscription(response)
             } )
         },
+        checkForSubscription(id) {
+            let userSubs = [];
+            getUserById(getUserId())
+            .then(response => {
+                userSubs = response.subscriptions
+                this.checkActive(userSubs, id)
+            })
+            
+        },
+        checkActive(userSubs, id) {
+            userSubs.forEach(sub => {
+                if (id === sub.api_provider_id) {
+                    console.log('should be working')
+                    this.active = true;
+                    this.subId = sub.id
+                }   
+            })
+        }
     }
 }
 </script>
