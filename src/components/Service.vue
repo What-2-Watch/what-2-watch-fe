@@ -11,23 +11,38 @@
 </template>
 
 <script>
+import { postService, removeSubscription, getUserId } from '../utilities.js'
 
 export default {
     name: 'Service',
     props: {
-        provider: {type: Object}
+        provider:Object,
     },
     data() {
         return{
-            active: false
+            active: false,
+            subId: null,
         }
     },
     methods: {
         clickProvider() {
             console.log(this.provider.name, this.provider.id)
+            if (this.active !== true) {
             this.active = true
-            this.$emit('addProvider', {name: this.provider.name, api_provider_id: this.provider.id})
-        }
+            this.addSubscription({name: this.provider.name, api_provider_id: this.provider.id})
+        } else {
+            this.active = false
+            removeSubscription(this.subId)
+         }
+        },
+        addSubscription(service) {
+            service.user = getUserId()
+            postService(service)
+            .then(response => {
+                console.log(response.id)
+                this.subId = response.id
+            } )
+        },
     }
 }
 </script>
