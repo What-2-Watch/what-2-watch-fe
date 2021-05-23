@@ -17,31 +17,32 @@
             />
           </section>
         </article>
-        <button class="edit-btn">EDIT PROFILE</button>
     </section>
 </template>
 
 <script>
 import Service from './Service'; 
-import { getServices, filterByTopServices } from '../utilities';
+import { getServices, filterByTopServices, getUserById, getUserId } from '../utilities';
 
 export default {
     name: 'Profile',
-    props: {
-        user: Object
-    }, 
     components: {
         Service
     }, 
     data() {
         return {
          services: [],
+         user: {}
         }
     },
     mounted() {
         getServices()
-        .then( services => {
+        .then(services => {
         this.services = filterByTopServices(services)
+        getUserById(getUserId())
+        .then(response => {
+            this.user = response
+        })
     })
   },
 }
