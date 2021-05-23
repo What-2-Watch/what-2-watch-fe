@@ -5,6 +5,8 @@
             <h1>Flick Finder</h1>
             </router-link>
             <aside class="nav-links" v-if="loggedIn">
+                <router-link to="/home"
+                data-cy="home">Home</router-link>
                 <router-link to="/search"
                 data-cy="search">Search</router-link>
                 <router-link to="/profile"
