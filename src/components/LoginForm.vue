@@ -114,14 +114,15 @@ export default ({
       confirmPassword: '',
       services: [],
       firstName: '',
-      lastName: ''
+      lastName: '',
     }
   },
-  async mounted() {
-    await getServices()
+  props: {
+  },
+  mounted() {
+    getServices()
     .then( services => {
       this.services = filterByTopServices(services)
-      console.log(this.services)
     })
   },
   emits: [
