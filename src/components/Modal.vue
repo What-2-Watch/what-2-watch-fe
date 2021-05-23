@@ -3,8 +3,7 @@
   <transition name="fade">
     <div class="modal" v-if="showing">
       <div class="modal__backdrop" @click="closeModal()"/>
-
-      <div class="modal__dialog">
+      <div class="modal__dialog" v-bind:style="{ 'background-image': 'url(' + movie.backdrop + ')' }">
         <div class="modal__header">
           <slot name="header"/>
           <button type="button" class="modal__close" @click="closeModal()">
@@ -16,31 +15,25 @@
             </svg>
           </button>
         </div>
-
-      <section>
-        <div class="detail-splash">
-            <img class="backdrop">
+        <section class="movie-info">
             <div class="title-box">
-                <h2>{{ movie.title }}</h2>
-                <h3>{{ movie.tagline }}</h3>
-            </div>
-        </div>
-        <div class="details-box">
-            <p>{{ movie.runtime }}</p>
-            <p>{{ movie.release_date }}</p>
-            <p>{{ movie.user_rating }}</p>
-            <div class="genres-box">
-            </div>
-        </div>
-        <article class="overview-box">
-            {{ movie.overview }}
-        </article>
-        <aside class="button-box">
-            <p>thumbs</p>
-            <p>watchlist</p>
-        </aside>
-
-    </section>
+              <h2>{{ movie.title }}
+              <p class="release-date">{{ movie.release_date.split('-')[0] }}</p>
+              </h2>
+              <p class="movie-rating">{{ movie.user_rating }}</p>
+              </div>
+            <article class="overview-box">
+              <i>
+                {{ movie.overview }}
+              </i>
+            </article>
+            <aside class="button-box">
+              <p name="add" v-on:click="emitWatchlist" v-if="list !== 'My Watchlist'">Add to Watchlist</p>
+              <p v-else name="remove" v-on:click="emitWatchlist">Remove from Watchlist</p>
+              <button class="thumb" name="upVote" v-on:click="emitThumbs">👍</button>
+              <button class="thumb" name="downVote" v-on:click="emitThumbs">👎</button>
+            </aside>
+          </section>
       </div>
     </div>
   </transition>
@@ -64,15 +57,27 @@ export default {
       document.querySelector("body").classList.remove("overflow-hidden");
     },
     openModal() {
+      console.log(this.movie.backdrop)
       this.$emit('openModal')
       document.querySelector("body").classList.add("overflow-hidden");
-    }
+    },
+    emitThumbs(e) {
+      if (e.target.name === 'upVote') {
+        this.$emit('postThumb', {api_movie_id: this.movie.id, title: this.movie.title, up: true});
+      } else {
+        this.$emit('postThumb', {api_movie_id: this.movie.id, title: this.movie.title, up: false});
+      }
+    },
+    emitWatchlist() {
+      this.$emit('postWatchList', {api_movie_id: this.movie.id, title: this.movie.title})
+    },
   }
 };
 </script>
 
 
 <style lang="scss" scoped>
+@import "../index.scss";
 .modal {
   overflow-x: hidden;
   overflow-y: auto;
@@ -94,12 +99,18 @@ export default {
   &__dialog {
     background-color: #ffffff;
     position: relative;
-    width: 600px;
+    width: 90%;
+    height: 90%;
     margin: 50px auto;
     display: flex;
-    flex-direction: column;
     border-radius: 5px;
     z-index: 2;
+    padding: 50px;
+    overflow-y: hidden;
+    svg {
+      color: $gray;
+      cursor: pointer
+    }
     @media screen and (max-width: 992px) {
       width: 90%;
     }
@@ -132,5 +143,75 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.detail-splash {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.movie-info {
+  background-color: rgba(75, 75, 75, 0.636);
+  backdrop-filter: blur(10px);
+  width: 250px;
+  padding: 15px;
+  border-radius: 10px;
+  color: $gray;
+  display: flex;
+  flex-flow: column;
+  height: fit-content;
+  margin-top: 50px;
+}
+
+.movie-rating, .thumb {
+border: 2px solid;
+border-radius: 50%;
+height: 50px;
+width: 50px;
+font-size: 1.8em;
+padding: 3.5px;
+color: $gray
+}
+
+.title-box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.release-date {
+  font-size: .6em;
+}
+
+.overview-box {
+  padding-top: 30px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.modal__close {
+  float: left;
+  border: 2px solid;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  padding: 2px 10px 0px 10px; 
+  color: $gray;
+  background-color: rgba(75, 75, 75, 0.636);
+  backdrop-filter: blur(10px);
+}
+
+.button-box {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  color: $gray;
+  button {
+    font-size: 2em;
+  }
+}
+
+.thumb {
+
 }
 </style>
