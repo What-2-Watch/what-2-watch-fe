@@ -4,39 +4,43 @@
             <h1>Welcome, {{ user.first_name }}</h1>
             <h2 class="email">Email: {{ user.email }}</h2>
         </div>
-        <div class="lang-reg-container">
-            <h2>Language: {{ user.language }} | </h2>
-            <h2>| Region: {{ user.region }}</h2>
-        </div>
         <h2>YOUR SERVICES:</h2>
         <article class="subscriptions-container"> 
-            <div :key="service.id" v-for="service in subscriptionList">
-                <Service :provider="service" />
-            </div>
+          <section :key="service.id" v-for="service in services">
+            <Service 
+             :provider="service" 
+             v-on:addProvider="postService($event)"
+            />
+          </section>
         </article>
-        <button class="edit-btn">EDIT PROFILE</button>
     </section>
 </template>
 
 <script>
 import Service from './Service'; 
+import { getServices, filterByTopServices, getUserById, getUserId } from '../utilities';
 
 export default {
     name: 'Profile',
-    props: {
-        user: Object
-    }, 
     components: {
         Service
     }, 
     data() {
         return {
-            subscriptionList: [
-                {id: 0, sub: "NutFlex"}, 
-                {id: 1, sub: "FlexNuts"}
-            ]
+         services: [],
+         user: {}
         }
-    }
+    },
+    mounted() {
+        getServices()
+        .then(services => {
+        this.services = filterByTopServices(services)
+        getUserById(getUserId())
+        .then(response => {
+            this.user = response
+        })
+    })
+  },
 }
 </script>
 
@@ -77,21 +81,15 @@ export default {
     }
 
     .subscriptions-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        height: 175px;
-        margin-top: 20px; 
-        overflow: auto; 
+       @include serviceContainer
     }
 
     .subscriptions-container::-webkit-scrollbar {
-        background-color: transparent;
-        width: 4px;
+       @include serviceScroll
     }
 
     .subscriptions-container::-webkit-scrollbar-thumb {
-       background-color: $gray;
-       border-radius: 10px;
+      @include serviceScrollThumb
     }
 
 </style>

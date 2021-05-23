@@ -3,7 +3,7 @@ const checkResponse = (response) => {
   if(response.ok) {
   return response.json()
 } else {
-  throw new Error('this request isn\'t available')
+  // alert("There was an error with your request. Please try again.")
 }}
 
 export const postWatchlist = (watchListObj) => {
@@ -16,9 +16,14 @@ export const postWatchlist = (watchListObj) => {
   })
 }
 
+export const getUserRecs = (id) => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/movies?user=${id}`)
+  .then(res => checkResponse(res))
+} 
+
 export const postThumb = async ({api_movie_id, up, title}) => {
   let thumb = {
-      'user': 1,
+      'user': getUserId(),
       api_movie_id,
       up,
       title,
@@ -27,15 +32,12 @@ export const postThumb = async ({api_movie_id, up, title}) => {
       "api_genre_id": null,
       "api_similar_id": 123,
   }
-  
   await Promise.all([getCredits(api_movie_id), getMovieGenre(api_movie_id)])
     .then(responses => {
       thumb.api_director_id = getDirectorID(responses[0])
       thumb.api_actor_id = getActorID(responses[0])
       thumb.api_genre_id = responses[1].id
   }) 
-
-
     return fetch(`https://what-2-watch-be.herokuapp.com/v1/thumbs/`, {
       method: 'POST',
       body: JSON.stringify(thumb),
@@ -86,7 +88,6 @@ export const getUserById = (id) => {
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/${id}`)
       .then(response => checkResponse(response))
       .then(data => data)
-
 }
 
 export const confirmLogin = (user, userList) => {
@@ -108,7 +109,7 @@ export const getRegions = (language) => {
     .catch()
 }
 
-export const getServices = (region, language) => {
+export const getServices = (region = 'US', language = 'en-US') => {
   return fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=d485a0da5573c3e7d61614d66ae23824&language=${language}&watch_region=${region}`)
         .then(response => checkResponse(response))
         .then(data => cleanServiceData(data.results))
@@ -177,21 +178,54 @@ export const filterResultsByGenre = (searchResults, genreID) => {
   })
 }
 
-const cleanServiceData = (array) => {
+export const postService = (userData) => {
+  return fetch('https://what-2-watch-be.herokuapp.com/v1/subscriptions/', {
+    method: 'POST',
+    body: JSON.stringify(userData),
+    headers: {
+    'Content-Type': 'application/json'
+    }
+  })
+  .then(response => checkResponse(response))
+}
+
+export const removeSubscription = (id) => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/subscriptions/${id}`, {
+    method: 'DELETE'
+   })
+    .then(response => console.log(response))
+    .catch()
+}
+
+export const cleanServiceData = (array) => {
   return array.map(service => {
     return {
-      'logo_path': service.logo_path,
-      'name': service.provider_name,
-      'id': service.provider_id
+      logo: `https://www.themoviedb.org/t/p/original${service.logo_path}`,
+      name: service.provider_name,
+      id: service.provider_id
     }
   })
 }
 
-const cleanRegionData = (array) => {
+export const filterByTopServices = (services) => {
+  const topServicesIds = ['8', '9', '337', '384', '15', '2', '143', '361', '258', '386', '192', '99', '300', '279', '37', '3']
+  const topServices = services.filter(service => topServicesIds.includes(String(service.id)))
+  return topServices
+}
+
+export const cleanRegionData = (array) => {
   return array.map(region => {
     return {
       'en_name': region.english_name,
       'id': region.iso_3166_1
     }
   })
+}
+
+export const setUserId = (id) => {
+  sessionStorage.setItem('userId', String(id))
+}
+
+export const getUserId = () => {
+  return parseInt(sessionStorage.getItem('userId'));
 }

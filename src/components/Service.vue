@@ -1,15 +1,67 @@
 <template>
-    <section class="service-container">
-        <button class="service-btn">{{ provider.sub }}</button>
-    </section>
+        <img 
+        v-on:click="clickProvider"
+        :src="provider.logo" 
+        class="service-logo" 
+        :alt="provider.name + 'logo'"
+        id="provider.id"
+        name="provider.name"
+        :class="active ? 'is-active' : 'not-active'"
+        />
 </template>
 
 <script>
+import { getUserById, postService, removeSubscription, getUserId, } from '../utilities.js'
 
 export default {
     name: 'Service',
     props: {
-        provider: {type: Object}
+        provider:Object,
+    },
+    data() {
+        return{
+            active: false,
+            subId: null,
+        }
+    },
+    mounted() {
+        this.checkForSubscription(this.provider.id);
+    },
+    methods: {
+        clickProvider() {
+            if (this.active !== true) {
+            this.active = true
+            this.addSubscription({name: this.provider.name, api_provider_id: this.provider.id})
+        } else {
+            this.active = false
+            removeSubscription(this.subId)
+         }
+        },
+        addSubscription(service) {
+            service.user = getUserId()
+            postService(service)
+            .then(response => {
+                this.subId = response.id
+            } )
+        },
+        checkForSubscription(id) {
+            let userSubs = [];
+            getUserById(getUserId())
+            .then(response => {
+                userSubs = response.subscriptions
+                this.checkActive(userSubs, id)
+            })
+            
+        },
+        checkActive(userSubs, id) {
+            userSubs.forEach(sub => {
+                if (id === sub.api_provider_id) {
+                    console.log('should be working')
+                    this.active = true;
+                    this.subId = sub.id
+                }   
+            })
+        }
     }
 }
 </script>
@@ -17,18 +69,18 @@ export default {
 <style scoped  lang="scss">
   @import '../index.scss';
     
-    .service-container {
-        @include flex-row; 
-        border: solid 1px $mediumRed; 
-        box-shadow: 0 0 .5em $mediumRed;
-        height: 40px; 
-        margin: 5px; 
+    .service-logo {
+        width: 85px;
+        height: 85px; 
+        border-radius: 20%;
     }
 
-    .service-btn {
-        color: $gray; 
-        font-size: 1.5em; 
-        font-weight: bold; 
+    .is-active {
+        border: solid 5px $mediumRed;
+    }
+
+    .not-active {
+        border: solid 5px transparent;
     }
 
 </style>

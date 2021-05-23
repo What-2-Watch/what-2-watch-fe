@@ -1,13 +1,13 @@
 <template>
   <section class="home-view">
     <Gallery 
-    :listTitle="watchlist_title"
-    :list="watchlist"
-    v-on:displayMovieModal="displayMovie($event)"/>
+      :listTitle="'Recommended'"
+      :list="recommended"
+       v-on:displayMovieModal="displayMovie($event)"/>
     <Gallery 
-    :listTitle="watchlist_title"
-    :list="watchlist"
-    v-on:displayMovieModal="displayMovie($event)"/>
+      :listTitle="'My Watchlist'"
+      :list="watchlist"
+      v-on:displayMovieModal="displayMovie($event)"/>
     <modal :movie="shownMovie" :showing="displayed"
     v-on:closeModal="displayMovie($event)"
     v-on:postThumb="updateThumb($event)"
@@ -17,7 +17,7 @@
 
 <script>
 import Gallery from '../components/Gallery';
-import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb } from '../utilities'; 
+import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb, getUserRecs, getUserId } from '../utilities'; 
 import Modal from '../components/Modal'
 
 export default {
@@ -28,22 +28,20 @@ export default {
   },
   data() {
     return {
-      'watchlist_title':"My Watchlist",
       user: {},
       watchlist : [],
       displayed: false,
-      shownMovie: {}
+      shownMovie: {},
+      recommended: [],
     }
   },
   mounted() {
-    getUserById(this.userId)
+    getUserById(getUserId())
     .then(data => {
       this.user = data
       this.fetchWatchlistMovies()
+      this.fetchRecommendations()
       })
-  },
-  props: {
-    userId: Number
   },
   methods: {
     fetchWatchlistMovies() {
@@ -69,21 +67,25 @@ export default {
     },
     updateThumb(thumb) {
       
-      postThumb(thumb, this.userId)
+      postThumb(thumb, getUserId())
       .then(res => console.log(res))
     },
     updateWatchList(obj) {
-      obj.user = this.userId
+      obj.user = getUserId()
       postWatchlist(obj)
       .then(res => console.log(res))
     },
+    fetchRecommendations() {
+      getUserRecs(getUserId())
+      .then(data => {
+        console.log(data)
+        this.recommended = [...cleanMovieSearchData(data.results)]
+      })
+    }
 }
 }
 </script>
 <style scoped lang="scss">
 @import '../index.scss';
-  .home-view {
- 
-  }
 
 </style>

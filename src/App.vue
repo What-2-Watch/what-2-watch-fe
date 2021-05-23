@@ -1,10 +1,13 @@
 <template>
   <body id="app">
     <Header :loggedIn="loggedIn"/>
-    <Login v-if="!loggedIn" v-on:newUser="createNewUser($event)" v-on:userLogin="existingLogin($event)"/>
+    <Login v-if="!loggedIn" 
+    v-on:newUser="createNewUser($event)" 
+    v-on:userLogin="existingLogin($event)"
+    v-on:finishCreate="updateLogin()"
+    />
     <main v-else>
       <router-view 
-      :userId="currentUser" 
       :log="loggedIn"/>
     </main>
   </body>
@@ -14,8 +17,9 @@
 import { } from 'vue'
 import Header from './components/Header';   
 import Login from './views/Login'; 
-import { submitNewUser, getUsers, confirmLogin } from './utilities'; 
+import { submitNewUser, getUsers, confirmLogin, setUserId } from './utilities'; 
 import router from './router/index'
+
 export default {
   name: 'App',
   components: {
@@ -34,7 +38,6 @@ export default {
     const allUsers = await getUsers()
     this.allUsers = allUsers
   },
-
   methods: {
     updateLogin() {
       !this.loggedIn ? this.loggedIn = true : this.loggedIn = false
@@ -44,15 +47,14 @@ export default {
       const user = confirmLogin(userData, this.allUsers)
       if (user) {
         this.updateLogin()
-        this.currentUser = user.id
+        setUserId(user.id)
       }
     },
     createNewUser(userData) {
       submitNewUser(userData)
-      .then(data => this.currentUser = data)
-      this.updateLogin()
-    },
-  },
+      .then(data => setUserId(data.id))
+    }
+  }
 }
 </script>
 
@@ -77,7 +79,3 @@ export default {
   }
 }
 </style>
-
-
-
-     
