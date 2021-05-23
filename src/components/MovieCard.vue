@@ -1,6 +1,5 @@
 <template>
   <article class="movie-card">
-    <router-link to="/movieDetailTest" >
      <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster"/>
      <div v-else class="poster-error">
       <h3>{{ movie.title }}</h3>
@@ -16,10 +15,14 @@
         <button v-else name="remove" v-on:click="emitWatchlist">Remove from Watchlist</button>
       </aside>
     </article>
+    <modal :movie="movie" :showing="displayed"
+    v-on:closeModal="stopShowing"></modal>
 </template>
 
 
 <script>
+import Modal from '../components/Modal'
+
     export default {
         name: 'MovieCard', 
         props: {
@@ -32,13 +35,26 @@
             'add:movie.id',
             'remove:movie.id'
         ],
+        data() {
+          return {
+            displayed: false
+          }
+        },
+        components: {
+          Modal
+        },
         methods: {
           emitThumbs(e) {
             this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
           },
           emitWatchlist(e) {
-            console.log(this.movie)
             this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
+          },
+          clickMovie() {
+            this.displayed = true
+          },
+          stopShowing() {
+            this.displayed = false
           }
         }
     }
