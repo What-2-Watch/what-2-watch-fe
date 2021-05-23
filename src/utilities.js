@@ -23,7 +23,7 @@ export const getUserRecs = (id) => {
 
 export const postThumb = async ({api_movie_id, up, title}) => {
   let thumb = {
-      'user': 1,
+      'user': getUserId(),
       api_movie_id,
       up,
       title,
