@@ -1,7 +1,6 @@
 <template>
   <div class="card-container">
-
-  <button class="movie-card" >
+  <button class="movie-card"  data-cy="movie-card">
      <img v-if="!movie.poster.includes('null')" :src="movie.poster" :alt="movie.title + 'poster'" class="poster" v-on:click="clickMovie"/>
      <div v-else class="poster-error">
       <img src="../assets/missing_movie-01.png" alt="A blank poster"/>

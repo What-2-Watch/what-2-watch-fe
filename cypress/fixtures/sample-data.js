@@ -3,8 +3,8 @@
         {
             "id": 1,
             "email": "hope.gochnour@gmail.com",
-            "first_name": "",
-            "last_name": "",
+            "first_name": "Hope",
+            "last_name": "Gochnour",
             "language": "0",
             "region": "0",
             "subscriptions": [],
@@ -13,6 +13,12 @@
                     "id": 1,
                     "title": "Candyman",
                     "api_movie_id": 9529,
+                    "user": 1
+                }, 
+                {
+                    "id": 2,
+                    "title": "Carne: The Taco Maker",
+                    "api_movie_id": null,
                     "user": 1
                 }
             ],

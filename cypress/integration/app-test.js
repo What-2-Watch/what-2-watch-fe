@@ -4,14 +4,43 @@ describe('Flick Finder', () => {
         cy.fixture('sample-data.js').then(() => {
             cy.intercept('https://what-2-watch-be.herokuapp.com/v1/')
         })
-        cy.visit('http://localhost:8080/ ')
+        cy.visit('http://localhost:8080/')
         .get('section').get('form').should('have.class', 'login-form')
     }); 
 
     it('should log a user in with an email and password', () => {
         cy.get('section').get('form').get('input[type=text]').type('hope.gochnour@gmail.com').get('[data-cy=password]').type('1234')
         .get('button').should('have.class', 'login-btn').click()
+        //50% of the time this doesn't click the button so it fails the rest of the tests. 
     }); 
+
+    it('should display watch list with movies', () => {
+        cy.get('section').should('have.class', 'gallery-display')
+        .get('h2').contains('My Watchlist')
+        .get('[data-cy=movie-card]')
+        .get('img').should('be.visible')
+        //add test for films with no poster 
+    })
+
+    // it('should click on a movie and display details', () => {
+
+    // }); 
+
+    it('should have a user profile page', () => {
+        cy.get('header').get('aside').get('[data-cy=profile]').click()
+    }); 
+
+    // it('should ', () => {
+
+    // }); 
+
+    // it('should ', () => {
+
+    // }); 
+
+    // it('should ', () => {
+
+    // }); 
 
     // it('should  click FAVORITES button and change URL path', () => {
     //     cy.get('header').get('div').get('.nav-btn').contains('FAVORITES').click()
