@@ -4,10 +4,6 @@
             <h1>Welcome, {{ user.first_name }}</h1>
             <h2 class="email">Email: {{ user.email }}</h2>
         </div>
-        <div class="lang-reg-container">
-            <h2>Language: {{ user.language }} | </h2>
-            <h2>| Region: {{ user.region }}</h2>
-        </div>
         <h2>YOUR SERVICES:</h2>
         <article class="subscriptions-container"> 
           <section :key="service.id" v-for="service in services">
