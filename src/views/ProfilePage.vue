@@ -18,9 +18,6 @@ export default ({
  components: {
    Profile
  },
- props: {
-   userId: Number
- },
 mounted() { 
     getUserById(getUserId())
     .then(data => this.user = data)
