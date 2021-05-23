@@ -191,18 +191,14 @@ export const postService = (userData) => {
     }
   })
   .then(response => checkResponse(response))
-  // .then(response => console.log(response))
 }
 
 export const removeSubscription = (id) => {
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/subscriptions/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    method: 'DELETE'
    })
-    .then(response => checkResponse(response))
     .then(response => console.log(response))
+    .catch()
 }
 
 export const cleanServiceData = (array) => {
