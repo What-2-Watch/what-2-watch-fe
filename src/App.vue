@@ -35,8 +35,9 @@ export default {
       allUsers: []
     }
   },
-  beforeCreate() {
+  created() {
     localStorage.clear()
+    this.setUpSubscriptionStorage()
   },
   async mounted() {
     const allUsers = await getUsers()
@@ -58,6 +59,9 @@ export default {
       submitNewUser(userData)
       .then(data => setUserId(data.id))
     },
+    setUpSubscriptionStorage() {
+      localStorage.setItem('userSubscriptions',(JSON.stringify([])))
+    }
   },
 }
 </script>
