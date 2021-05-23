@@ -5,11 +5,9 @@
     v-on:newUser="createNewUser($event)" 
     v-on:userLogin="existingLogin($event)"
     v-on:finishCreate="updateLogin()"
-    :userId="currentUser" 
     />
     <main v-else>
       <router-view 
-
       :log="loggedIn"/>
     </main>
   </body>
@@ -81,7 +79,3 @@ export default {
   }
 }
 </style>
-
-
-
-           <!-- :userId="currentUser"  -->
