@@ -236,13 +236,16 @@ export const getUserId = () => {
 }
 
 export const saveSubscription = (sub) => {
+  const currentSubs = JSON.parse(localStorage.getItem('userSubscriptions'));
+  currentSubs.push(sub)
+  localStorage.getItem('userSubscriptions', JSON.stringify(currentSubs))
+}
 
+export const getUserSubscriptions = () => {
+  
 }
 
 /*
-  SETTING UP STORAGE
-    inside mounted in app
-    create the empty array for holding subscriptions
 
   SAVING SUBSCRIPTION 
     save the entire subscription object in an array in local storage

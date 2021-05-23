@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { postService, removeSubscription, getUserId } from '../utilities.js'
+import { postService, removeSubscription, getUserId, saveSubscription } from '../utilities.js'
 
 export default {
     name: 'Service',
@@ -45,9 +45,9 @@ export default {
             service.user = getUserId()
             postService(service)
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 this.subId = response.id
-                //save reponse to local storage
+                saveSubscription(response)
             } )
         },
     }
