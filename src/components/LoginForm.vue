@@ -16,8 +16,8 @@
         name="password"
         placeholder="PASSWORD"
         required
-        v-model="password"/> -->
-        <!-- <label for="password"></label> -->
+        v-model="password"/> 
+        <label for="password"></label> -->
         <button class="login-btn" type="submit" v-on:click="existingLogin">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
     </form>
@@ -57,24 +57,6 @@
         required
         v-model="lastName"/>
       <label for="lastName"></label>
-      <aside class="dropDown">
-        <select 
-        v-model="selectedLanguage"
-        required>
-          <option disabled value="">Default language</option>
-          <option>Eng</option>
-          <option>Esp</option>
-          <option>Ger</option>
-        </select>
-        <select 
-        v-model="selectedRegion"
-        required>
-          <option disabled value="">Default region</option>
-          <option>US</option>
-          <option>Pits</option>
-          <option>FR</option>
-        </select>
-      </aside>
       <label for="language"></label>
       <button v-on:click="createUser" class="create-acct-btn">CREATE ACCOUNT</button>
     </form>
@@ -88,10 +70,10 @@
             />
           </section>
       </article>
+      <button class="login-btn" type="submit" v-on:click="finishUserCreate">CLICK HERE TO GET STARTED</button>
     </form>
    </section>
 </template>
-
 
 <script>
   
@@ -107,8 +89,8 @@ export default ({
     return {
       newUser: false,
       servicePage: false,
-      selectedLanguage: '',
-      selectedRegion: '',
+      selectedLanguage: 'en-US',
+      selectedRegion: 'US',
       email: '',
       password: '',
       confirmPassword: '',
@@ -141,7 +123,9 @@ export default ({
       }
       this.$emit('existingLogin', user)
     },
-
+    finishUserCreate() {
+      this.$emit('finishCreate')
+    },
     createUser(e) {
       e.preventDefault()
       const newUser = {
