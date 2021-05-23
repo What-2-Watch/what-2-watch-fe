@@ -23,7 +23,7 @@
 <script>
 import SearchForm from '../components/SearchForm'
 import SearchGrid from '../components/SearchGrid'
-import { movieSearch, getGenres, getRegions, postThumb, postWatchlist, getUserById } from '../utilities'; 
+import { movieSearch, getGenres, getRegions, postThumb, postWatchlist, getUserById, getUserId } from '../utilities'; 
 import Modal from '../components/Modal'
 
 
@@ -46,7 +46,7 @@ export default ({
     }
   },
   async mounted() {
-    this.user = await getUserById(this.userId)
+    this.user = await getUserById(getUserId())
 
     Promise.all([getGenres(this.user.language), getRegions(this.user.language)])
     .then(responses => {
@@ -66,11 +66,11 @@ export default ({
     },
     updateThumb(thumb) {
       
-      postThumb(thumb, this.user.id)
+      postThumb(thumb, getUserId())
       .then(res => console.log(res))
     },
     updateWatchList(obj) {
-      obj.user = this.user.id
+      obj.user = getUserId()
       postWatchlist(obj)
       .then(res => console.log(res))
     },
