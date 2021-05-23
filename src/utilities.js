@@ -161,7 +161,7 @@ export const cleanMovieSearchData = (array) => {
     return {
       'id':movieData.id, 
       'genres':movieData.genre_ids,
-      'backdrop': movieData.backdrop_path,
+      'backdrop': `https://www.themoviedb.org/t/p/original/${movieData.backdrop_path}`,
       'title': movieData.title,
       'overview': movieData.overview,
       'poster': `https://www.themoviedb.org/t/p/w220_and_h330_face/${movieData.poster_path}`,
