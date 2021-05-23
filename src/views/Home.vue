@@ -67,11 +67,11 @@ export default {
     },
     updateThumb(thumb) {
       
-      postThumb(thumb, this.userId)
+      postThumb(thumb, getUserId())
       .then(res => console.log(res))
     },
     updateWatchList(obj) {
-      obj.user = this.userId
+      obj.user = getUserId()
       postWatchlist(obj)
       .then(res => console.log(res))
     },
