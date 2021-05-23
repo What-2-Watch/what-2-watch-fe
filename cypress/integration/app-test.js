@@ -28,17 +28,26 @@ describe('Flick Finder', () => {
 
     it('should have a user profile page', () => {
         cy.get('header').get('aside').get('[data-cy=profile]').click()
+        .get('section').get('.welcome-container').contains('h1', 'Welcome, ').next()
+        .contains('h2', 'Email: hope.gochnour@gmail.com')
+        .get('.lang-reg-container')
+        .contains('h2', 'Language: ').next()
+        .contains('h2', 'Region: ')
+        .get('article').get('div').get('.service-container').get('button')
+        .contains('NutFlex')
     }); 
 
-    // it('should ', () => {
+    it('should be able to search for films', () => {
+        cy.get('header').get('aside').get('[data-cy=search]').click()
+        .get('form').get('input[type=text]').type('nobody')
+        .get('button').click()
+    }); 
 
-    // }); 
+    it('should add a movie to the users watchlist', () => {
+        
+    }); 
 
-    // it('should ', () => {
-
-    // }); 
-
-    // it('should ', () => {
+    // it('should thumbs up or down a movie', () => {
 
     // }); 
 
