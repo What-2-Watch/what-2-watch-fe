@@ -6,7 +6,7 @@
 
 <script>
 import Profile from '../components/Profile'; 
-import { getUserById } from '../utilities';
+import { getUserById, getUserId } from '../utilities';
 
 export default ({
  name: 'ProfilePage',
@@ -22,7 +22,7 @@ export default ({
    userId: Number
  },
 mounted() { 
-    getUserById(this.userId)
+    getUserById(getUserId())
     .then(data => this.user = data)
  }
 })

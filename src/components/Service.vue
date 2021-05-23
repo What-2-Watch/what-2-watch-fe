@@ -24,6 +24,11 @@ export default {
             subId: null,
         }
     },
+    mounted() {
+        //pull local storage
+        //check if MY service id is inside of the array
+        //if so, save the subID and change active to true
+    },
     methods: {
         clickProvider() {
             console.log(this.provider.name, this.provider.id)
@@ -33,14 +38,16 @@ export default {
         } else {
             this.active = false
             removeSubscription(this.subId)
+            //find in local storage using id, remove it
          }
         },
         addSubscription(service) {
             service.user = getUserId()
             postService(service)
             .then(response => {
-                console.log(response.id)
+                console.log(response)
                 this.subId = response.id
+                //save reponse to local storage
             } )
         },
     }

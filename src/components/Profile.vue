@@ -10,11 +10,12 @@
         </div>
         <h2>YOUR SERVICES:</h2>
         <article class="subscriptions-container"> 
-            <div :key="service.id" v-for="service in subscriptionList">
-                <Service 
-                :provider="service"
-                 />
-            </div>
+          <section :key="service.id" v-for="service in services">
+            <Service 
+             :provider="service" 
+             v-on:addProvider="postService($event)"
+            />
+          </section>
         </article>
         <button class="edit-btn">EDIT PROFILE</button>
     </section>
@@ -22,6 +23,7 @@
 
 <script>
 import Service from './Service'; 
+import { getServices, filterByTopServices } from '../utilities';
 
 export default {
     name: 'Profile',
@@ -33,9 +35,15 @@ export default {
     }, 
     data() {
         return {
- 
+         services: [],
         }
-    }
+    },
+    mounted() {
+        getServices()
+        .then( services => {
+        this.services = filterByTopServices(services)
+    })
+  },
 }
 </script>
 

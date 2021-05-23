@@ -83,8 +83,8 @@
       <article class="subscriptions-container">
           <section :key="service.id" v-for="service in services">
             <Service 
-            :provider="service" 
-            v-on:addProvider="postService($event)"
+              :provider="service" 
+              v-on:addProvider="postService($event)"
             />
           </section>
       </article>

@@ -3,7 +3,7 @@ const checkResponse = (response) => {
   if(response.ok) {
   return response.json()
 } else {
-  throw new Error('this request isn\'t available')
+  alert("There was an error with your request. Please try again.")
 }}
 
 export const postWatchlist = (watchListObj) => {
@@ -234,3 +234,22 @@ export const setUserId = (id) => {
 export const getUserId = () => {
   return parseInt(localStorage.getItem('userId'));
 }
+
+export const saveSubscription = (sub) => {
+
+}
+
+/*
+  SETTING UP STORAGE
+    inside mounted in app
+    create the empty array for holding subscriptions
+
+  SAVING SUBSCRIPTION 
+    save the entire subscription object in an array in local storage
+    get this from the response when a subscription is made
+    This happens inside of addSubscription in service
+
+  CHECKING SUBSCRIPTION
+    inside mounted
+    get the subscriptions array 
+*/
