@@ -36,7 +36,7 @@ export default {
     }
   },
   beforeCreate() {
-    localStorage.clear
+    localStorage.clear()
   },
   async mounted() {
     const allUsers = await getUsers()
