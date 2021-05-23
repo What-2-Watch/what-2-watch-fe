@@ -3,7 +3,7 @@ const checkResponse = (response) => {
   if(response.ok) {
   return response.json()
 } else {
-  alert("There was an error with your request. Please try again.")
+  // alert("There was an error with your request. Please try again.")
 }}
 
 export const postWatchlist = (watchListObj) => {
@@ -32,15 +32,12 @@ export const postThumb = async ({api_movie_id, up, title}) => {
       "api_genre_id": null,
       "api_similar_id": 123,
   }
-  
   await Promise.all([getCredits(api_movie_id), getMovieGenre(api_movie_id)])
     .then(responses => {
       thumb.api_director_id = getDirectorID(responses[0])
       thumb.api_actor_id = getActorID(responses[0])
       thumb.api_genre_id = responses[1].id
   }) 
-
-
     return fetch(`https://what-2-watch-be.herokuapp.com/v1/thumbs/`, {
       method: 'POST',
       body: JSON.stringify(thumb),
@@ -91,7 +88,6 @@ export const getUserById = (id) => {
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/${id}`)
       .then(response => checkResponse(response))
       .then(data => data)
-
 }
 
 export const confirmLogin = (user, userList) => {
@@ -214,7 +210,6 @@ export const cleanServiceData = (array) => {
 export const filterByTopServices = (services) => {
   const topServicesIds = ['8', '9', '337', '384', '15', '2', '143', '361', '258', '386', '192', '99', '300', '279', '37', '3']
   const topServices = services.filter(service => topServicesIds.includes(String(service.id)))
-
   return topServices
 }
 
@@ -228,31 +223,9 @@ export const cleanRegionData = (array) => {
 }
 
 export const setUserId = (id) => {
-  localStorage.setItem('userId', String(id))
+  sessionStorage.setItem('userId', String(id))
 }
 
 export const getUserId = () => {
-  return parseInt(localStorage.getItem('userId'));
+  return parseInt(sessionStorage.getItem('userId'));
 }
-
-export const saveSubscription = (sub) => {
-  const currentSubs = JSON.parse(localStorage.getItem('userSubscriptions'));
-  currentSubs.push(sub)
-  localStorage.getItem('userSubscriptions', JSON.stringify(currentSubs))
-}
-
-export const getUserSubscriptions = () => {
-  
-}
-
-/*
-
-  SAVING SUBSCRIPTION 
-    save the entire subscription object in an array in local storage
-    get this from the response when a subscription is made
-    This happens inside of addSubscription in service
-
-  CHECKING SUBSCRIPTION
-    inside mounted
-    get the subscriptions array 
-*/
