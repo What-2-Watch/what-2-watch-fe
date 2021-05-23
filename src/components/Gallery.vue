@@ -8,7 +8,8 @@
             :navigation="true"
             >
             <swiper-slide :key="card.id" v-for="card in list">
-             <MovieCard :list="listTitle" :movie="card"/>
+             <MovieCard :list="listTitle" :movie="card"
+             v-on:clickMovie="showMovie($event)"/>
             </swiper-slide>
             </swiper>
     </section>
@@ -36,6 +37,11 @@ export default {
         MovieCard,
         Swiper,
         SwiperSlide,
+    },
+    methods: {
+        showMovie(movie) {
+            this.$emit('displayMovieModal', movie)
+        }
     }
     
 }

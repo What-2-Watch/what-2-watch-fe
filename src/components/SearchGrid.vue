@@ -7,7 +7,8 @@
       v-on:upVote="thumbsUp($event)"
       v-on:downVote="thumbsDown($event)"
       v-on:add="addToWatchList($event)"
-      v-on:remove="removeFromWatchlist($event)"/>
+      v-on:remove="removeFromWatchlist($event)"
+      v-on:clickMovie="showMovie($event)"/>
   </section>
 </template>
 
@@ -35,6 +36,9 @@ export default {
     },
     addToWatchList({id, title}) {
       this.$emit('postWatchList', {api_movie_id: id, title})
+    },
+    showMovie(movie) {
+      this.$emit('displayMovieModal', movie)
     }
   }
 }
