@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import ProfilePage from '../views/ProfilePage.vue'
 import Search from '../views/Search.vue'
+
 const routes = [
   {
     path: '/home',
