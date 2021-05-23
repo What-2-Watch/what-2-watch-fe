@@ -191,7 +191,18 @@ export const postService = (userData) => {
     }
   })
   .then(response => checkResponse(response))
-  .then(response => console.log(response))
+  // .then(response => console.log(response))
+}
+
+export const removeSubscription = (id) => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/subscriptions/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+   })
+    .then(response => checkResponse(response))
+    .then(response => console.log(response))
 }
 
 export const cleanServiceData = (array) => {
@@ -218,4 +229,12 @@ export const cleanRegionData = (array) => {
       'id': region.iso_3166_1
     }
   })
+}
+
+export const setUserId = (id) => {
+  localStorage.setItem('userId', String(id))
+}
+
+export const getUserId = () => {
+  return parseInt(localStorage.getItem('userId'));
 }
