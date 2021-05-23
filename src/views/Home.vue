@@ -17,7 +17,7 @@
 
 <script>
 import Gallery from '../components/Gallery';
-import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb, getUserRecs } from '../utilities'; 
+import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb, getUserRecs, getUserId } from '../utilities'; 
 import Modal from '../components/Modal'
 
 export default {
@@ -36,15 +36,12 @@ export default {
     }
   },
   mounted() {
-    getUserById(this.userId)
+    getUserById(getUserId())
     .then(data => {
       this.user = data
       this.fetchWatchlistMovies()
       this.fetchRecommendations()
       })
-  },
-  props: {
-    userId: Number
   },
   methods: {
     fetchWatchlistMovies() {
@@ -79,7 +76,7 @@ export default {
       .then(res => console.log(res))
     },
     fetchRecommendations() {
-      getUserRecs(this.userId)
+      getUserRecs(getUserId())
       .then(data => {
         console.log(data)
         this.recommended = [...cleanMovieSearchData(data.results)]
@@ -90,8 +87,5 @@ export default {
 </script>
 <style scoped lang="scss">
 @import '../index.scss';
-  .home-view {
- 
-  }
 
 </style>
