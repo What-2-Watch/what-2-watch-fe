@@ -1,12 +1,10 @@
 <template>
-  <article class="movie-card">
-    <router-link to="/movieDetailTest" >
+  <article class="movie-card" v-on:click="clickMovie">
      <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster"/>
      <div v-else class="poster-error">
       <h3>{{ movie.title }}</h3>
       <p class="error">Poster not available</p>
     </div>
-    </router-link>
       <aside class="button-container">
         <div class="thumbs">
           <button name="upVote" v-on:click="emitThumbs">👍</button>
@@ -16,10 +14,12 @@
         <button v-else name="remove" v-on:click="emitWatchlist">Remove from Watchlist</button>
       </aside>
     </article>
+    
 </template>
 
 
 <script>
+
     export default {
         name: 'MovieCard', 
         props: {
@@ -37,9 +37,11 @@
             this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
           },
           emitWatchlist(e) {
-            console.log(this.movie)
             this.$emit(e.target.name, {id: this.movie.id, title: this.movie.title})
-          }
+          },
+          clickMovie() {
+            this.$emit('clickMovie', this.movie)
+          },
         }
     }
 </script>

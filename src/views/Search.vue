@@ -5,11 +5,18 @@
     :genres="allGenres"
     :languages="allLanguages"
     :regions="allRegions"
-    
     ></search-form>
+
     <search-grid :searchResults="searchResults"
-    v-on:postThumb="updateThumb"
-    v-on:postWatchList="updateWatchList"></search-grid>
+    v-on:postThumb="updateThumb($event)"
+    v-on:postWatchList="updateWatchList($event)"
+    v-on:displayMovieModal="displayMovie($event)"></search-grid>
+    
+    <modal :movie="shownMovie" :showing="displayed"
+    v-on:closeModal="displayMovie($event)"
+    v-on:postThumb="updateThumb($event)"
+    v-on:postWatchList="updateWatchList($event)"
+    />
   </section>
 </template>
 
@@ -17,14 +24,15 @@
 import SearchForm from '../components/SearchForm'
 import SearchGrid from '../components/SearchGrid'
 import { movieSearch, getGenres, getRegions, postThumb, postWatchlist, getUserById } from '../utilities'; 
-
+import Modal from '../components/Modal'
 
 
 export default ({
   name: 'Search',
   components: {
     SearchForm,
-    SearchGrid
+    SearchGrid,
+    Modal
   },
   data() {
     return {
@@ -32,7 +40,9 @@ export default ({
       allGenres: [],
       allLanguages: [],
       allRegions: [],
-      user: {}
+      user: {},
+      displayed: false,
+      shownMovie: {},
     }
   },
   async mounted() {
@@ -63,6 +73,16 @@ export default ({
       obj.user = this.user.id
       postWatchlist(obj)
       .then(res => console.log(res))
+    },
+    displayMovie(movie) {
+      if (this.displayed !== true && this.shownMovie !== movie) {
+        this.shownMovie = movie;
+        this.displayed = true;
+      }
+      else {
+        this.shownMovie = {},
+        this.displayed = false
+      }
     }
     // setActiveGenres(genreId) {
     //   console.log(genreId)

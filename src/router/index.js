@@ -19,9 +19,6 @@ const routes = [
     component: Search
   },
   {
-    
-  },
-  {
     path: '/',
     name: 'Login',
     redirect: '/login'
