@@ -1,6 +1,6 @@
 <template>
-  <article class="movie-card" v-on:click="clickMovie">
-     <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster"/>
+  <article class="movie-card" >
+     <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster" v-on:click="clickMovie"/>
      <div v-else class="poster-error">
       <h3>{{ movie.title }}</h3>
       <p class="error">Poster not available</p>
