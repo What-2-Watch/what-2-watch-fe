@@ -236,4 +236,20 @@ export default ({
       @include serviceScrollThumb
     }
 
+@media screen and (max-width: 1024px) {
+
+      .login-form {
+        width: 45%; 
+      }
+
+  }
+
+@media screen and (max-width: 600px) {
+    
+      .login-form {
+        width: 70%; 
+      }
+
+  }
+
 </style>
