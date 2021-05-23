@@ -1,7 +1,7 @@
 describe('Flick Finder', () => {
 
     it('should have a login page ', () => {
-        cy.fixture('sample-data.js').then(() => {
+        cy.fixture('sample-data.json').then(() => {
             cy.intercept('https://what-2-watch-be.herokuapp.com/v1/')
         })
         cy.visit('http://localhost:8080/')
@@ -28,9 +28,12 @@ describe('Flick Finder', () => {
 
     it('should have a user profile page', () => {
         cy.get('header').get('aside').get('[data-cy=profile]').click()
-        .get('section').get('.welcome-container').contains('h1', 'Welcome, ').next()
+        .get('section').get('.welcome-container')
+        //add name to this
+        .contains('h1', 'Welcome, ').next()
         .contains('h2', 'Email: hope.gochnour@gmail.com')
         .get('.lang-reg-container')
+        //add language and region
         .contains('h2', 'Language: ').next()
         .contains('h2', 'Region: ')
         .get('article').get('div').get('.service-container').get('button')
@@ -39,17 +42,21 @@ describe('Flick Finder', () => {
 
     it('should be able to search for films', () => {
         cy.get('header').get('aside').get('[data-cy=search]').click()
-        .get('form').get('input[type=text]').type('nobody')
+        .get('form').get('input[type=text]').type('tacos')
         .get('button').click()
     }); 
 
     it('should add a movie to the users watchlist', () => {
-        
+        cy.get('.search-view').get('[data-cy=search-grid]').get('article')
+        .get('button').contains('Add to Watchlist').click()
+        .get('header').get('aside').get('[data-cy=home]').click()
     }); 
 
-    // it('should thumbs up or down a movie', () => {
-
-    // }); 
+    it('should thumbs up or down a movie', () => {
+        cy.get('section').should('have.class', 'gallery-display')
+        .get('[data-cy=movie-card]').get('article')
+        .get('button').contains('👍').click()
+    }); 
 
     // it('should  click FAVORITES button and change URL path', () => {
     //     cy.get('header').get('div').get('.nav-btn').contains('FAVORITES').click()

@@ -206,7 +206,7 @@
             "name": "Sundance Now",
             "api_provider_id": 143,
             "user": 30
-        },
+        }
     ], 
     "watchlists": [
         {
@@ -244,7 +244,7 @@
             "title": "Tango & Cash",
             "api_movie_id": 9618,
             "user": 15
-        },
+        }
     ], 
     "thumbs": [
         {
