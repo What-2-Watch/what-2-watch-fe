@@ -2,10 +2,10 @@
     <LoginForm 
     v-on:createUser="newUser($event)" 
     v-on:existingLogin="userLogin($event)" 
+    v-on:finishCreate="finishCreate()"
     v-bind:updateLogin="updateLogin" 
     />
 </template>
-
 
 <script>
 import LoginForm from '../components/LoginForm'; 
@@ -21,13 +21,13 @@ export default ({
   },
   emits: [
     'userLogin:user',
-    'newUser:userData'
+    'newUser:userData',
+    'finishCreate'
   ],
   data() {
     return {
       selectedLanguage: '',
       selectedRegion: '',
-
     }
   },
   mounted() {
@@ -39,6 +39,9 @@ export default ({
     newUser(userData) {
       console.log(userData)
       this.$emit('newUser', userData)
+    },
+    finishCreate() {
+      this.$emit('finishCreate')
     }
   }
 
