@@ -1,16 +1,17 @@
 describe('Flick Finder', () => {
 
-    // it('should have a header ', () => {
-    //     cy.fixture('marsPhoto.js').then(() => {
-    //         cy.intercept('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2020-4-20&api_key=53v8Y7IFlUi4zxNuImN5cZ8W8kghwuo0kqF7hOta')
-    //     })
-    //     cy.visit('http://localhost:3000')
-    //     cy.contains('h1', 'The Party Planet')
-    //     cy.contains('h3', 'A celebration out of this world')
-    //     .get('div').should('be.visible').and('have.class', 'nav-btn-container')
-    //     .get('.nav-btn').should('be.visible').contains('HOME')
-    //     .get('.nav-btn').should('be.visible').contains('FAVORITES')
-    // })
+    it('should have a login page ', () => {
+        cy.fixture('sample-data.js').then(() => {
+            cy.intercept('https://what-2-watch-be.herokuapp.com/v1/')
+        })
+        cy.visit('http://localhost:8080/ ')
+        .get('section').get('form').should('have.class', 'login-form')
+    }); 
+
+    it('should log a user in with an email and password', () => {
+        cy.get('section').get('form').get('input[type=text]').type('hope.gochnour@gmail.com').get('[data-cy=password]').type('1234')
+        .get('button').should('have.class', 'login-btn').click()
+    }); 
 
     // it('should  click FAVORITES button and change URL path', () => {
     //     cy.get('header').get('div').get('.nav-btn').contains('FAVORITES').click()

@@ -15,6 +15,7 @@
         type="password"
         name="password"
         placeholder="PASSWORD"
+        data-cy="password"
         required
         v-model="password"/> 
         <label for="password"></label>
