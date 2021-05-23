@@ -18,8 +18,9 @@
 import { } from 'vue'
 import Header from './components/Header';   
 import Login from './views/Login'; 
-import { submitNewUser, getUsers, confirmLogin } from './utilities'; 
+import { submitNewUser, getUsers, confirmLogin, setUserId } from './utilities'; 
 import router from './router/index'
+
 export default {
   name: 'App',
   components: {
@@ -34,11 +35,13 @@ export default {
       allUsers: []
     }
   },
+  beforeCreate() {
+    localStorage.clear
+  },
   async mounted() {
     const allUsers = await getUsers()
     this.allUsers = allUsers
   },
-
   methods: {
     updateLogin() {
       !this.loggedIn ? this.loggedIn = true : this.loggedIn = false
@@ -53,7 +56,7 @@ export default {
     },
     createNewUser(userData) {
       submitNewUser(userData)
-      .then(data => this.currentUser = data.id)
+      .then(data => setUserId(data.id))
     },
   },
 }
