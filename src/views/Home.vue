@@ -1,13 +1,13 @@
 <template>
   <section class="home-view">
     <Gallery 
-    :listTitle="watchlist_title"
-    :list="watchlist"
-    v-on:displayMovieModal="displayMovie($event)"/>
+      :listTitle="'Recommended'"
+      :list="recommended"
+       v-on:displayMovieModal="displayMovie($event)"/>
     <Gallery 
-    :listTitle="watchlist_title"
-    :list="watchlist"
-    v-on:displayMovieModal="displayMovie($event)"/>
+      :listTitle="'My Watchlist'"
+      :list="watchlist"
+      v-on:displayMovieModal="displayMovie($event)"/>
     <modal :movie="shownMovie" :showing="displayed"
     v-on:closeModal="displayMovie($event)"
     v-on:postThumb="updateThumb($event)"
@@ -28,7 +28,6 @@ export default {
   },
   data() {
     return {
-      'watchlist_title':"My Watchlist",
       user: {},
       watchlist : [],
       displayed: false,
