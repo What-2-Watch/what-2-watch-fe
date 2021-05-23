@@ -2,24 +2,37 @@
   <section class="home-view">
     <Gallery 
     :listTitle="watchlist_title"
-    :list="watchlist"/>
+    :list="watchlist"
+    v-on:displayMovieModal="displayMovie($event)"/>
+    <Gallery 
+    :listTitle="watchlist_title"
+    :list="watchlist"
+    v-on:displayMovieModal="displayMovie($event)"/>
+    <modal :movie="shownMovie" :showing="displayed"
+    v-on:closeModal="displayMovie($event)"
+    v-on:postThumb="updateThumb($event)"
+    v-on:postWatchList="updateWatchList($event)"></modal>
   </section>
 </template>
 
 <script>
 import Gallery from '../components/Gallery';
-import { getUserById, getMovieById, cleanMovieSearchData } from '../utilities'; 
+import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb } from '../utilities'; 
+import Modal from '../components/Modal'
 
 export default {
   name: 'Home',
   components: {
-    Gallery
+    Gallery,
+    Modal
   },
   data() {
     return {
       'watchlist_title':"My Watchlist",
       user: {},
-      watchlist : []
+      watchlist : [],
+      displayed: false,
+      shownMovie: {}
     }
   },
   mounted() {
@@ -43,7 +56,27 @@ export default {
         console.log(responses)
       })
       
-    }
+    },
+    displayMovie(movie) {
+      if (this.displayed !== true && this.shownMovie !== movie) {
+        this.shownMovie = movie;
+        this.displayed = true;
+      }
+      else {
+        this.shownMovie = {},
+        this.displayed = false
+      }
+    },
+    updateThumb(thumb) {
+      
+      postThumb(thumb, this.userId)
+      .then(res => console.log(res))
+    },
+    updateWatchList(obj) {
+      obj.user = this.userId
+      postWatchlist(obj)
+      .then(res => console.log(res))
+    },
 }
 }
 </script>
