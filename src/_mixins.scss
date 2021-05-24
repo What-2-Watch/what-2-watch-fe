@@ -35,9 +35,9 @@
   color:black;
 }
 
-@mixin serviceContainer {
+@mixin serviceContainer($col) {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat($col, 1fr);
   height: 355px;
   margin-top: 20px; 
   overflow: auto; 

@@ -224,7 +224,7 @@ export default ({
     .subscriptions-container {
       margin: 0 auto;
       width:65%;
-       @include serviceContainer;
+       @include serviceContainer(4);
       overflow-x: hidden;
     }
 

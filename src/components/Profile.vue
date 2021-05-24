@@ -81,7 +81,7 @@ export default {
     }
 
     .subscriptions-container {
-       @include serviceContainer
+       @include serviceContainer(4);
     }
 
     .subscriptions-container::-webkit-scrollbar {
@@ -91,5 +91,20 @@ export default {
     .subscriptions-container::-webkit-scrollbar-thumb {
       @include serviceScrollThumb
     }
+
+
+@media screen and (max-width: 600px) {
+    
+    .profile-container {
+        padding: 10px; 
+        margin: 15px; 
+    }
+
+    .subscriptions-container {
+        @include serviceContainer(3);
+    }
+
+  }
+
 
 </style>

@@ -55,4 +55,14 @@ export default {
     column-gap: 16px;
     row-gap: 16px;
   }
+
+@media screen and (max-width: 600px) {
+
+  .search-grid {
+      grid-template-columns: repeat(2, 1fr);
+  }
+
+  }
+
+
 </style>
