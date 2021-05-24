@@ -5,25 +5,25 @@
     class="login-form"
     >
       <input
-        type="text" 
+        type="email" 
         name="email"
         placeholder="EMAIL"
         required
         v-model="email"/>
       <label for="email"></label>
-      <!-- <input 
+      <input 
         type="password"
         name="password"
         placeholder="PASSWORD"
         required
         v-model="password"/> 
-        <label for="password"></label> -->
+        <label for="password"></label>
         <button class="login-btn" type="submit" v-on:click="existingLogin">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
     </form>
     <form v-else-if="!servicePage" class="login-form">
       <input
-        type="text"
+        type="email"
         name="email"
         placeholder="EMAIL" 
         v-model="email"
