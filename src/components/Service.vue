@@ -56,7 +56,6 @@ export default {
         checkActive(userSubs, id) {
             userSubs.forEach(sub => {
                 if (id === sub.api_provider_id) {
-                    console.log('should be working')
                     this.active = true;
                     this.subId = sub.id
                 }   
@@ -76,7 +75,7 @@ export default {
     }
 
     .is-active {
-        border: solid 5px $mediumRed;
+        border: solid 5px $lightRed;
     }
 
     .not-active {
