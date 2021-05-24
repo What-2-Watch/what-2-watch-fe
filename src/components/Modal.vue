@@ -49,8 +49,8 @@ export default {
     return {
       liked: false,
       disliked: false,
-      subId: null,
       thumbId: null,
+      listId: null,
       onList: false
     };
   },
@@ -77,9 +77,9 @@ export default {
         if (!this.liked) {
           this.updateThumb({api_movie_id: this.movie.id, up: true, title: this.movie.title});
           this.liked = true;
-        } else if (this.subId && this.liked) {
+        } else if (this.thumbId && this.liked) {
           this.liked = false;
-          removeThumb(this.subId)
+          removeThumb(this.thumbId)
         }
       } else if (!this.disliked) {
           this.disliked = true
@@ -87,7 +87,7 @@ export default {
 
       } else if (this.disliked) {
           this.disliked = false;
-          removeThumb(this.subId)
+          removeThumb(this.thumbId)
       }
     },
     emitWatchlist(posting) {
@@ -134,14 +134,13 @@ export default {
     },
     checkCardWatchlist(watchlist, id) {
       if (id === watchlist.api_movie_id) {
-        console.log('should be working')
         this.onList = true;
         this.listId = watchlist.id
       } 
     },
     updateThumb(thumb) {
       postThumb(thumb, getUserId())
-      .then(res => this.subId = res.id)
+      .then(res => this.thumbId = res.id)
     },
     updateWatchList(obj) {
       obj.user = getUserId()
@@ -183,7 +182,7 @@ export default {
     border-radius: 5px;
     z-index: 2;
     padding: 50px;
-    overflow-y: hidden;
+
     svg {
       color: $gray;
       cursor: pointer
@@ -238,6 +237,7 @@ export default {
   flex-flow: column;
   height: fit-content;
   margin-top: 50px;
+
 }
 
 .movie-rating, .thumb {
