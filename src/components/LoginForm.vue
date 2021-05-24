@@ -34,7 +34,7 @@
         name="password"
         placeholder="PASSWORD"
         v-model="password"
-        required>
+        required/>
       <label for="password"></label>
       <input 
         type="password"
