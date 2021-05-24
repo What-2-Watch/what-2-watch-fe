@@ -48,7 +48,6 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
           this.checkUserLists()
         },
         methods: {
-          
           emitThumbs(e) {
             if (e.target.name === 'upVote') {
               if (!this.liked) {

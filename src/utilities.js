@@ -18,7 +18,6 @@ export const postWatchlist = (watchListObj) => {
 }
 
 export const removeWatchlist = (id) => {
-  console.log(id)
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/watchlists/${id}`, {
     method: 'DELETE',
     headers: {

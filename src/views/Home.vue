@@ -44,7 +44,6 @@ export default {
       Promise.all(movieList)
       .then(responses => {
         this.watchlist = [...cleanMovieSearchData(responses)]
-        console.log(responses)
       })
       
     },
@@ -63,7 +62,6 @@ export default {
     fetchRecommendations() {
       getUserRecs(getUserId())
       .then(data => {
-        console.log(data)
         this.recommended = [...cleanMovieSearchData(data.results)]
       })
     }
