@@ -3,7 +3,7 @@ const checkResponse = (response) => {
   if(response.ok) {
   return response.json()
 } else {
-  // alert("There was an error with your request. Please try again.")
+  alert(response.status + " " + response.statusText)
 }}
 
 export const postWatchlist = (watchListObj) => {
