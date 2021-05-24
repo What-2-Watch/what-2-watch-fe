@@ -51,9 +51,13 @@ export default {
         setUserId(user.id)
       }
     },
-    createNewUser(userData) {
-      submitNewUser(userData)
-      .then(data => setUserId(data.id))
+    async createNewUser(userData) {
+      await submitNewUser(userData)
+      .then(data => {
+        console.log(data)
+        setUserId(data.id)
+      })
+
     }
   }
 }
