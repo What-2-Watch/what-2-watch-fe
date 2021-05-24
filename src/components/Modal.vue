@@ -3,7 +3,7 @@
   <transition name="fade">
     <div class="modal" v-if="showing">
       <div class="modal__backdrop" @click="closeModal()"/>
-      <div class="modal__dialog" v-bind:style="{ 'background-image': 'url(' + movie.backdrop + ')' }">
+      <div class="modal__dialog detail-splash" v-bind:style="{ 'background-image': 'url(' + movie.backdrop + ')' }">
         <div class="modal__header">
           <slot name="header"/>
           <button type="button" class="modal__close" @click="closeModal()">
@@ -146,7 +146,7 @@ export default {
 }
 
 .detail-splash {
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -215,7 +215,7 @@ color: $gray
 
 }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1050px) {
 
     .modal__close {
       height: 35px;
