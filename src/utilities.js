@@ -85,6 +85,7 @@ export const submitNewUser = (userData) => {
 }
 
 export const getUserById = (id) => {
+  console.log(id)
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/${id}`)
       .then(response => checkResponse(response))
       .then(data => data)
