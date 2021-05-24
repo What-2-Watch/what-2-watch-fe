@@ -2,7 +2,7 @@
     <header>
         <div class="header-content">
             <router-link to="/home" exact-active-class="active-title">
-            <h1 class='app-title'>Flick Finder</h1>
+            <h1>Flick Finder</h1>
             </router-link>
             <aside class="nav-links" v-if="loggedIn">
                 <router-link to="/search">Search</router-link>
@@ -68,6 +68,28 @@ export default {
     }
     .router-link-active {
         @include activeBorder;
+  }
+
+@media screen and (max-width: 600px) {
+    
+    header {
+        height: 90px; 
+    }
+
+     .header-content {
+         height: 28px; 
+     }
+
+      h1 {
+          margin: 0; 
+          font-size: 2em; 
+      }
+
+      .nav-links {
+          @include centerColumn; 
+      }
 
   }
+
+
 </style>

@@ -224,7 +224,7 @@ export default ({
     .subscriptions-container {
       margin: 0 auto;
       width:65%;
-       @include serviceContainer;
+       @include serviceContainer(4);
       overflow-x: hidden;
     }
 
@@ -235,5 +235,24 @@ export default ({
     .subscriptions-container::-webkit-scrollbar-thumb {
       @include serviceScrollThumb
     }
+
+@media screen and (max-width: 1024px) {
+
+      .login-form {
+        width: 45%; 
+      }
+
+  }
+
+@media screen and (max-width: 600px) {
+    
+      .login-form {
+        width: 70%; 
+         input {
+           width: 80%;
+         }
+      }
+
+  }
 
 </style>

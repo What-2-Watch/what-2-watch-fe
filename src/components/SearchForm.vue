@@ -71,6 +71,7 @@ export default {
       font-size: 2em;
       color: $gray
     }
+
     button, select {
       color: $gray;
       border: 1px solid $lightRed;
@@ -90,4 +91,24 @@ export default {
     display: flex;
     justify-content: center;
   }
+
+@media screen and (max-width: 600px) {
+
+  .search-form {
+    padding: 20px; 
+    font-size: 15px; 
+    input {
+      width: 90%
+    }
+    select {
+      width: 60%;
+    }
+  }
+
+  .secondary-inputs {
+    width: 100%; 
+  }
+
+  }
+
 </style>

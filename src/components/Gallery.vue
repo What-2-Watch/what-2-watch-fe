@@ -2,6 +2,7 @@
     <section class='gallery-display'>
         <h2 class='gallery-title'>{{ listTitle || 'Recommendations' }}</h2>
             <swiper
+            :breakpoints="swiperOptions.breakpoints"
             :slides-per-view="5"
             :space-between="50"
             :scrollbar="{ draggable: true }"
@@ -42,9 +43,25 @@ export default {
         showMovie(movie) {
             this.$emit('displayMovieModal', movie)
         }
+    }, 
+    data() {
+        return {
+            swiperOptions: {
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20 
+                    }, 
+                    640: {
+                        slidesPerView: 5,
+                        spaceBetween: 30
+                    }
+                }
+            }
+        }
     }
-    
 }
+
 </script>
 
 <style scoped lang='scss'>
