@@ -14,12 +14,9 @@
         <button v-else name="remove" v-on:click="emitWatchlist">Remove from Watchlist</button>
       </aside>
     </article>
-    
 </template>
 
-
 <script>
-
     export default {
         name: 'MovieCard', 
         props: {
@@ -75,6 +72,7 @@
         margin: 0 auto;
         padding: 40px 0 0 0;
         text-align: center;
+        color:$gray;
       }
 
       h3 {
