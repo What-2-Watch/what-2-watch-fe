@@ -223,9 +223,9 @@ export const cleanRegionData = (array) => {
 }
 
 export const setUserId = (id) => {
-  sessionStorage.setItem('userId', String(id))
+  localStorage.setItem('userId', String(id))
 }
 
 export const getUserId = () => {
-  return parseInt(sessionStorage.getItem('userId'));
+  return parseInt(localStorage.getItem('userId'));
 }
