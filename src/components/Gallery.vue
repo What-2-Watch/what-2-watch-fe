@@ -1,6 +1,6 @@
 <template>
     <section class='gallery-display'>
-        <h2 class='gallery-title'>{{ listTitle || 'Recommendations' }}</h2>
+        <h2 class='gallery-title'>{{ listTitle || 'WATCH LIST' }}</h2>
             <swiper
             :breakpoints="swiperOptions.breakpoints"
             :slides-per-view="5"
