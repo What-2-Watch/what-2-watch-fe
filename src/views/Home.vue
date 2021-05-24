@@ -64,7 +64,6 @@ export default {
     },
 
     updateThumb(thumb) {
-      
       postThumb(thumb, getUserId())
       .then(res => console.log(res))
     },
