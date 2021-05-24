@@ -3,7 +3,7 @@ const checkResponse = (response) => {
   if(response.ok) {
   return response.json()
 } else {
-  // alert("There was an error with your request. Please try again.")
+  alert(response.status + " " + response.statusText)
 }}
 
 export const postWatchlist = (watchListObj) => {
@@ -95,6 +95,7 @@ export const submitNewUser = (userData) => {
 }
 
 export const getUserById = (id) => {
+  console.log(id)
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/${id}`)
       .then(response => checkResponse(response))
       .then(data => data)
@@ -240,9 +241,9 @@ export const cleanRegionData = (array) => {
 }
 
 export const setUserId = (id) => {
-  sessionStorage.setItem('userId', String(id))
+  localStorage.setItem('userId', String(id))
 }
 
 export const getUserId = () => {
-  return parseInt(sessionStorage.getItem('userId'));
+  return parseInt(localStorage.getItem('userId'));
 }
