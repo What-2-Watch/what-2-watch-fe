@@ -14,6 +14,16 @@ export const postWatchlist = (watchListObj) => {
     },
     body: JSON.stringify(watchListObj)
   })
+  .then(res => res.json())
+}
+
+export const removeWatchlist = (id) => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/watchlists/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
 }
 
 export const getUserRecs = (id) => {
@@ -45,6 +55,7 @@ export const postThumb = async ({api_movie_id, up, title}) => {
         'Content-Type': 'application/json'
       },
     })
+    .then(res => res.json())
     .catch()
 }
 
@@ -69,7 +80,6 @@ const getDirectorID = (creditData) => {
 
 const getActorID = (creditData) => {
   const actors = creditData.cast.sort((a, b) => a.popularity - b.popularity)
-  console.log(actors)
   return actors[0].id
 }
 
@@ -195,6 +205,13 @@ export const removeSubscription = (id) => {
    })
     .then(response => console.log(response))
     .catch()
+}
+
+export const removeThumb = (id) => {
+  return fetch(`https://what-2-watch-be.herokuapp.com/v1/thumbs/${id}`, {
+    method: 'DELETE'
+  })
+    .then(response => console.log(response))
 }
 
 export const cleanServiceData = (array) => {

@@ -27,11 +27,13 @@
                 {{ movie.overview }}
               </i>
             </article>
-            <aside class="button-box">
-              <p name="add" v-on:click="emitWatchlist" v-if="list !== 'My Watchlist'">Add to Watchlist</p>
-              <p v-else name="remove" v-on:click="emitWatchlist">Remove from Watchlist</p>
-              <button class="thumb" name="upVote" v-on:click="emitThumbs">👍</button>
-              <button class="thumb" name="downVote" v-on:click="emitThumbs">👎</button>
+            <aside class="button-container">
+              <div class="thumbs">
+                <img :class="liked ? 'is-active' : 'not-active'" src="../assets/thumbs-up.png" class="thumb" name="upVote" v-on:click="emitThumbs"/>
+                <img :class="disliked ? 'is-active' : 'not-active'" src="../assets/thumbs-down.png" class="thumb" name="downVote" v-on:click="emitThumbs"/>
+              </div>
+              <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
+              <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>
             </aside>
           </section>
       </div>
@@ -40,16 +42,26 @@
 </template>
 
 <script>
+import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWatchlist } from '../utilities';
 export default {
   name: "Modal",
   data() {
     return {
-      show: false
+      liked: false,
+      disliked: false,
+      thumbId: null,
+      listId: null,
+      onList: false
     };
   },
   props: {
     movie: Object,
     showing: Boolean
+  },
+  watch: {
+    showing() {
+    this.checkUserLists()
+    }
   },
   methods: {
     closeModal() {
@@ -57,19 +69,83 @@ export default {
       document.querySelector("body").classList.remove("overflow-hidden");
     },
     openModal() {
-      console.log(this.movie.backdrop)
       this.$emit('openModal')
       document.querySelector("body").classList.add("overflow-hidden");
     },
     emitThumbs(e) {
       if (e.target.name === 'upVote') {
-        this.$emit('postThumb', {api_movie_id: this.movie.id, title: this.movie.title, up: true});
-      } else {
-        this.$emit('postThumb', {api_movie_id: this.movie.id, title: this.movie.title, up: false});
+        if (!this.liked) {
+          this.updateThumb({api_movie_id: this.movie.id, up: true, title: this.movie.title});
+          this.liked = true;
+        } else if (this.thumbId && this.liked) {
+          this.liked = false;
+          removeThumb(this.thumbId)
+        }
+      } else if (!this.disliked) {
+          this.disliked = true
+          this.updateThumb({api_movie_id: this.movie.id, up: false, title: this.movie.title});
+
+      } else if (this.disliked) {
+          this.disliked = false;
+          removeThumb(this.thumbId)
       }
     },
-    emitWatchlist() {
-      this.$emit('postWatchList', {api_movie_id: this.movie.id, title: this.movie.title})
+    emitWatchlist(posting) {
+      if (posting) {
+        this.onList = true
+        this.updateWatchList({api_movie_id: this.movie.id, title: this.movie.title})
+      } else {
+        this.onList = false
+        removeWatchlist(this.listId)
+      }
+    },
+    checkUserLists() {
+      let userThumbs = [];
+      getUserById(getUserId())
+      .then(response => {
+        userThumbs = response.thumbs
+        this.checkActive(userThumbs, this.movie.id, true)
+        this.checkActive(response.watchlist, this.movie.id)
+      })
+      
+    },
+    checkActive(userList, id, thumbs = false) {
+      const foundMovie = userList.find(listItem => id === listItem.api_movie_id)
+      if (foundMovie && thumbs) {
+        this.checkModalThumbs(foundMovie, id)
+      } else if (foundMovie) {
+        this.checkCardWatchlist(foundMovie, id)
+      } 
+      else if (!foundMovie) {
+        this.thumbId = null
+        this.disliked = false;
+        this.liked = false
+        this.onList = false;
+      }
+    },
+    checkModalThumbs(thumb, id) {
+      if (id === thumb.api_movie_id && thumb.up) {
+        this.liked = true;
+        this.thumbId = thumb.id
+      } else if (id === thumb.api_movie_id && !thumb.up) {
+        this.disliked = true;
+        this.thumbId = thumb.id
+      }
+    },
+    checkCardWatchlist(watchlist, id) {
+      if (id === watchlist.api_movie_id) {
+        this.onList = true;
+        this.listId = watchlist.id
+      } 
+    },
+    updateThumb(thumb) {
+      postThumb(thumb, getUserId())
+      .then(res => this.thumbId = res.id)
+    },
+    updateWatchList(obj) {
+      obj.user = getUserId()
+      postWatchlist(obj)
+      .then(res => this.listId = res.id)
     },
   }
 };
@@ -106,7 +182,7 @@ export default {
     border-radius: 5px;
     z-index: 2;
     padding: 50px;
-    overflow-y: hidden;
+
     svg {
       color: $gray;
       cursor: pointer
@@ -161,6 +237,7 @@ export default {
   flex-flow: column;
   height: fit-content;
   margin-top: 50px;
+
 }
 
 .movie-rating, .thumb {
@@ -201,18 +278,24 @@ color: $gray
   backdrop-filter: blur(10px);
 }
 
-.button-box {
+.button-container {
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  background-color: transparent;
   color: $gray;
   button {
-    font-size: 2em;
+    margin: 5px;
+    font-size: 1em;
+    background-color: $gray;
+  }
+  img {
+    margin: 5px;
   }
 }
 
-.thumb {
 
+.is-active {
+  background-color: $gray;
 }
 
   @media screen and (max-width: 1050px) {
