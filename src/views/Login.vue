@@ -17,7 +17,6 @@ export default ({
   },
   props: {
     updateLogin: Function,
-
   },
   emits: [
     'userLogin:user',
