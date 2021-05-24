@@ -4,6 +4,14 @@
             <h1>Welcome, {{ user.first_name }}</h1>
             <h2 class="email">Email: {{ user.email }}</h2>
         </div>
+        <Gallery 
+            :listTitle="'YOUR WATCHLIST'"
+            :list="watchlist"
+            v-on:displayMovieModal="displayMovie($event)"/>
+        <modal :movie="shownMovie" :showing="displayed"
+            v-on:closeModal="displayMovie($event)"
+            v-on:postThumb="updateThumb($event)"
+            v-on:postWatchList="updateWatchList($event)"></modal>
         <h2>YOUR SERVICES:</h2>
         <article class="subscriptions-container"> 
           <section :key="service.id" v-for="service in services">
@@ -18,17 +26,24 @@
 
 <script>
 import Service from './Service'; 
-import { getServices, filterByTopServices, getUserById, getUserId } from '../utilities';
+import Gallery from '../components/Gallery';
+import Modal from '../components/Modal'
+import { getServices, getUserId, filterByTopServices, getUserById, getMovieById, cleanMovieSearchData } from '../utilities';
+
 
 export default {
     name: 'Profile',
     components: {
-        Service
+        Service,
+        Gallery, 
+        Modal
     }, 
     data() {
         return {
-         services: [],
-         user: {}
+            services: [],
+            user: {},
+            watchlist : [],
+            displayed: false
         }
     },
     mounted() {
@@ -38,9 +53,33 @@ export default {
         getUserById(getUserId())
         .then(response => {
             this.user = response
+            this.fetchWatchlistMovies()
         })
     })
   },
+  methods: {
+      displayMovie(movie) {
+      if (this.displayed !== true && this.shownMovie !== movie) {
+        this.shownMovie = movie;
+        this.displayed = true;
+      }
+      else {
+        this.shownMovie = {},
+        this.displayed = false
+      }
+    },
+     fetchWatchlistMovies() {
+      let movieList = this.user.watchlist.map(watchlistObj => {
+        return getMovieById(watchlistObj.api_movie_id)
+      })
+      Promise.all(movieList)
+      .then(responses => {
+        this.watchlist = [...cleanMovieSearchData(responses)]
+        console.log(responses)
+      })
+      
+    },
+  }
 }
 </script>
 

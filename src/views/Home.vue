@@ -1,13 +1,10 @@
 <template>
-  <section class="home-view">
-    <Gallery 
-      :listTitle="'Recommended'"
-      :list="recommended"
-       v-on:displayMovieModal="displayMovie($event)"/>
-    <Gallery 
-      :listTitle="'My Watchlist'"
-      :list="watchlist"
-      v-on:displayMovieModal="displayMovie($event)"/>
+  <section>
+    <h1>RECOMMENDED</h1>
+    <search-grid :searchResults="recommended"
+        v-on:postThumb="updateThumb($event)"
+        v-on:postWatchList="updateWatchList($event)"
+        v-on:displayMovieModal="displayMovie($event)"></search-grid>
     <modal :movie="shownMovie" :showing="displayed"
     v-on:closeModal="displayMovie($event)"
     v-on:postThumb="updateThumb($event)"
@@ -16,15 +13,15 @@
 </template>
 
 <script>
-import Gallery from '../components/Gallery';
 import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb, getUserRecs, getUserId } from '../utilities'; 
 import Modal from '../components/Modal'
+import SearchGrid from '../components/SearchGrid'
 
 export default {
   name: 'Home',
   components: {
-    Gallery,
-    Modal
+    Modal,
+    SearchGrid
   },
   data() {
     return {
@@ -55,6 +52,7 @@ export default {
       })
       
     },
+
     displayMovie(movie) {
       if (this.displayed !== true && this.shownMovie !== movie) {
         this.shownMovie = movie;
@@ -65,16 +63,19 @@ export default {
         this.displayed = false
       }
     },
+
     updateThumb(thumb) {
       
       postThumb(thumb, getUserId())
       .then(res => console.log(res))
     },
+
     updateWatchList(obj) {
       obj.user = getUserId()
       postWatchlist(obj)
       .then(res => console.log(res))
     },
+
     fetchRecommendations() {
       getUserRecs(getUserId())
       .then(data => {
