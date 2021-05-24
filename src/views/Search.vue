@@ -2,10 +2,12 @@
   <section class="search-view">
     <search-form 
     v-on:submitSearch="getSearchResults($event)"
-    :genres="allGenres"
-    :languages="allLanguages"
-    :regions="allRegions"
     ></search-form>
+
+    <article v-if="!searchResults.length" class="search-message">
+      <h3>Search for movies and use the thumbs to tell us what you like.</h3>
+      <h3>We'll tailor your recommedations based on your taste in movies.</h3>
+    </article>
 
     <search-grid :searchResults="searchResults"
     v-on:postThumb="updateThumb($event)"
@@ -25,7 +27,6 @@ import SearchForm from '../components/SearchForm'
 import SearchGrid from '../components/SearchGrid'
 import { movieSearch, getGenres, getRegions, postThumb, postWatchlist, getUserById, getUserId } from '../utilities'; 
 import Modal from '../components/Modal'
-
 
 export default ({
   name: 'Search',
@@ -52,11 +53,7 @@ export default ({
     .then(responses => {
       this.allGenres = responses[0],
       this.allRegions = responses[1]
-      console.log(responses);
     })
-  },
-  props: {
-    userId: Number,
   },
   methods: {
     getSearchResults({ region, search, lang }) {
@@ -65,7 +62,6 @@ export default ({
       .then(data => this.searchResults = data)
     },
     updateThumb(thumb) {
-      
       postThumb(thumb, getUserId())
       .then(res => console.log(res))
     },
@@ -84,11 +80,17 @@ export default ({
         this.displayed = false
       }
     }
-    // setActiveGenres(genreId) {
-    //   console.log(genreId)
-    // v-on:changeGenreFilter="setActiveGenre($event)"
-    //   // &with_genres=${18}
-    // }
   }
 })
 </script>
+
+<style lang="scss">
+  @import '../index.scss';
+
+  .search-message {
+    h3 {
+      color: $gray;
+    }
+  }
+
+</style>
