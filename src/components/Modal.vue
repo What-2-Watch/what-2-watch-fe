@@ -214,4 +214,23 @@ color: $gray
 .thumb {
 
 }
+
+  @media screen and (max-width: 600px) {
+
+    .modal__close {
+      height: 35px;
+      width: 35px;
+    }
+
+    .modal {
+      &__header {
+        padding: 5px; 
+      }
+      &__dialog {
+        padding: 10px; 
+        overflow-y: scroll; 
+      }
+    }
+
+  }
 </style>
