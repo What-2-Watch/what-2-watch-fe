@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>RECOMMENDED</h1>
+    <h1 class="rec-title">RECOMMENDED</h1>
     <search-grid :searchResults="recommended"
         v-on:postThumb="updateThumb($event)"
         v-on:postWatchList="updateWatchList($event)"
@@ -26,7 +26,6 @@ export default {
   data() {
     return {
       user: {},
-      watchlist : [],
       displayed: false,
       shownMovie: {},
       recommended: [],
@@ -36,7 +35,7 @@ export default {
     getUserById(getUserId())
     .then(data => {
       this.user = data
-      this.fetchWatchlistMovies()
+      // this.fetchWatchlistMovies()
       this.fetchRecommendations()
       })
   },
@@ -88,5 +87,9 @@ export default {
 </script>
 <style scoped lang="scss">
 @import '../index.scss';
+
+.rec-title {
+  margin: 20px; 
+}
 
 </style>
