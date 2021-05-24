@@ -1,7 +1,7 @@
 <template>
  <section class="form-view">
     <form v-if="!newUser"
-    @submit="existingLogin"
+    @submit.prevent="existingLogin"
     class="login-form"
     >
       <input
@@ -18,10 +18,10 @@
         required
         v-model="password"/> 
         <label for="password"></label>
-        <button class="login-btn" type="submit" v-on:click="existingLogin">LOGIN</button>
+        <button class="login-btn" type="submit">LOGIN</button>
         <p v-on:click="showNewUser">Don't have an account? Create one here!</p>
     </form>
-    <form v-else-if="!servicePage" class="login-form">
+    <form v-else-if="!servicePage" @submit.prevent="createUser"  class="login-form">
       <input
         type="email"
         name="email"
@@ -58,7 +58,7 @@
         v-model="lastName"/>
       <label for="lastName"></label>
       <label for="language"></label>
-      <button v-on:click="createUser" class="create-acct-btn">CREATE ACCOUNT</button>
+      <button class="create-acct-btn">CREATE ACCOUNT</button>
     </form>
     <form  v-else-if="servicePage">
       <h3 class="service-message">Select which services you use</h3>
