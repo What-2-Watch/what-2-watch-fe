@@ -2,18 +2,15 @@
   <section>
     <h1 class="rec-title">RECOMMENDED</h1>
     <search-grid :searchResults="recommended"
-        v-on:postThumb="updateThumb($event)"
-        v-on:postWatchList="updateWatchList($event)"
-        v-on:displayMovieModal="displayMovie($event)"></search-grid>
+    v-on:displayMovieModal="displayMovie($event)"></search-grid>
     <modal :movie="shownMovie" :showing="displayed"
     v-on:closeModal="displayMovie($event)"
-    v-on:postThumb="updateThumb($event)"
-    v-on:postWatchList="updateWatchList($event)"></modal>
+    ></modal>
   </section>
 </template>
 
 <script>
-import { getUserById, getMovieById, cleanMovieSearchData, postWatchlist, postThumb, getUserRecs, getUserId } from '../utilities'; 
+import { getUserById, getMovieById, cleanMovieSearchData, getUserRecs, getUserId } from '../utilities'; 
 import Modal from '../components/Modal'
 import SearchGrid from '../components/SearchGrid'
 
@@ -31,11 +28,11 @@ export default {
       recommended: [],
     }
   },
+  
   mounted() {
     getUserById(getUserId())
     .then(data => {
       this.user = data
-      // this.fetchWatchlistMovies()
       this.fetchRecommendations()
       })
   },
@@ -62,19 +59,7 @@ export default {
         this.displayed = false
       }
     },
-
-    updateThumb(thumb) {
-      
-      postThumb(thumb, getUserId())
-      .then(res => console.log(res))
-    },
-
-    updateWatchList(obj) {
-      obj.user = getUserId()
-      postWatchlist(obj)
-      .then(res => console.log(res))
-    },
-
+    
     fetchRecommendations() {
       getUserRecs(getUserId())
       .then(data => {
