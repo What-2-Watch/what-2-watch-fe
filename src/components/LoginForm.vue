@@ -248,6 +248,9 @@ export default ({
     
       .login-form {
         width: 70%; 
+         input {
+           width: 80%;
+         }
       }
 
   }
