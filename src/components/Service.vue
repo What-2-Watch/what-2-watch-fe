@@ -1,6 +1,6 @@
 <template>
+    <button v-on:click="clickProvider">
         <img 
-        v-on:click="clickProvider"
         :src="provider.logo" 
         class="service-logo" 
         :alt="provider.name + 'logo'"
@@ -8,6 +8,7 @@
         name="provider.name"
         :class="active ? 'is-active' : 'not-active'"
         />
+    </button>
 </template>
 
 <script>
@@ -76,6 +77,7 @@ export default {
 
     .is-active {
         border: solid 5px $lightRed;
+        box-shadow: 0 0 .75em $lightRed;
     }
 
     .not-active {
