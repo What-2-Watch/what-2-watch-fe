@@ -100,6 +100,15 @@ export const getUserById = (id) => {
 export const confirmLogin = (user, userList) => {
   const foundUser = userList.find(potentialUser => potentialUser.email === user.email)
   return foundUser
+  // console.log(user)
+  // return fetch(`https://what-2-watch-be.herokuapp.com/v1/rest-auth/login`, {
+  //   method: 'POST',
+  //   body: JSON.stringify(user), 
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  // })
+  // .then(res => console.log(res))
 } 
 
 export const getGenres = (language) => {
