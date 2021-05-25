@@ -65,7 +65,8 @@
       <article class="subscriptions-container">
           <section :key="service.id" v-for="service in services">
             <Service 
-              :provider="service" 
+              :provider="service"
+              :location="location" 
               v-on:addProvider="postService($event)"
             />
           </section>
@@ -97,6 +98,7 @@ export default ({
       services: [],
       firstName: '',
       lastName: '',
+      location: 'login'
     }
   },
   props: {

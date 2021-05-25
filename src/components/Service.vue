@@ -18,6 +18,7 @@ export default {
     name: 'Service',
     props: {
         provider:Object,
+        location:String
     },
     data() {
         return{
@@ -26,7 +27,9 @@ export default {
         }
     },
     mounted() {
-        this.checkForSubscription(this.provider.id);
+        if(location === "profile") {
+            this.checkForSubscription(this.provider.id);
+        }
     },
     methods: {
         clickProvider() {
@@ -45,9 +48,9 @@ export default {
                 this.subId = response.id
             } )
         },
-        checkForSubscription(id) {
+        async checkForSubscription(id) {
             let userSubs = [];
-            getUserById(getUserId())
+            await getUserById(getUserId())
             .then(response => {
                 userSubs = response.subscriptions
                 this.checkActive(userSubs, id)
