@@ -52,8 +52,8 @@ export default ({
     }
   },
   async mounted() {
+    this.failedSearch = false;
     this.user = await getUserById(getUserId())
-
     Promise.all([getGenres(this.user.language), getRegions(this.user.language)])
     .then(responses => {
       this.allGenres = responses[0],
@@ -65,10 +65,12 @@ export default ({
       this.failedSearch = false;
       const fetchStr = `&language=${lang}&query=${search}&watch_region=${region}`
       movieSearch(fetchStr)
-      .then(data => this.searchResults = data)
-      if (!this.searchResults.length) {
-        this.failedSearch = true;
-      }
+      .then(data =>   {
+        if (!data.length) {
+          this.failedSearch = true;
+        }
+        this.searchResults = data
+      })
     },
     updateThumb(thumb) {
       postThumb(thumb, getUserId())
