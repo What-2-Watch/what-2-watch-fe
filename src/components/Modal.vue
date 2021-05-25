@@ -5,7 +5,7 @@
       <div class="modal__dialog detail-splash" v-bind:style="{ 'background-image': 'url(' + movie.backdrop + ')'}" >
         <div class="modal__header">
           <slot name="header"/>
-          <button type="button" class="modal__close" @click="closeModal()">
+          <button type="button" class="modal__close" aria-label="close modal" @click="closeModal()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
               <path
                 fill="currentColor"
@@ -28,8 +28,20 @@
             </article>
             <aside class="button-container">
               <div class="thumbs">
-                <img :class="liked ? 'is-active' : 'not-active'" src="../assets/thumbs-up.png" class="thumb" name="upVote" v-on:click="emitThumbs"/>
-                <img :class="disliked ? 'is-active' : 'not-active'" src="../assets/thumbs-down.png" class="thumb" name="downVote" v-on:click="emitThumbs"/>
+                <img 
+                :class="liked ? 'is-active' : 'not-active'" 
+                src="../assets/thumbs-up.png" 
+                class="thumb" 
+                name="upVote" 
+                v-on:click="emitThumbs"
+                alt="thumbs up"/>
+                <img 
+                :class="disliked ? 'is-active' : 'not-active'" 
+                src="../assets/thumbs-down.png" 
+                class="thumb" 
+                name="downVote" 
+                v-on:click="emitThumbs"
+                alt="thumbs down"/>
               </div>
               <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
               <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>
@@ -62,8 +74,8 @@ export default {
     showing: Boolean
   },
   watch: {
-    showing() {
-    this.checkUserLists()
+    async showing() {
+    await this.checkUserLists()
     }
   },
   methods: {
@@ -108,7 +120,7 @@ export default {
       .then(response => {
         userThumbs = response.thumbs
         this.checkActive(userThumbs, this.movie.id, true)
-        this.checkActive(response.watchlist, this.movie.id)
+        this.checkActive(response.watchlist, this.movie.id, false)
       })
       
     },
@@ -116,14 +128,16 @@ export default {
       const foundMovie = userList.find(listItem => id === listItem.api_movie_id)
       if (foundMovie && thumbs) {
         this.checkModalThumbs(foundMovie, id)
-      } else if (foundMovie) {
+      } else if (foundMovie && !thumbs) {
         this.checkCardWatchlist(foundMovie, id)
       } 
-      else if (!foundMovie) {
+      else if (!foundMovie && thumbs) {
         this.thumbId = null
         this.disliked = false;
         this.liked = false
+      } else if (!foundMovie && !thumbs) {
         this.onList = false;
+        this.listId = false
       }
     },
     checkModalThumbs(thumb, id) {

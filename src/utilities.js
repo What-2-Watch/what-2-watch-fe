@@ -72,12 +72,12 @@ const getCredits = (movieID) => {
 
 const getDirectorID = (creditData) => {
   const director = creditData.crew.find(crew => crew.job === "Director")
-  return director.id
+  return director? director.id : null
 }
 
 const getActorID = (creditData) => {
   const actors = creditData.cast.sort((a, b) => a.popularity - b.popularity)
-  return actors[0].id
+  return actors[0]? actors[0].id : null
 }
 
 export const submitNewUser = (userData) => {
@@ -100,6 +100,15 @@ export const getUserById = (id) => {
 export const confirmLogin = (user, userList) => {
   const foundUser = userList.find(potentialUser => potentialUser.email === user.email)
   return foundUser
+  // console.log(user)
+  // return fetch(`https://what-2-watch-be.herokuapp.com/v1/rest-auth/login`, {
+  //   method: 'POST',
+  //   body: JSON.stringify(user), 
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  // })
+  // .then(res => console.log(res))
 } 
 
 export const getGenres = (language) => {

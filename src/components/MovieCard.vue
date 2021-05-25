@@ -2,7 +2,7 @@
   <div class="card-container">
 
   <button class="movie-card" >
-     <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster" v-on:click="clickMovie"/>
+     <img v-if="!movie.poster.includes('null')" :src="movie.poster" :alt="movie.title + 'poster'" class="poster" v-on:click="clickMovie"/>
      <div v-else class="poster-error">
       <img src="../assets/missing_movie-01.png" alt="A blank poster"/>
       <h3>{{ movie.title }}</h3>
@@ -11,8 +11,23 @@
     </button>
       <aside class="button-container">
         <div class="thumbs">
-            <img role="button" tab-index="0" :class="liked ? 'is-active' : 'not-active'" src="../assets/thumbs-up.png" class="thumb" name="upVote" v-on:click="emitThumbs"/>
-            <img role="button" tab-index="0" :class="disliked ? 'is-active' : 'not-active'" src="../assets/thumbs-down.png" class="thumb" name="downVote" v-on:click="emitThumbs"/>
+          <img :class="liked ? 'is-active' : 'not-active'" 
+          src="../assets/thumbs-up.png" 
+          class="thumb" 
+          name="upVote" 
+          v-on:click="emitThumbs"
+          alt="thumbs up"
+          role="button"
+          tab-index="0"/>
+          <img 
+          :class="disliked ? 'is-active' : 'not-active'" 
+          src="../assets/thumbs-down.png" 
+          class="thumb" 
+          name="downVote" 
+          v-on:click="emitThumbs"
+          alt="thumbs down"
+          role="button"
+          tab-index="0"/>
         </div>
           <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
           <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>
@@ -28,7 +43,6 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
         name: 'MovieCard', 
         props: {
           movie: {type: Object},
-          list: {type: String}
         }, 
         data() {
           return {
@@ -39,11 +53,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
           }
         },
         emits: [
-            'upVote:movie.id',
-            'downVote:movie.id',
-            'add:movie.id',
-            'remove:movie.id',
-            'clickMovie:movie'
+            'clickMovie'
         ],
         mounted() {
           this.checkUserLists()
@@ -60,7 +70,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
               }
             } else if (!this.disliked) {
                 this.disliked = true
-                this.updateThumb({api_movie_id: this.movie.id, up: true, title: this.movie.title});
+                this.updateThumb({api_movie_id: this.movie.id, up: false, title: this.movie.title});
 
             } else if (this.disliked) {
                 this.disliked = false;
@@ -96,10 +106,13 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
             } else if (currentMovie) {
               this.checkCardWatchlist(currentMovie, id)
             } 
-            else if (!currentMovie) {
+            else if (!currentMovie && thumbs) {
               this.thumbId = null
               this.disliked = false;
               this.liked = false
+            } else if (!currentMovie && !thumbs) {
+              this.onList = false;
+              this.listId = false
             }
           },
           checkCardThumbs(thumb, id) {
@@ -214,6 +227,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
        padding: 5px;
        border-radius: 5px;
        width: 90%;
+       height: 25px;
        background-color: $gray;
     }
   }

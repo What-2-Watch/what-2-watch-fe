@@ -1,13 +1,9 @@
 <template>
   <section class="search-grid">
       <MovieCard 
-      :list="title" v-for="result in searchResults" 
+      v-for="result in searchResults" 
       :movie="result" 
       :key="result.id"
-      v-on:upVote="thumbsUp($event)"
-      v-on:downVote="thumbsDown($event)"
-      v-on:add="addToWatchList($event)"
-      v-on:remove="removeFromWatchlist($event)"
       v-on:clickMovie="showMovie($event)"/>
   </section>
 </template>

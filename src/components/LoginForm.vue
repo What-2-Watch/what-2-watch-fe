@@ -110,8 +110,10 @@ export default ({
     })
   },
   emits: [
-    'existingLogin:user', 
-    'createUser:userData'
+    'existingLogin', 
+    'createUser',
+    'finishCreate',
+    'postService'
   ],
   methods: {
     showNewUser() {

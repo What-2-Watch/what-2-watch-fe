@@ -45,7 +45,8 @@ export default {
             user: {},
             watchlist : [],
             displayed: false,
-            location: 'profile'
+            location: 'profile',
+            shownMovie: {}
         }
     },
     mounted() {
