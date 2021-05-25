@@ -60,7 +60,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
               }
             } else if (!this.disliked) {
                 this.disliked = true
-                this.updateThumb({api_movie_id: this.movie.id, up: true, title: this.movie.title});
+                this.updateThumb({api_movie_id: this.movie.id, up: false, title: this.movie.title});
 
             } else if (this.disliked) {
                 this.disliked = false;
@@ -96,10 +96,13 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
             } else if (currentMovie) {
               this.checkCardWatchlist(currentMovie, id)
             } 
-            else if (!currentMovie) {
+            else if (!currentMovie && thumbs) {
               this.thumbId = null
               this.disliked = false;
               this.liked = false
+            } else if (!currentMovie && !thumbs) {
+              this.onList = false;
+              this.listId = false
             }
           },
           checkCardThumbs(thumb, id) {
@@ -214,6 +217,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
        padding: 5px;
        border-radius: 5px;
        width: 90%;
+       height: 25px;
        background-color: $gray;
     }
   }

@@ -62,8 +62,8 @@ export default {
     showing: Boolean
   },
   watch: {
-    showing() {
-    this.checkUserLists()
+    async showing() {
+    await this.checkUserLists()
     }
   },
   methods: {
@@ -108,7 +108,7 @@ export default {
       .then(response => {
         userThumbs = response.thumbs
         this.checkActive(userThumbs, this.movie.id, true)
-        this.checkActive(response.watchlist, this.movie.id)
+        this.checkActive(response.watchlist, this.movie.id, false)
       })
       
     },
@@ -116,14 +116,16 @@ export default {
       const foundMovie = userList.find(listItem => id === listItem.api_movie_id)
       if (foundMovie && thumbs) {
         this.checkModalThumbs(foundMovie, id)
-      } else if (foundMovie) {
+      } else if (foundMovie && !thumbs) {
         this.checkCardWatchlist(foundMovie, id)
       } 
-      else if (!foundMovie) {
+      else if (!foundMovie && thumbs) {
         this.thumbId = null
         this.disliked = false;
         this.liked = false
+      } else if (!foundMovie && !thumbs) {
         this.onList = false;
+        this.listId = false
       }
     },
     checkModalThumbs(thumb, id) {
