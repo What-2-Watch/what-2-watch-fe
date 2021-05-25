@@ -77,10 +77,8 @@ export default {
       Promise.all(movieList)
       .then(responses => {
         this.watchlist = [...cleanMovieSearchData(responses)]
-        console.log(responses)
       })
-      
-    },
+    }
   }
 }
 </script>
