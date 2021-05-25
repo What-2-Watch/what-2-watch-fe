@@ -184,6 +184,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
 
   .button-container {
     width: 100%;
+    padding-bottom: 10px;
     box-shadow: 0 0 .35em #d9d9d956;
     padding-top: 5px;
     align-self: flex-end;
