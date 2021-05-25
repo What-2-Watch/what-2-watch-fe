@@ -4,7 +4,7 @@
   <button class="movie-card" >
      <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster" v-on:click="clickMovie"/>
      <div v-else class="poster-error">
-      <img src="../assets/missing_movie-01-01.png" alt="A blank poster"/>
+      <img src="../assets/missing_movie-01.png" alt="A blank poster"/>
       <h3>{{ movie.title }}</h3>
       <p class="error">Poster not available</p>
     </div>
@@ -151,7 +151,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
       grid-template-rows: 1fr;
       width:100%; 
       margin: 0 auto;
-      font-size: 24px;
+      padding: 2px;
 
         img {
           grid-area:1/1/1/1;
@@ -163,18 +163,19 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
         width: 70%;
         grid-area:1/1/1/1;
         margin: 0 auto;
-        padding: 140px 0 0 0;
+        padding: 100px 0 0 0;
         text-align: center;
         color:$gray;
+        font-size: 15px;
       }
 
       h3 {
-        font-size: 30px;
+        font-size: 18px;
         grid-area:1/1/1/1;
         grid-area:'error';
         text-align: center;
         margin: 0 auto;
-        padding: 15px 0 0 0;
+        padding: 10px 0 0 0;
         color: $gray;
         text-align: center;
       }
@@ -224,6 +225,32 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
 
   .is-active {
     background-color: $gray;
+  }
+
+@media screen and (max-width: 600px) {
+    .poster-error {
+      h3 {
+        font-size: 28px;
+        padding: 15px 0 0 0;
+      }
+      .error {
+        padding: 160px 0 0 0;
+        font-size: 28px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .poster-error {
+      h3 {
+        font-size: 22px;
+        padding: 15px 0 0 0;
+      }
+      .error {
+        padding: 120px 0 0 0;
+        font-size: 18px;
+      }
+    }
   }
 
 </style>
