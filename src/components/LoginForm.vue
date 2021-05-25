@@ -141,10 +141,7 @@ export default ({
         'last_name': this.lastName,
       }
       this.$emit('createUser', newUser)
-      // console.log(localStorage.getItem('userId'))
-      // if (localStorage.length) {
-      //   }
-        this.servicePage = true;
+      this.servicePage = true;
     },
 
     postService(service) {
