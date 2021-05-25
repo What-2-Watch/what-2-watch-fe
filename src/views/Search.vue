@@ -9,8 +9,8 @@
     </article>
 
     <article v-else-if="!searchResults.length" class="search-message">
-      <h3>Search for movies and use the thumbs to tell us what you like.</h3>
-      <h3>We'll tailor your recommedations based on your taste in movies.</h3>
+      <h2>Search for movies and use the thumbs to tell us what you like.</h2>
+      <h2>We'll tailor your recommedations based on your taste in movies.</h2>
     </article>
 
     <search-grid :searchResults="searchResults"
@@ -99,7 +99,7 @@ export default ({
   @import '../index.scss';
 
   .search-message {
-    h3 {
+    h2 {
       color: $gray;
     }
   }
