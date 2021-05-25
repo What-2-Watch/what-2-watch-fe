@@ -45,6 +45,7 @@
 
 <script>
 import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWatchlist } from '../utilities';
+
 export default {
   name: "Modal",
   data() {
@@ -158,7 +159,7 @@ export default {
 @import "../index.scss";
 .modal {
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   position: fixed;
   top: 0;
   right: 0;
@@ -184,8 +185,7 @@ export default {
     border-radius: 5px;
     z-index: 2;
     padding: 50px;
-    overflow-y: scroll;
-
+    overflow-y: scroll; 
     svg {
       color: $gray;
       cursor: pointer
@@ -215,6 +215,8 @@ export default {
     padding: 10px 20px 20px;
   }
 }
+
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s;
@@ -230,9 +232,14 @@ export default {
   background-color: $gray;
 }
 
+.modal__dialog::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
 .backup-poster {
-    height: 300px; 
+    height: 80%;  
     margin: 50px; 
+    border: solid 3px $mediumRed; 
 }
 
 .movie-info {
@@ -253,7 +260,7 @@ export default {
 border: 2px solid;
 border-radius: 50%;
 height: 50px;
-width: 50px;
+min-width: 50px;
 font-size: 1.8em;
 padding: 3.5px;
 color: $gray
@@ -301,7 +308,6 @@ color: $gray
     margin: 5px;
   }
 }
-
 
 .is-active {
   background-color: $gray;
