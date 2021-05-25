@@ -2,7 +2,7 @@
   <div class="card-container">
 
   <button class="movie-card" >
-     <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster" v-on:click="clickMovie"/>
+     <img v-if="!movie.poster.includes('null')" :src="movie.poster" :alt="movie.title + 'poster'" class="poster" v-on:click="clickMovie"/>
      <div v-else class="poster-error">
       <img src="../assets/missing_movie-01.png" alt="A blank poster"/>
       <h3>{{ movie.title }}</h3>
@@ -11,8 +11,23 @@
     </button>
       <aside class="button-container">
         <div class="thumbs">
-            <img role="button" tab-index="0" :class="liked ? 'is-active' : 'not-active'" src="../assets/thumbs-up.png" class="thumb" name="upVote" v-on:click="emitThumbs"/>
-            <img role="button" tab-index="0" :class="disliked ? 'is-active' : 'not-active'" src="../assets/thumbs-down.png" class="thumb" name="downVote" v-on:click="emitThumbs"/>
+          <img :class="liked ? 'is-active' : 'not-active'" 
+          src="../assets/thumbs-up.png" 
+          class="thumb" 
+          name="upVote" 
+          v-on:click="emitThumbs"
+          alt="thumbs up"
+          role="button"
+          tab-index="0"/>
+          <img 
+          :class="disliked ? 'is-active' : 'not-active'" 
+          src="../assets/thumbs-down.png" 
+          class="thumb" 
+          name="downVote" 
+          v-on:click="emitThumbs"
+          alt="thumbs down"
+          role="button"
+          tab-index="0"/>
         </div>
           <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
           <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>

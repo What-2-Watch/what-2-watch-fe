@@ -28,8 +28,20 @@
             </article>
             <aside class="button-container">
               <div class="thumbs">
-                <img :class="liked ? 'is-active' : 'not-active'" src="../assets/thumbs-up.png" class="thumb" name="upVote" v-on:click="emitThumbs"/>
-                <img :class="disliked ? 'is-active' : 'not-active'" src="../assets/thumbs-down.png" class="thumb" name="downVote" v-on:click="emitThumbs"/>
+                <img 
+                :class="liked ? 'is-active' : 'not-active'" 
+                src="../assets/thumbs-up.png" 
+                class="thumb" 
+                name="upVote" 
+                v-on:click="emitThumbs"
+                alt="thumbs up"/>
+                <img 
+                :class="disliked ? 'is-active' : 'not-active'" 
+                src="../assets/thumbs-down.png" 
+                class="thumb" 
+                name="downVote" 
+                v-on:click="emitThumbs"
+                alt="thumbs down"/>
               </div>
               <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
               <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>
