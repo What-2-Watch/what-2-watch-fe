@@ -1,9 +1,8 @@
-
 <template>
   <transition name="fade">
     <div class="modal" v-if="showing">
       <div class="modal__backdrop" @click="closeModal()"/>
-      <div class="modal__dialog detail-splash" v-bind:style="{ 'background-image': 'url(' + movie.backdrop + ')' }">
+      <div class="modal__dialog detail-splash" v-bind:style="{ 'background-image': 'url(' + movie.backdrop + ')'}" >
         <div class="modal__header">
           <slot name="header"/>
           <button type="button" class="modal__close" @click="closeModal()">
@@ -36,6 +35,9 @@
               <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>
             </aside>
           </section>
+          <div v-if="movie.backdrop.includes('null')">
+              <img class="backup-poster" :src="movie.poster" alt="movie poster">
+          </div>
       </div>
     </div>
   </transition>
@@ -182,6 +184,7 @@ export default {
     border-radius: 5px;
     z-index: 2;
     padding: 50px;
+    overflow-y: scroll;
 
     svg {
       color: $gray;
@@ -224,6 +227,12 @@ export default {
 .detail-splash {
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: $gray;
+}
+
+.backup-poster {
+    height: 300px; 
+    margin: 50px; 
 }
 
 .movie-info {
@@ -311,7 +320,6 @@ color: $gray
       }
       &__dialog {
         padding: 10px; 
-        overflow-y: scroll; 
       }
     }
 
