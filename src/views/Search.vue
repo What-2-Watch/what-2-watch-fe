@@ -4,7 +4,11 @@
     v-on:submitSearch="getSearchResults($event)"
     ></search-form>
 
-    <article v-if="!searchResults.length" class="search-message">
+    <article v-if="failedSearch" class="search-message">
+      <h3>No movies found</h3>
+    </article>
+
+    <article v-else-if="!searchResults.length" class="search-message">
       <h3>Search for movies and use the thumbs to tell us what you like.</h3>
       <h3>We'll tailor your recommedations based on your taste in movies.</h3>
     </article>
@@ -44,6 +48,7 @@ export default ({
       user: {},
       displayed: false,
       shownMovie: {},
+      failedSearch: false
     }
   },
   async mounted() {
@@ -57,9 +62,13 @@ export default ({
   },
   methods: {
     getSearchResults({ region, search, lang }) {
+      this.failedSearch = false;
       const fetchStr = `&language=${lang}&query=${search}&watch_region=${region}`
       movieSearch(fetchStr)
       .then(data => this.searchResults = data)
+      if (!this.searchResults.length) {
+        this.failedSearch = true;
+      }
     },
     updateThumb(thumb) {
       postThumb(thumb, getUserId())
