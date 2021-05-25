@@ -19,8 +19,8 @@ export default ({
     updateLogin: Function,
   },
   emits: [
-    'userLogin:user',
-    'newUser:userData',
+    'userLogin',
+    'newUser',
     'finishCreate'
   ],
   data() {
