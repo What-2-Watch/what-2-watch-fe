@@ -91,5 +91,11 @@ export default {
 
   }
 
+@media screen and (max-width: 300px) {
 
+      h1 {
+          margin-top: 5px; 
+          font-size: 1.75em; 
+      }
+  }
 </style>
