@@ -28,7 +28,6 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
         name: 'MovieCard', 
         props: {
           movie: {type: Object},
-          list: {type: String}
         }, 
         data() {
           return {
@@ -39,11 +38,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
           }
         },
         emits: [
-            'upVote:movie.id',
-            'downVote:movie.id',
-            'add:movie.id',
-            'remove:movie.id',
-            'clickMovie:movie'
+            'clickMovie'
         ],
         mounted() {
           this.checkUserLists()
