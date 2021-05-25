@@ -1,17 +1,18 @@
 <template>
   <div class="card-container">
 
-  <article class="movie-card" >
+  <button class="movie-card" >
      <img v-if="!movie.poster.includes('null')" :src="movie.poster" alt="" class="poster" v-on:click="clickMovie"/>
      <div v-else class="poster-error">
+      <img src="../assets/missing_movie-01.png" alt="A blank poster"/>
       <h3>{{ movie.title }}</h3>
       <p class="error">Poster not available</p>
     </div>
-    </article>
+    </button>
       <aside class="button-container">
         <div class="thumbs">
-          <img :class="liked ? 'is-active' : 'not-active'" src="../assets/thumbs-up.png" class="thumb" name="upVote" v-on:click="emitThumbs"/>
-          <img :class="disliked ? 'is-active' : 'not-active'" src="../assets/thumbs-down.png" class="thumb" name="downVote" v-on:click="emitThumbs"/>
+            <img role="button" tab-index="0" :class="liked ? 'is-active' : 'not-active'" src="../assets/thumbs-up.png" class="thumb" name="upVote" v-on:click="emitThumbs"/>
+            <img role="button" tab-index="0" :class="disliked ? 'is-active' : 'not-active'" src="../assets/thumbs-down.png" class="thumb" name="downVote" v-on:click="emitThumbs"/>
         </div>
           <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
           <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>
@@ -145,23 +146,36 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
     }
 
     .poster-error {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
       width:100%; 
       margin: 0 auto;
-      padding: 15px 0 0 0;
-      font-size: 24px;
+      padding: 2px;
+
+        img {
+          grid-area:1/1/1/1;
+          width: 100%;
+          margin: 0 auto;
+        }
 
       .error {
         width: 70%;
+        grid-area:1/1/1/1;
         margin: 0 auto;
-        padding: 40px 0 0 0;
+        padding: 100px 0 0 0;
         text-align: center;
         color:$gray;
+        font-size: 15px;
       }
 
       h3 {
-        font-size: 30px;
+        font-size: 18px;
+        grid-area:1/1/1/1;
+        grid-area:'error';
         text-align: center;
         margin: 0 auto;
+        padding: 10px 0 0 0;
         color: $gray;
         text-align: center;
       }
@@ -184,6 +198,7 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
 
   .button-container {
     width: 100%;
+    padding-bottom: 10px;
     box-shadow: 0 0 .35em #d9d9d956;
     padding-top: 5px;
     align-self: flex-end;
@@ -210,6 +225,32 @@ import { getUserById, getUserId, postThumb, postWatchlist, removeThumb, removeWa
 
   .is-active {
     background-color: $gray;
+  }
+
+@media screen and (max-width: 600px) {
+    .poster-error {
+      h3 {
+        font-size: 28px;
+        padding: 15px 0 0 0;
+      }
+      .error {
+        padding: 160px 0 0 0;
+        font-size: 28px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .poster-error {
+      h3 {
+        font-size: 22px;
+        padding: 15px 0 0 0;
+      }
+      .error {
+        padding: 120px 0 0 0;
+        font-size: 18px;
+      }
+    }
   }
 
 </style>

@@ -17,6 +17,7 @@
           <section :key="service.id" v-for="service in services">
             <Service 
              :provider="service" 
+             :location="location"
              v-on:addProvider="postService($event)"
             />
           </section>
@@ -43,7 +44,8 @@ export default {
             services: [],
             user: {},
             watchlist : [],
-            displayed: false
+            displayed: false,
+            location: 'profile'
         }
     },
     mounted() {
@@ -75,10 +77,8 @@ export default {
       Promise.all(movieList)
       .then(responses => {
         this.watchlist = [...cleanMovieSearchData(responses)]
-        console.log(responses)
       })
-      
-    },
+    }
   }
 }
 </script>

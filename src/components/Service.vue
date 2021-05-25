@@ -1,6 +1,6 @@
 <template>
+    <button v-on:click="clickProvider">
         <img 
-        v-on:click="clickProvider"
         :src="provider.logo" 
         class="service-logo" 
         :alt="provider.name + 'logo'"
@@ -8,6 +8,7 @@
         name="provider.name"
         :class="active ? 'is-active' : 'not-active'"
         />
+    </button>
 </template>
 
 <script>
@@ -17,6 +18,7 @@ export default {
     name: 'Service',
     props: {
         provider:Object,
+        location:String
     },
     data() {
         return{
@@ -25,7 +27,9 @@ export default {
         }
     },
     mounted() {
-        this.checkForSubscription(this.provider.id);
+        if(location === "profile") {
+            this.checkForSubscription(this.provider.id);
+        }
     },
     methods: {
         clickProvider() {
@@ -44,9 +48,9 @@ export default {
                 this.subId = response.id
             } )
         },
-        checkForSubscription(id) {
+        async checkForSubscription(id) {
             let userSubs = [];
-            getUserById(getUserId())
+            await getUserById(getUserId())
             .then(response => {
                 userSubs = response.subscriptions
                 this.checkActive(userSubs, id)
@@ -76,6 +80,7 @@ export default {
 
     .is-active {
         border: solid 5px $lightRed;
+        box-shadow: 0 0 .75em $lightRed;
     }
 
     .not-active {

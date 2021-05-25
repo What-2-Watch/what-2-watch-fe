@@ -63,14 +63,11 @@ const getMovieGenre = (movieID) => {
   return fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=d485a0da5573c3e7d61614d66ae23824&language=en-US`)
     .then(response => checkResponse(response))
     .then(data => data.genres[0])
-    .catch(err => console.log(err))
-    
 }
 
 const getCredits = (movieID) => {
   return fetch (`https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=d485a0da5573c3e7d61614d66ae23824&language=en-US`)
   .then(response => checkResponse(response))
-  .catch(err => console.log(err))
 }
 
 const getDirectorID = (creditData) => {
@@ -95,7 +92,6 @@ export const submitNewUser = (userData) => {
 }
 
 export const getUserById = (id) => {
-  console.log(id)
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/${id}`)
       .then(response => checkResponse(response))
       .then(data => data)
@@ -204,15 +200,14 @@ export const removeSubscription = (id) => {
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/subscriptions/${id}`, {
     method: 'DELETE'
    })
-    .then(response => console.log(response))
-    .catch()
+    .then(response => checkResponse(response))
 }
 
 export const removeThumb = (id) => {
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/thumbs/${id}`, {
     method: 'DELETE'
   })
-    .then(response => console.log(response))
+    .then(response => checkResponse(response))
 }
 
 export const cleanServiceData = (array) => {

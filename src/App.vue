@@ -53,11 +53,7 @@ export default {
     },
     async createNewUser(userData) {
       await submitNewUser(userData)
-      .then(data => {
-        console.log(data)
-        setUserId(data.id)
-      })
-
+      .then(data => setUserId(data.id))
     }
   }
 }
