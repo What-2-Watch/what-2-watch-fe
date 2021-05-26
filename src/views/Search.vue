@@ -9,8 +9,8 @@
     </article>
 
     <article v-else-if="!searchResults.length" class="search-message">
-      <h2>Search for movies and use the thumbs to tell us what you like.</h2>
-      <h2>We'll tailor your recommedations based on your taste in movies.</h2>
+      <h2>Search for movies and use the thumbs to tell us what you like. We'll tailor your recommedations based on your taste in movies.</h2>
+      <h2></h2>
     </article>
 
     <search-grid :searchResults="searchResults"
@@ -100,8 +100,17 @@ export default ({
 
   .search-message {
     h2 {
+      margin: 16px;
       color: $gray;
     }
   }
+
+  @media screen and (max-width: 545px) {
+    .search-message {
+        h2 {
+          font-size: 18px;
+        }
+      }
+  } 
 
 </style>
