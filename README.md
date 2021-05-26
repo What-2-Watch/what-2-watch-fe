@@ -32,6 +32,12 @@ In this capstone project, our team was asked to create a full-stack app of our c
 #### Details Modal: 
 ![Details Modal](https://media.giphy.com/media/avUVS3lv8epzYudq5F/giphy.gif)
 
+#### Mobile:
+![Mobile view](src/assets/mobile.gif)
+
+#### Tablet: 
+![Tablet view](src/assets/tablet.gif)
+
 ## Project Learning Goals
 1. Demonstrate knowledge you’ve gained throughout Turing
 2. Use an agile process to turn well defined requirements into deployed and production ready software
