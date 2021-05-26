@@ -1,5 +1,5 @@
 <h1 align="center">Flick Finder</h1>
-<a align="center" href="https://watchtowhat.herokuapp.com/#/home">- Deployed App -</a>
+<a align="center" href="https://flickfinder2011.herokuapp.com/#/home">- Deployed App -</a>
 
 ## Table of Contents
 
