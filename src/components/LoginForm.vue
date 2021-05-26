@@ -139,7 +139,7 @@ export default ({
         'email': this.email,
         'password': this.password,
         'confirmPassword': this.confirmPassword,
-        'services': this.services,
+        'services': [],
         'first_name': this.firstName,
         'last_name': this.lastName,
       }
