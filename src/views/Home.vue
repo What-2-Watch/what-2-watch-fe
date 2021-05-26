@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1 class="rec-title">{{user.first_name}}'s RECOMMENDED</h1>
-    <search-grid :searchResults="recommended"
+    <search-grid class="rec-grid" :searchResults="recommended"
     v-on:displayMovieModal="displayMovie($event)"></search-grid>
     <modal :movie="shownMovie" :showing="displayed"
     v-on:closeModal="displayMovie($event)"
@@ -73,6 +73,10 @@ export default {
 
 .rec-title {
   margin: 20px; 
+}
+
+.rec-grid {
+  margin: 0 auto;
 }
 
 </style>
