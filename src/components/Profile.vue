@@ -12,7 +12,7 @@
             v-on:closeModal="displayMovie($event)"
             v-on:postThumb="updateThumb($event)"
             v-on:postWatchList="updateWatchList($event)"></modal>
-        <h2>YOUR SERVICES:</h2>
+        <h2>Click below to update your services.</h2>
         <article class="subscriptions-container"> 
           <section :key="service.id" v-for="service in services">
             <Service 
