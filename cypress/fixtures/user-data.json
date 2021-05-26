@@ -10,14 +10,8 @@
         "watchlist": [
             {
                 "id": 1,
-                "title": "Candyman",
-                "api_movie_id": 9529,
-                "user": 1
-            }, 
-            {
-                "id": 2,
-                "title": "Carne: The Taco Maker",
-                "api_movie_id": null,
+                "title": "Vico C: The Life Of A Philosopher",
+                "api_movie_id": 407650,
                 "user": 1
             }
         ],
