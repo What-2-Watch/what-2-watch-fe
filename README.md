@@ -28,20 +28,19 @@ In this capstone project, our team was asked to create a full-stack app of our c
 #### Final Product:
 
 ##### Login Page: 
-![]()
+![Login](https://media.giphy.com/media/YLB9pdDKnEZMLHubjV/giphy.gif)
 
 ##### Home Page:
-![]()
+![Home](src/assets/Home.png)
 
 ##### Search Page: 
-![]()
-![]()
+![Search Page](https://media.giphy.com/media/HrgXOiHqSUxLPbXuOH/giphy.gif)
 
 ##### Profile Page: 
-![]()
+![Profile Page](https://media.giphy.com/media/gKzZsmgvmo8uTMimSZ/giphy.gif)
 
 #### Details Modal: 
-![]()
+![Details Modal](https://media.giphy.com/media/avUVS3lv8epzYudq5F/giphy.gif)
 
 ## Project Learning Goals
 1. Demonstrate knowledge you’ve gained throughout Turing
@@ -86,7 +85,7 @@ Flick Finder is an app that allows a user to browse movies from all their stream
 #### Tablet View
 #### Accessibility
 
-## Contributers 
+## Contributors 
 
 #### Front-End: 
 [<img src="https://img.shields.io/badge/LinkedIn-matt--umland-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0FBBD6"/>][linkedin0]
