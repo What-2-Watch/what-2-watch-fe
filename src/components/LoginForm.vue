@@ -15,6 +15,7 @@
         type="password"
         name="password"
         placeholder="PASSWORD"
+        data-cy="password"
         required
         v-model="password"/> 
         <label for="password"></label>
@@ -138,7 +139,7 @@ export default ({
         'email': this.email,
         'password': this.password,
         'confirmPassword': this.confirmPassword,
-        'services': this.services,
+        'services': [],
         'first_name': this.firstName,
         'last_name': this.lastName,
       }

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="rec-title">{{user.first_name}}'s RECOMMENDED</h1>
+    <h1 class="rec-title">{{user.first_name}}'s RECOMMENDED MOVIES</h1>
     <search-grid class="rec-grid" :searchResults="recommended"
     v-on:displayMovieModal="displayMovie($event)"></search-grid>
     <modal :movie="shownMovie" :showing="displayed"

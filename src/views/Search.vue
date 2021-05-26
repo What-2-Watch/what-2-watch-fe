@@ -16,7 +16,8 @@
     <search-grid :searchResults="searchResults"
     v-on:postThumb="updateThumb($event)"
     v-on:postWatchList="updateWatchList($event)"
-    v-on:displayMovieModal="displayMovie($event)"></search-grid>
+    v-on:displayMovieModal="displayMovie($event)"
+    data-cy='search-grid'></search-grid>
     
     <modal :movie="shownMovie" :showing="displayed"
     v-on:closeModal="displayMovie($event)"

@@ -5,8 +5,12 @@
             <h1>Flick Finder</h1>
             </router-link>
             <aside class="nav-links" v-if="loggedIn">
-                <router-link to="/search">Search</router-link>
-                <router-link to="/profile">Profile</router-link>
+                <router-link to="/home"
+                data-cy="home" class="nav-btn">Recommendations</router-link>
+                <router-link to="/search"
+                data-cy="search" class="nav-btn">Search</router-link>
+                <router-link to="/profile"
+                data-cy="profile" class="nav-btn">Profile</router-link>
             </aside>
         </div>
     </header>
@@ -42,7 +46,6 @@ export default {
     }
     .nav-links {
         align-self: flex-end;
-        width: 160px;
         display: flex;
         justify-content: space-between;
         height: unset;
@@ -68,6 +71,10 @@ export default {
     }
     .router-link-active {
         @include activeBorder;
+  }
+
+  .nav-btn {
+      margin: 0 5px; 
   }
 
 @media screen and (max-width: 600px) {

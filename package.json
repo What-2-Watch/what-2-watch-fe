@@ -6,7 +6,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "postinstall": "npm run build",
-    "start": "vue-cli-service serve"
+    "start": "vue-cli-service serve",
+    "cypress": "./node_modules/.bin/cypress open"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",

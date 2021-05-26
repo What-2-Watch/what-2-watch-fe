@@ -34,6 +34,7 @@
                 class="thumb" 
                 name="upVote" 
                 v-on:click="emitThumbs"
+                tabindex="0"
                 alt="thumbs up"/>
                 <img 
                 :class="disliked ? 'is-active' : 'not-active'" 
@@ -41,6 +42,7 @@
                 class="thumb" 
                 name="downVote" 
                 v-on:click="emitThumbs"
+                tabindex="0"
                 alt="thumbs down"/>
               </div>
               <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
