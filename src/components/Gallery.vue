@@ -7,7 +7,7 @@
                 v-on:clickMovie="showMovie($event)"/>
             </li>
         </section>
-        <p v-else>You havent added anything to your watchlist yet, press the + Watchlist button on a poster you like to save it for later.</p>
+        <p v-else class="watchlist-message">Press the + Watchlist button on a movie to add it to your watchlist.</p>
     </section>
 </template>
 
@@ -66,6 +66,10 @@ export default {
     }
     .card-slider::-webkit-scrollbar-thumb {
         @include serviceScrollThumb
+    }
+
+    .watchlist-message {
+        margin: 0 auto;
     }
     
 
