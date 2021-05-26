@@ -17,7 +17,7 @@
           v-on:click="emitThumbs"
           alt="thumbs up"
           role="button"
-          tab-index="0"/>
+          tabindex="0"/>
           <img 
           :class="disliked ? 'is-active' : 'not-active'" 
           src="../assets/thumbs-down.png" 
@@ -26,7 +26,7 @@
           v-on:click="emitThumbs"
           alt="thumbs down"
           role="button"
-          tab-index="0"/>
+          tabindex="0"/>
         </div>
           <button name="add" v-on:click="emitWatchlist(true)" v-if="!onList">✚ Watchlist</button>
           <button v-else name="remove" v-on:click="emitWatchlist(false)">ⓧ Watchlist</button>

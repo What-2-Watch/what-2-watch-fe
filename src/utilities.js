@@ -135,7 +135,7 @@ export const getServices = (region = 'US', language = 'en-US') => {
 export const getUsers = () => {
   return fetch(`https://what-2-watch-be.herokuapp.com/v1/users/`)
         .then(response => checkResponse(response))
-
+        .then(res => console.log(res))
 }
 
 export const getMovieDetails = (id, language) => {
