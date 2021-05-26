@@ -27,7 +27,7 @@ export default {
         }
     },
     mounted() {
-        if(location === "profile") {
+        if(this.location === "profile") {
             this.checkForSubscription(this.provider.id);
         }
     },
