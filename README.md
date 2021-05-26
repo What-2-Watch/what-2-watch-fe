@@ -1,24 +1,14 @@
 <h1 align="center">Flick Finder</h1>
-<a align="center" href="https://watchtowhat.herokuapp.com/#/home">- Deployed App -</a>
+<a align="center" href="https://flickfinder2011.herokuapp.com/#/home">- Deployed App -</a>
 
 ## Table of Contents
 
 - [About the Project](#about-the-project)
 - [Project Goals](#project-learning-goals)
+- [Challenges and Wins](#Challenges)
 - [Installation](#installation)
 - [Technologies Used](#technologies-used)
-- [Functionality](#functionality)
-  - [General](#general)
-  - [Login and Create Account](#login-and-create-account)
-  - [Home](#home)
-  - [Search](#search)
-  - [Details](#details) 
-  - [User Profile](#user-profile)
-  - [Mobile View](#mobile-view)
-  - [Tablet View](#tablet-view)
-  - [Accessibility](#accessibility)
-  - [Error Handling](#error-handling)
-- [Contributers](#contributers)
+- [Contributors](#contributors)
 
 ## About the Project
 
@@ -28,20 +18,25 @@ In this capstone project, our team was asked to create a full-stack app of our c
 #### Final Product:
 
 ##### Login Page: 
-![]()
+![Login](https://media.giphy.com/media/YLB9pdDKnEZMLHubjV/giphy.gif)
 
 ##### Home Page:
-![]()
+![Home](src/assets/Home.png)
 
 ##### Search Page: 
-![]()
-![]()
+![Search Page](https://media.giphy.com/media/HrgXOiHqSUxLPbXuOH/giphy.gif)
 
 ##### Profile Page: 
-![]()
+![Profile Page](https://media.giphy.com/media/gKzZsmgvmo8uTMimSZ/giphy.gif)
 
 #### Details Modal: 
-![]()
+![Details Modal](https://media.giphy.com/media/avUVS3lv8epzYudq5F/giphy.gif)
+
+#### Mobile:
+![Mobile view](src/assets/mobile.gif)
+
+#### Tablet: 
+![Tablet view](src/assets/tablet.gif)
 
 ## Project Learning Goals
 1. Demonstrate knowledge you’ve gained throughout Turing
@@ -53,12 +48,27 @@ In this capstone project, our team was asked to create a full-stack app of our c
 7. Build applications that execute in development, test, CI, and production environments
 8. Focus on communication between front-end and back-end teams in order to complete and deploy features that have been outlined by the project spec
 
+## Challenges
+1. Building an app with Vue(new to frontend team).
+2. Learning and following a Git Rebase workflow.
+3. Working hand in hand with a backend team to meet sprint deadlines for the first time.
+4. Evolving project MVP, and intial documentation. The look and essential functionality of the app were everchanging throughout the project.
+5. Realizing that we had neglected to fully understand the structure and common practices of Vue apps up front, and consequently changing our app's structure from the ground up.
+## Wins
+1. Built a sharp and professional app with the help of our backend team.
+2. Despite the major Vue restructuring and countless documentation changes, we were able to push through and create an app that we are all proud of
+
 ## Installation
 1. Fork (optional) and clone down this repository to a directory of your choice
 2. <code>cd</code> into the repo
 3. Run <code>npm i</code> to install dependencies
 4. Run the command <code>npm run start</code> to run the application in your browser
-5. Begin interacting!
+5. Begin interacting [here](http://localhost:8080)
+
+## Testing
+1. After completing the Installation steps above and starting the server in your local browser:
+2. Run ```$npx cypress open``` from your terminal to open up the cypress client.
+3. Click on the ```test.js``` to open up the live testing browser.
 
 ## Technologies Used
 - ![Vue](https://img.shields.io/badge/vue%20-%2320232a.svg?&style=for-the-badge&logo=vue&logoColor=%2361DAFB)
@@ -72,21 +82,12 @@ In this capstone project, our team was asked to create a full-stack app of our c
 - ![Webpack](https://img.shields.io/badge/webpack%20-%238DD6F9.svg?&style=for-the-badge&logo=webpack&logoColor=black)
 
 - ![Cypress](https://img.shields.io/badge/cypress%20-%2317202C.svg?&style=for-the-badge&logo=cypress&logoColor=white)
-
-## Functionality
-
-#### General
-Flick Finder is an app that allows a user to browse movies from all their streaming services in one place. 
-#### Login and Create Account
-#### Home
-#### Search
-#### Details
-#### User Profile 
-#### Mobile View
-#### Tablet View
 #### Accessibility
-
-## Contributers 
+1. Passes Wave audit with no errors.
+2. Uses Semantic HTML.
+3. Site is fully tabbable and accessible through screen readers.
+4. Passes Lighthouse Accessibility Audit with 100%
+## Contributors 
 
 #### Front-End: 
 [<img src="https://img.shields.io/badge/LinkedIn-matt--umland-informational?style=for-the-badge&labelColor=black&logo=linkedin&logoColor=0077b5&&color=0FBBD6"/>][linkedin0]
